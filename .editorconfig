@@ -1,0 +1,76 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+charset: utf-8
+indent_style: space
+
+[*.cs]
+indent_size: 4
+trim_trailing_whitespace: true
+insert_final_newline: true
+
+;
+; /VS
+; VisualStudio .NET Style Guide custom options
+; Options that VS does not understand have to come last! Otherwise everything is ignored.
+;
+csharp_new_line_before_open_brace = none
+csharp_new_line_before_catch = false
+csharp_new_line_before_else = false
+csharp_new_line_before_finally = false
+csharp_new_line_before_members_in_anonymous_types = false
+csharp_new_line_before_members_in_object_initializers = false
+; Sort using and Import directives with System.* appearing first
+dotnet_sort_system_directives_first = true
+; Avoid "this." and "Me." if not necessary
+dotnet_style_qualification_for_field = false:suggestion
+dotnet_style_qualification_for_property = false:suggestion
+dotnet_style_qualification_for_method = false:suggestion
+dotnet_style_qualification_for_event = false:suggestion
+; Suggest more modern language features when available
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_null_propagation = true:suggestion
+dotnet_style_explicit_tuple_names = true:suggestion
+csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
+csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
+csharp_style_inlined_variable_declaration = true:suggestion
+csharp_style_throw_expression = true:suggestion
+csharp_style_conditional_delegate_call = true:suggestion
+;
+; / VS
+;
+
+; Denotes preferred quoting style for string literals (for languages that support multiple quote styles)
+quote_type: single
+
+curly_bracket_next_line: false
+; https://en.wikipedia.org/wiki/Indentation_style
+indent_brace_style: K&R
+
+spaces_around_operators: true
+spaces_around_brackets: none
+
+; JetBrains Rider specific configuration
+brace_style: end_of_line
+other_braces: end_of_line
+allow_comment_after_lbrace: false
+
+blank_lines_around_local_method: 1
+blank_lines_around_namespace: 1
+blank_lines_around_field: 0
+blank_lines_around_single_line_field: 0
+keep_blank_lines_in_code: 1
+keep_blank_lines_in_declarations: 1
+empty_block_style: multiline
+
+new_line_before_catch: false
+new_line_before_else: false
+new_line_before_finally: false
+
+space_between_square_brackets: false
+space_between_empty_square_brackets: false
