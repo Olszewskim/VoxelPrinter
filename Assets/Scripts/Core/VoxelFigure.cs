@@ -7,32 +7,33 @@ using UnityEngine;
 [Serializable]
 public class VoxelData {
     public Vector3 voxelPosition;
-    public GameObject voxelGameobject;
+    public VoxelElement voxelElement;
 
-    public VoxelData(Vector3 voxelPosition, GameObject voxelGameobject) {
+    public VoxelData(Vector3 voxelPosition, VoxelElement voxelElement) {
         this.voxelPosition = voxelPosition;
-        this.voxelGameobject = voxelGameobject;
+        this.voxelElement = voxelElement;
     }
 }
 
 public class VoxelFigure : MonoBehaviour {
     [SerializeField] private List<VoxelData> _voxels;
 
-    public void AddVoxel(Vector3 position, GameObject voxelObject) {
+    public void AddVoxel(Vector3 position, VoxelElement voxelElement) {
         if (_voxels == null) {
             _voxels = new List<VoxelData>();
         }
 
-        _voxels.Add(new VoxelData(position, voxelObject));
+        _voxels.Add(new VoxelData(position, voxelElement));
     }
 
     public void Start() {
         SortVoxels();
-       StartCoroutine(Print());
+        StartCoroutine(Print());
     }
 
     private void SortVoxels() {
-        _voxels = _voxels.OrderBy(v => v.voxelPosition.y).ThenByDescending(v => v.voxelPosition.x).ThenBy(v => v.voxelPosition.z)
+        _voxels = _voxels.OrderBy(v => v.voxelPosition.y).ThenByDescending(v => v.voxelPosition.x)
+            .ThenBy(v => v.voxelPosition.z)
             .ToList();
     }
 
@@ -40,13 +41,13 @@ public class VoxelFigure : MonoBehaviour {
         TurnOffAllVoxels();
         foreach (var v in _voxels) {
             yield return new WaitForSeconds(0.2f);
-            v.voxelGameobject.SetActive(true);
+            v.voxelElement.Print(0.2f);
         }
     }
 
     private void TurnOffAllVoxels() {
         foreach (var v in _voxels) {
-            v.voxelGameobject.SetActive(false);
+            v.voxelElement.Hide();
         }
     }
 }

@@ -20,7 +20,7 @@ public class ParseVoxelStructure : MonoBehaviour {
         }
     }
 
-    private static GameObject _voxelPrefab;
+    private static VoxelElement _voxelPrefab;
 
     [MenuItem("Tools/Parse Voxel Structure into Prefab")]
     public static void Do() {
@@ -48,9 +48,7 @@ public class ParseVoxelStructure : MonoBehaviour {
 
         string line;
         while ((line = file.ReadLine()) != null) {
-            if (line[0] == '#' || line[0] == ' ') {
-                continue;
-            } else {
+            if (line[0] != '#' && line[0] != ' ') {
                 var split = line.Split();
                 Vector3 position =
                     new Vector3(float.Parse(split[0]), float.Parse(split[2]),
@@ -66,12 +64,12 @@ public class ParseVoxelStructure : MonoBehaviour {
         GameObject root = new GameObject();
         var voxelFigure = root.AddComponent<VoxelFigure>();
         if (_voxelPrefab == null) {
-            _voxelPrefab = Resources.Load<GameObject>("Voxel");
+            _voxelPrefab = Resources.Load<VoxelElement>("Voxel");
         }
 
         for (int i = 0; i < rawVoxelData.Count; i++) {
             var cube = Instantiate(_voxelPrefab);
-            cube.layer = Layers.Voxel;
+            cube.gameObject.layer = Layers.Voxel;
             cube.transform.SetParent(root.transform);
             cube.transform.position = rawVoxelData[i].position;
             var material = GetOrCreateVoxelMaterial(rawVoxelData[i].color);
