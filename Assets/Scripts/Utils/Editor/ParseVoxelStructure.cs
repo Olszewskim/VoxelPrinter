@@ -1,6 +1,7 @@
 ﻿#if UNITY_EDITOR
 using System.Collections.Generic;
 using System.IO;
+using UnityConstants;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ public class ParseVoxelStructure : MonoBehaviour {
             this.color = color;
         }
     }
+
+    private static GameObject _voxelPrefab;
 
     [MenuItem("Tools/Parse Voxel Structure into Prefab")]
     public static void Do() {
@@ -62,9 +65,13 @@ public class ParseVoxelStructure : MonoBehaviour {
     private static GameObject CreateVoxelStructure(List<RawVoxelData> rawVoxelData) {
         GameObject root = new GameObject();
         var voxelFigure = root.AddComponent<VoxelFigure>();
+        if (_voxelPrefab == null) {
+            _voxelPrefab = Resources.Load<GameObject>("Voxel");
+        }
+
         for (int i = 0; i < rawVoxelData.Count; i++) {
-            var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            cube.layer = LayerMask.NameToLayer("Voxel");
+            var cube = Instantiate(_voxelPrefab);
+            cube.layer = Layers.Voxel;
             cube.transform.SetParent(root.transform);
             cube.transform.position = rawVoxelData[i].position;
             var material = GetOrCreateVoxelMaterial(rawVoxelData[i].color);
