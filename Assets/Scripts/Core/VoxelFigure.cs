@@ -32,8 +32,8 @@ public class VoxelFigure : MonoBehaviour {
     }
 
     private void SortVoxels() {
-        _voxels = _voxels.OrderBy(v => v.voxelPosition.y).ThenByDescending(v => v.voxelPosition.x)
-            .ThenBy(v => v.voxelPosition.z)
+        _voxels = _voxels.OrderBy(v => v.voxelPosition.y).ThenBy(v => v.voxelPosition.z)
+            .ThenBy(v => v.voxelPosition.x)
             .ToList();
     }
 
