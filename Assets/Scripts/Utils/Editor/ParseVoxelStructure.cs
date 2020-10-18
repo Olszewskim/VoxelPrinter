@@ -74,7 +74,7 @@ public class ParseVoxelStructure : MonoBehaviour {
             cube.transform.position = rawVoxelData[i].position;
             var material = GetOrCreateVoxelMaterial(rawVoxelData[i].color);
             cube.GetComponent<Renderer>().sharedMaterial = material;
-            voxelFigure.AddVoxel(rawVoxelData[i].position, cube);
+            voxelFigure.AddVoxel(rawVoxelData[i].position, cube, material.color);
         }
 
         return root;
