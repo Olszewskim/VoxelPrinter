@@ -22,7 +22,7 @@ public class VoxelFigure : MonoBehaviour {
     [SerializeField] private List<VoxelData> _voxels;
 
     private Printer _printer;
-    private const float PRINT_TIME = 0.3f;
+    private const float PRINT_TIME = 0.2f;
 
     public void AddVoxel(Vector3 position, VoxelElement voxelElement, Color voxelColor) {
         if (_voxels == null) {

@@ -4,6 +4,7 @@ using UnityEngine;
 public class Printer : MonoBehaviour {
     [SerializeField] private Transform _nozzle;
     [SerializeField] private Transform _fillament;
+    [SerializeField] private ParticleSystem _laserBeam;
 
     private Material _fillamentMaterial;
     private Vector3 _fillamentStartScale;
@@ -13,6 +14,7 @@ public class Printer : MonoBehaviour {
     private const float MOVE_TIME = 5f;
 
     private void Awake() {
+        _laserBeam.Stop();
         _fillamentStartScale = _fillament.localScale;
         _fillamentRunOutScale = Vector3.Scale(_fillamentRunOutScale, _fillamentStartScale);
         _fillamentMaterial = _fillament.GetComponent<MeshRenderer>().sharedMaterial;
@@ -21,12 +23,15 @@ public class Printer : MonoBehaviour {
     public Tween MoveNoozle(Vector3 position, Color printColor) {
         _fillamentMaterial.color = printColor;
         _fillament.localScale = _fillamentStartScale;
+        var main = _laserBeam.main;
+        main.startColor = printColor;
         position.y += PRINT_HEIGHT;
         var anim = _nozzle.DOMove(position, MOVE_TIME).SetEase(Ease.Linear).SetSpeedBased();
         return anim;
     }
 
     public void Print(float printTime) {
-        _fillament.DOScale(_fillamentRunOutScale, printTime);
+        _laserBeam.Play();
+        _fillament.DOScale(_fillamentRunOutScale, printTime).OnComplete(() => _laserBeam.Stop());
     }
 }
