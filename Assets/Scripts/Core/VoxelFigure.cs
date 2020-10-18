@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 [Serializable]
@@ -18,6 +19,9 @@ public class VoxelData {
 public class VoxelFigure : MonoBehaviour {
     [SerializeField] private List<VoxelData> _voxels;
 
+    private Printer _printer;
+    private const float PRINT_TIME = 0.3f;
+
     public void AddVoxel(Vector3 position, VoxelElement voxelElement) {
         if (_voxels == null) {
             _voxels = new List<VoxelData>();
@@ -27,6 +31,7 @@ public class VoxelFigure : MonoBehaviour {
     }
 
     public void Start() {
+        _printer = FindObjectOfType<Printer>();
         SortVoxels();
         StartCoroutine(Print());
     }
@@ -40,8 +45,12 @@ public class VoxelFigure : MonoBehaviour {
     private IEnumerator Print() {
         TurnOffAllVoxels();
         foreach (var v in _voxels) {
-            yield return new WaitForSeconds(0.2f);
-            v.voxelElement.Print(0.2f);
+            var moveAnim = _printer.MoveNoozle(v.voxelElement.transform.position);
+            yield return null;
+            var moveAnimTime = moveAnim.Duration();
+            yield return new WaitForSeconds(moveAnimTime);
+            v.voxelElement.Print(PRINT_TIME);
+            yield return new WaitForSeconds(PRINT_TIME);
         }
     }
 

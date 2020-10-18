@@ -12,6 +12,6 @@ public class VoxelElement : MonoBehaviour {
 
     public void Print(float time) {
         transform.localScale = _beforePrintScale;
-        transform.DOScale(_showScale, time);
+        transform.DOScale(_showScale, time).SetEase(Ease.Linear);
     }
 }
