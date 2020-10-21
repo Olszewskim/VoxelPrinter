@@ -9,6 +9,13 @@ public class VoxelElement : MonoBehaviour {
 
     [SerializeField] private Image _frame;
 
+    private Canvas _canvas;
+
+    private void Awake() {
+        _canvas = GetComponentInChildren<Canvas>();
+        _canvas.worldCamera = Camera.main;
+    }
+
     public void Hide() {
         transform.localScale = _hideScale;
         _frame.gameObject.SetActive(false);
