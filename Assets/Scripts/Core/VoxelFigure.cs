@@ -19,10 +19,12 @@ public class VoxelData {
 }
 
 public class VoxelFigure : MonoBehaviour {
+    private const float PRINT_TIME = 0.2f;
+
     [SerializeField] private List<VoxelData> _voxels;
 
     private Printer _printer;
-    private const float PRINT_TIME = 0.2f;
+    private int _currentLayer;
 
     public void AddVoxel(Vector3 position, VoxelElement voxelElement, Color voxelColor) {
         if (_voxels == null) {
@@ -47,7 +49,13 @@ public class VoxelFigure : MonoBehaviour {
 
     private IEnumerator Print() {
         TurnOffAllVoxels();
+        _currentLayer = -1;
         foreach (var v in _voxels) {
+            if (v.voxelPosition.y != _currentLayer) {
+                _currentLayer = (int) v.voxelPosition.y;
+                ShowCurrentLayer();
+            }
+
             var moveAnim = _printer.MoveNoozle(v.voxelElement.transform.position, v.voxelColor);
             yield return null;
             var moveAnimTime = moveAnim.Duration();
@@ -55,6 +63,13 @@ public class VoxelFigure : MonoBehaviour {
             v.voxelElement.Print(PRINT_TIME);
             _printer.Print(PRINT_TIME);
             yield return new WaitForSeconds(PRINT_TIME);
+        }
+    }
+
+    private void ShowCurrentLayer() {
+        var thisLayerVoxels = _voxels.Where(v => v.voxelPosition.y == _currentLayer).ToList();
+        foreach (var voxel in thisLayerVoxels) {
+            voxel.voxelElement.PrepareToPrint();
         }
     }
 
