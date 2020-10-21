@@ -68,6 +68,10 @@ namespace UnityConstants
         /// Index of layer 'Voxel'.
         /// </summary>
         public const int Voxel = 8;
+        /// <summary>
+        /// Index of layer 'Button'.
+        /// </summary>
+        public const int Button = 9;
 
         /// <summary>
         /// Bitmask of layer 'Default'.
@@ -93,6 +97,10 @@ namespace UnityConstants
         /// Bitmask of layer 'Voxel'.
         /// </summary>
         public const int VoxelMask = 1 << 8;
+        /// <summary>
+        /// Bitmask of layer 'Button'.
+        /// </summary>
+        public const int ButtonMask = 1 << 9;
     }
 
     public static class Scenes

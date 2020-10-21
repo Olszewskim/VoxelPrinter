@@ -49,6 +49,9 @@ public class VoxelFigure : MonoBehaviour {
 
     private IEnumerator Print() {
         TurnOffAllVoxels();
+        var myColors = GetFigureColors();
+        _printer.SetButtonsColors(myColors);
+
         _currentLayer = -1;
         foreach (var v in _voxels) {
             if (v.voxelPosition.y != _currentLayer) {
@@ -64,6 +67,15 @@ public class VoxelFigure : MonoBehaviour {
             _printer.Print(PRINT_TIME);
             yield return new WaitForSeconds(PRINT_TIME);
         }
+    }
+
+    private List<Color> GetFigureColors() {
+        var colors = new HashSet<Color>();
+        foreach (var v in _voxels) {
+            colors.Add(v.voxelColor);
+        }
+
+        return colors.ToList();
     }
 
     private void ShowCurrentLayer() {

@@ -1,9 +1,11 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Printer : MonoBehaviour {
     [SerializeField] private Transform _nozzle;
     [SerializeField] private Transform _fillament;
+    [SerializeField] private PrinterButton[] _buttons;
     [SerializeField] private ParticleSystem _laserBeam;
 
     private Material _fillamentMaterial;
@@ -18,6 +20,12 @@ public class Printer : MonoBehaviour {
         _fillamentStartScale = _fillament.localScale;
         _fillamentRunOutScale = Vector3.Scale(_fillamentRunOutScale, _fillamentStartScale);
         _fillamentMaterial = _fillament.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+
+    public void SetButtonsColors(List<Color> colors) {
+        for (int i = 0; i < _buttons.Length; i++) {
+            _buttons[i].SetButtonColor(colors[i]);
+        }
     }
 
     public Tween MoveNoozle(Vector3 position, Color printColor) {
