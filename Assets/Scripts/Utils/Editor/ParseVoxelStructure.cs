@@ -68,7 +68,7 @@ public class ParseVoxelStructure : MonoBehaviour {
         }
 
         for (int i = 0; i < rawVoxelData.Count; i++) {
-            var cube = Instantiate(_voxelPrefab);
+            var cube = (VoxelElement)PrefabUtility.InstantiatePrefab(_voxelPrefab);
             cube.gameObject.layer = Layers.Voxel;
             cube.transform.SetParent(root.transform);
             cube.transform.position = rawVoxelData[i].position;
