@@ -22,6 +22,8 @@ public class Printer : MonoBehaviour {
     private float _buttonAreaDistance = 8f;
 
     private bool _isPrinting;
+    private bool _continuePrinting;
+    private Color _currentColor;
 
     private void Awake() {
         _laserBeam.Stop();
@@ -72,6 +74,9 @@ public class Printer : MonoBehaviour {
         yield return new WaitForSeconds(PRINT_TIME);
         _currentPrintedModel.ShowCurrentElementAndLayer();
         _isPrinting = false;
+        if (_continuePrinting) {
+            StartCoroutine(Print(_currentColor));
+        }
     }
 
     private Tween MoveNoozle(Color printColor, VoxelData voxelData) {
@@ -101,11 +106,14 @@ public class Printer : MonoBehaviour {
     }
 
     private void OnPrintButtonPressed(Color printColor) {
+        _currentColor = printColor;
         if (!_isPrinting) {
             StartCoroutine(Print(printColor));
+            _continuePrinting = true;
         }
     }
 
     private void OnPrintButtonReleased() {
+        _continuePrinting = false;
     }
 }
