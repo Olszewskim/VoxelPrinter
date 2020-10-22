@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
 public class Printer : MonoBehaviour {
+    private const float PRINT_HEIGHT = 1.5f;
+    private const float MOVE_TIME = 5f;
+    private const float PRINT_TIME = 0.3f;
+
     [SerializeField] private Transform _nozzle;
     [SerializeField] private Transform _fillament;
     [SerializeField] private PrinterButton _buttonsPrefab;
@@ -13,11 +18,10 @@ public class Printer : MonoBehaviour {
     private Vector3 _fillamentRunOutScale = new Vector3(0.8f, 0, 0.8f);
 
     private List<PrinterButton> _buttons = new List<PrinterButton>();
-
-    private const float PRINT_HEIGHT = 1.5f;
-    private const float MOVE_TIME = 5f;
-
+    private VoxelFigure _currentPrintedModel;
     private float _buttonAreaDistance = 8f;
+
+    private bool _isPrinting;
 
     private void Awake() {
         _laserBeam.Stop();
@@ -27,11 +31,21 @@ public class Printer : MonoBehaviour {
         _buttonsPrefab.gameObject.SetActive(false);
     }
 
-    public void SetButtonsColors(List<Color> colors) {
+    public void SetupPrintModel(VoxelFigure voxelFigure) {
+        _currentPrintedModel = voxelFigure;
+        SetButtonsColors(voxelFigure.GetFigureColors());
+        voxelFigure.TurnOffAllVoxels();
+        _currentPrintedModel.ShowCurrentElementAndLayer();
+    }
+
+    private void SetButtonsColors(List<Color> colors) {
         TurnOffAllButtons();
         for (int i = 0; i < colors.Count; i++) {
             if (i >= _buttons.Count) {
-                _buttons.Add(Instantiate(_buttonsPrefab, _buttonsPrefab.transform.parent));
+                var button = Instantiate(_buttonsPrefab, _buttonsPrefab.transform.parent);
+                button.OnButtonPressed += OnPrintButtonPressed;
+                button.OnButtonReleased += OnPrintButtonReleased;
+                _buttons.Add(button);
             }
 
             _buttons[i].gameObject.SetActive(true);
@@ -41,19 +55,34 @@ public class Printer : MonoBehaviour {
         SetButtonsPositions(colors.Count);
     }
 
-    public Tween MoveNoozle(Vector3 position, Color printColor) {
+    private IEnumerator Print(Color printColor) {
+        _isPrinting = true;
+        var currentElement = _currentPrintedModel.GetCurrentElement();
+        if (currentElement == null) {
+            yield break;
+        }
+
+        var moveAnim = MoveNoozle(printColor, currentElement);
+        yield return null;
+        var moveAnimTime = moveAnim.Duration();
+        yield return new WaitForSeconds(moveAnimTime);
+        _laserBeam.Play();
+        _fillament.DOScale(_fillamentRunOutScale, PRINT_TIME).OnComplete(() => _laserBeam.Stop());
+        _currentPrintedModel.Print(PRINT_TIME, printColor);
+        yield return new WaitForSeconds(PRINT_TIME);
+        _currentPrintedModel.ShowCurrentElementAndLayer();
+        _isPrinting = false;
+    }
+
+    private Tween MoveNoozle(Color printColor, VoxelData voxelData) {
         _fillamentMaterial.color = printColor;
         _fillament.localScale = _fillamentStartScale;
         var main = _laserBeam.main;
         main.startColor = printColor;
+        var position = voxelData.voxelPosition;
         position.y += PRINT_HEIGHT;
         var anim = _nozzle.DOMove(position, MOVE_TIME).SetEase(Ease.Linear).SetSpeedBased();
         return anim;
-    }
-
-    public void Print(float printTime) {
-        _laserBeam.Play();
-        _fillament.DOScale(_fillamentRunOutScale, printTime).OnComplete(() => _laserBeam.Stop());
     }
 
     private void TurnOffAllButtons() {
@@ -69,5 +98,14 @@ public class Printer : MonoBehaviour {
             pos.x = _buttonsPrefab.transform.localPosition.x + areaPerButton * i;
             _buttons[i].transform.localPosition = pos;
         }
+    }
+
+    private void OnPrintButtonPressed(Color printColor) {
+        if (!_isPrinting) {
+            StartCoroutine(Print(printColor));
+        }
+    }
+
+    private void OnPrintButtonReleased() {
     }
 }

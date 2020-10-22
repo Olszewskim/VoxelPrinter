@@ -19,12 +19,11 @@ public class VoxelData {
 }
 
 public class VoxelFigure : MonoBehaviour {
-    private const float PRINT_TIME = 0.2f;
-
     [SerializeField] private List<VoxelData> _voxels;
 
-    private Printer _printer;
     private int _currentLayer;
+    private int _currentPrintedElementIndex;
+    private Dictionary<Color, Material> _materialsMap = new Dictionary<Color, Material>();
 
     public void AddVoxel(Vector3 position, VoxelElement voxelElement, Color voxelColor) {
         if (_voxels == null) {
@@ -34,45 +33,43 @@ public class VoxelFigure : MonoBehaviour {
         _voxels.Add(new VoxelData(position, voxelElement, voxelColor));
     }
 
-    public IEnumerator Start() {
-        _printer = FindObjectOfType<Printer>();
+    public void Awake() {
         SortVoxels();
-        yield return null;
-        StartCoroutine(Print());
     }
 
     private void SortVoxels() {
-        _voxels = _voxels.OrderBy(v => v.voxelPosition.y).ThenBy(v => v.voxelPosition.z)
-            .ThenBy(v => v.voxelPosition.x)
+        _voxels = _voxels.OrderBy(v => v.voxelPosition.y).ThenByDescending(v => v.voxelPosition.z)
+            .ThenByDescending(v => v.voxelPosition.x)
             .ToList();
     }
 
-    private IEnumerator Print() {
-        TurnOffAllVoxels();
-        var myColors = GetFigureColors();
-        _printer.SetButtonsColors(myColors);
-
-        _currentLayer = -1;
-        foreach (var v in _voxels) {
-            if (v.voxelPosition.y != _currentLayer) {
-                _currentLayer = (int) v.voxelPosition.y;
-                ShowCurrentLayer();
-            }
-
-            var moveAnim = _printer.MoveNoozle(v.voxelElement.transform.position, v.voxelColor);
-            yield return null;
-            var moveAnimTime = moveAnim.Duration();
-            yield return new WaitForSeconds(moveAnimTime);
-            v.voxelElement.Print(PRINT_TIME);
-            _printer.Print(PRINT_TIME);
-            yield return new WaitForSeconds(PRINT_TIME);
-        }
+    public void Print(float printTime, Color printColor) {
+        var element = _voxels[_currentPrintedElementIndex];
+        var material = _materialsMap[printColor];
+        element.voxelElement.Print(printTime, material);
+        _currentPrintedElementIndex++;
     }
 
-    private List<Color> GetFigureColors() {
+    public void ShowCurrentElementAndLayer() {
+        if (_currentPrintedElementIndex >= _voxels.Count) {
+            return;
+        }
+
+        var element = _voxels[_currentPrintedElementIndex];
+        if (element.voxelPosition.y != _currentLayer) {
+            _currentLayer = (int) element.voxelPosition.y;
+            ShowCurrentLayer();
+        }
+
+        element.voxelElement.ShowCurrentElement();
+    }
+
+    public List<Color> GetFigureColors() {
         var colors = new HashSet<Color>();
         foreach (var v in _voxels) {
-            colors.Add(v.voxelColor);
+            if (colors.Add(v.voxelColor)) {
+                _materialsMap.Add(v.voxelColor, v.voxelElement.GetMaterial());
+            }
         }
 
         return colors.ToList();
@@ -85,9 +82,19 @@ public class VoxelFigure : MonoBehaviour {
         }
     }
 
-    private void TurnOffAllVoxels() {
+    public void TurnOffAllVoxels() {
+        _currentLayer = -1;
+        _currentPrintedElementIndex = 0;
         foreach (var v in _voxels) {
             v.voxelElement.Hide();
         }
+    }
+
+    public VoxelData GetCurrentElement() {
+        if (_currentPrintedElementIndex >= _voxels.Count) {
+            return null;
+        }
+
+        return _voxels[_currentPrintedElementIndex];
     }
 }

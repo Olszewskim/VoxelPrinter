@@ -1,8 +1,12 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PrinterButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
+    public Action<Color> OnButtonPressed;
+    public Action OnButtonReleased;
+
     [SerializeField] private Transform _buttonTop;
 
     private const float BUTTON_Y_ANIM_SCALE = 0.5f;
@@ -10,6 +14,7 @@ public class PrinterButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     private MeshRenderer _meshRenderer;
     private bool _isClicked;
+    private Color _myColor;
 
     private void Awake() {
         _meshRenderer = _buttonTop.GetComponent<MeshRenderer>();
@@ -18,17 +23,20 @@ public class PrinterButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void SetButtonColor(Color color) {
         _meshRenderer.material.color = color;
+        _myColor = color;
     }
 
     public void OnPointerDown(PointerEventData eventData) {
         _isClicked = true;
         _buttonTop.DOKill();
         _buttonTop.DOScaleY(BUTTON_Y_ANIM_SCALE, BUTTON_ANIM_TIME);
+        OnButtonPressed?.Invoke(_myColor);
     }
 
     public void OnPointerUp(PointerEventData eventData) {
         _isClicked = false;
         _buttonTop.DOKill();
         _buttonTop.DOScaleY(1, BUTTON_ANIM_TIME);
+        OnButtonReleased?.Invoke();
     }
 }
