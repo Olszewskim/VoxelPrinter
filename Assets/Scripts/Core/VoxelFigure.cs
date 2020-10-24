@@ -43,10 +43,10 @@ public class VoxelFigure : MonoBehaviour {
             .ToList();
     }
 
-    public void Print(float printTime, Color printColor) {
+    public void Print(float printTime, Color printColor, Action onFinish) {
         var element = _voxels[_currentPrintedElementIndex];
         var material = _materialsMap[printColor];
-        element.voxelElement.Print(printTime, material);
+        element.voxelElement.Print(printTime, material, onFinish);
         _currentPrintedElementIndex++;
     }
 

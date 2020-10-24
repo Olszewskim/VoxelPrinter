@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -23,6 +22,7 @@ public class Printer : MonoBehaviour {
 
     private bool _isPrinting;
     private bool _continuePrinting;
+    private bool _isNoozleMoved;
     private Color _currentColor;
 
     private void Awake() {
@@ -57,37 +57,54 @@ public class Printer : MonoBehaviour {
         SetButtonsPositions(colors.Count);
     }
 
-    private IEnumerator Print(Color printColor) {
-        _isPrinting = true;
+    private void StartPrinting(Color printColor) {
         var currentElement = _currentPrintedModel.GetCurrentElement();
         if (currentElement == null) {
-            yield break;
+            return;
         }
 
-        var moveAnim = MoveNoozle(printColor, currentElement);
-        yield return null;
-        var moveAnimTime = moveAnim.Duration();
-        yield return new WaitForSeconds(moveAnimTime);
-        _laserBeam.Play();
-        _fillament.DOScale(_fillamentRunOutScale, PRINT_TIME).OnComplete(() => _laserBeam.Stop());
-        _currentPrintedModel.Print(PRINT_TIME, printColor);
-        yield return new WaitForSeconds(PRINT_TIME);
-        _currentPrintedModel.ShowCurrentElementAndLayer();
-        _isPrinting = false;
+        SetFillamentColor();
+        if (_isNoozleMoved) {
+            ContinuePrinting(printColor);
+            return;
+        }
+
+        _isPrinting = true;
+        _isNoozleMoved = false;
+        MoveNoozle(printColor, currentElement);
+    }
+
+    private void MoveNoozle(Color printColor, VoxelData voxelData) {
+        _fillament.localScale = _fillamentStartScale;
+        var position = voxelData.voxelPosition;
+        position.y += PRINT_HEIGHT;
+        _nozzle.DOMove(position, MOVE_TIME).SetEase(Ease.Linear).SetSpeedBased()
+            .OnComplete(FinishNoozleMove);
+    }
+
+    private void FinishNoozleMove() {
+        _isNoozleMoved = true;
         if (_continuePrinting) {
-            StartCoroutine(Print(_currentColor));
+            SetFillamentColor();
+            ContinuePrinting(_currentColor);
+        } else {
+            _isPrinting = false;
         }
     }
 
-    private Tween MoveNoozle(Color printColor, VoxelData voxelData) {
-        _fillamentMaterial.color = printColor;
-        _fillament.localScale = _fillamentStartScale;
-        var main = _laserBeam.main;
-        main.startColor = printColor;
-        var position = voxelData.voxelPosition;
-        position.y += PRINT_HEIGHT;
-        var anim = _nozzle.DOMove(position, MOVE_TIME).SetEase(Ease.Linear).SetSpeedBased();
-        return anim;
+    private void ContinuePrinting(Color printColor) {
+        _laserBeam.Play();
+        _fillament.DOScale(_fillamentRunOutScale, PRINT_TIME).OnComplete(() => _laserBeam.Stop());
+        _currentPrintedModel.Print(PRINT_TIME, printColor, FinishPrinting);
+    }
+
+    private void FinishPrinting() {
+        _currentPrintedModel.ShowCurrentElementAndLayer();
+        _isPrinting = false;
+        _isNoozleMoved = false;
+        if (_continuePrinting) {
+            StartPrinting(_currentColor);
+        }
     }
 
     private void TurnOffAllButtons() {
@@ -107,10 +124,16 @@ public class Printer : MonoBehaviour {
 
     private void OnPrintButtonPressed(Color printColor) {
         _currentColor = printColor;
+        _continuePrinting = true;
         if (!_isPrinting) {
-            StartCoroutine(Print(printColor));
-            _continuePrinting = true;
+            StartPrinting(printColor);
         }
+    }
+
+    private void SetFillamentColor() {
+        _fillamentMaterial.color = _currentColor;
+        var main = _laserBeam.main;
+        main.startColor = _currentColor;
     }
 
     private void OnPrintButtonReleased() {

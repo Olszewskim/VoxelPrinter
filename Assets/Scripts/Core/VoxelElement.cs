@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,10 +27,13 @@ public class VoxelElement : MonoBehaviour {
         _frame.gameObject.SetActive(false);
     }
 
-    public void Print(float time, Material material) {
+    public void Print(float time, Material material, Action onFinish) {
         _meshRenderer.sharedMaterial = material;
         transform.DOScale(_showScale, time).SetEase(Ease.Linear)
-            .OnComplete(OnElementPrinted);
+            .OnComplete(() => {
+                OnElementPrinted();
+                onFinish?.Invoke();
+            });
     }
 
     private void OnElementPrinted() {
