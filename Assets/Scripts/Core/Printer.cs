@@ -63,20 +63,21 @@ public class Printer : MonoBehaviour {
             return;
         }
 
+        _isPrinting = true;
         SetFillamentColor();
+
         if (_isNoozleMoved) {
             ContinuePrinting(printColor);
             return;
         }
 
-        _isPrinting = true;
         _isNoozleMoved = false;
-        MoveNoozle(printColor, currentElement);
+        MoveNoozle(currentElement.voxelPosition);
     }
 
-    private void MoveNoozle(Color printColor, VoxelData voxelData) {
+    private void MoveNoozle(Vector3 voxelPosition) {
         _fillament.localScale = _fillamentStartScale;
-        var position = voxelData.voxelPosition;
+        var position = voxelPosition;
         position.y += PRINT_HEIGHT;
         _nozzle.DOMove(position, MOVE_TIME).SetEase(Ease.Linear).SetSpeedBased()
             .OnComplete(FinishNoozleMove);
