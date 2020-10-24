@@ -6,6 +6,8 @@ public class Printer : MonoBehaviour {
     private const float PRINT_HEIGHT = 1.5f;
     private const float MOVE_TIME = 5f;
     private const float PRINT_TIME = 0.3f;
+    private const float MAX_SPEED_MULTIPLIER = 3f;
+    private const float SPEED_MULTIPLIER_INCREASE_RATE = 1.2f;
 
     [SerializeField] private Transform _nozzle;
     [SerializeField] private Transform _fillament;
@@ -24,6 +26,7 @@ public class Printer : MonoBehaviour {
     private bool _continuePrinting;
     private bool _isNoozleMoved;
     private Color _currentColor;
+    private float _currentSpeedMultiplier = 1f;
 
     private void Awake() {
         _laserBeam.Stop();
@@ -79,7 +82,7 @@ public class Printer : MonoBehaviour {
         _fillament.localScale = _fillamentStartScale;
         var position = voxelPosition;
         position.y += PRINT_HEIGHT;
-        _nozzle.DOMove(position, MOVE_TIME).SetEase(Ease.Linear).SetSpeedBased()
+        _nozzle.DOMove(position, GetNoozleMovementSpeed()).SetEase(Ease.Linear).SetSpeedBased()
             .OnComplete(FinishNoozleMove);
     }
 
@@ -95,8 +98,9 @@ public class Printer : MonoBehaviour {
 
     private void ContinuePrinting(Color printColor) {
         _laserBeam.Play();
-        _fillament.DOScale(_fillamentRunOutScale, PRINT_TIME).OnComplete(() => _laserBeam.Stop());
-        _currentPrintedModel.Print(PRINT_TIME, printColor, FinishPrinting);
+        var printTime = GetPrintSpeed();
+        _fillament.DOScale(_fillamentRunOutScale, printTime).OnComplete(() => _laserBeam.Stop());
+        _currentPrintedModel.Print(printTime, printColor, FinishPrinting);
     }
 
     private void FinishPrinting() {
@@ -104,6 +108,7 @@ public class Printer : MonoBehaviour {
         _isPrinting = false;
         _isNoozleMoved = false;
         if (_continuePrinting) {
+            IncreaseSpeedMultiplier();
             StartPrinting(_currentColor);
         }
     }
@@ -139,5 +144,19 @@ public class Printer : MonoBehaviour {
 
     private void OnPrintButtonReleased() {
         _continuePrinting = false;
+        _currentSpeedMultiplier = 1f;
+    }
+
+    private void IncreaseSpeedMultiplier() {
+        _currentSpeedMultiplier *= SPEED_MULTIPLIER_INCREASE_RATE;
+        _currentSpeedMultiplier = Mathf.Min(_currentSpeedMultiplier, MAX_SPEED_MULTIPLIER);
+    }
+
+    private float GetPrintSpeed() {
+        return PRINT_TIME / _currentSpeedMultiplier;
+    }
+
+    private float GetNoozleMovementSpeed() {
+        return MOVE_TIME * _currentSpeedMultiplier;
     }
 }
