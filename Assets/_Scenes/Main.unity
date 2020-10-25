@@ -256,7 +256,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 531574464}
   m_LocalRotation: {x: 0.15047963, y: 0.2960627, z: -0.047296643, w: 0.94205403}
-  m_LocalPosition: {x: -6.6593933, y: 12.163235, z: -12.55424}
+  m_LocalPosition: {x: -11.73, y: 15.89, z: -22.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -714,7 +714,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1.15
+  m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -922,6 +922,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Printer
+      objectReference: {fileID: 0}
+    - target: {fileID: 9009477798551541883, guid: 4b46fd0159a2b441eb83012d9bd9cf7d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 9009477798551541883, guid: 4b46fd0159a2b441eb83012d9bd9cf7d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 9009477798551541883, guid: 4b46fd0159a2b441eb83012d9bd9cf7d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.2012
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b46fd0159a2b441eb83012d9bd9cf7d, type: 3}
