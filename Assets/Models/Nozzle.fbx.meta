@@ -3,7 +3,17 @@ guid: 405ff174f2a8d4445939fbccd6128a98
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FilamentMaterial
+    second: {fileID: 2100000, guid: 69a2c8970eba5134381745254ea2681c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Nozzle
+    second: {fileID: 2100000, guid: 29c3a6b03ba3d274bb3513cb84ab7d50, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

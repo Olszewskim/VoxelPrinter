@@ -3,7 +3,67 @@ guid: 0c05233898e1ac94397ebd31f540b53a
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ButtonGreen
+    second: {fileID: 2100000, guid: f5232c639436147428b83249cc6200b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ButtonRed
+    second: {fileID: 2100000, guid: c969a07d1bcd5994ca7a94f5934afc45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fan
+    second: {fileID: 2100000, guid: 513173195d27429438c1b5d926e3452d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FanCover
+    second: {fileID: 2100000, guid: e9f55dbaca2270848802dd9e1d9f1ee2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HeatBed
+    second: {fileID: 2100000, guid: 5756f3e8cd4122f4c8703963243e4fab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plate
+    second: {fileID: 2100000, guid: 1700784e056e63f4b842a45f934a8877, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PowerSuply
+    second: {fileID: 2100000, guid: af2bb2e8289c91948aadb3fe233b784b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PrinterBase
+    second: {fileID: 2100000, guid: 76245190ea3ff924180ae5c7678b7389, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PrinterUp
+    second: {fileID: 2100000, guid: e9e598a179842fa499abcfda6ec3387a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen
+    second: {fileID: 2100000, guid: 3c692747fa109204ab9dd446e9ff20fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ScreenBase
+    second: {fileID: 2100000, guid: d837826fc71a09f43bcfb4bffbd6d102, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scroll
+    second: {fileID: 2100000, guid: 952429fd7bdc93240aa7457ae3a5b6d6, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

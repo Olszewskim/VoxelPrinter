@@ -3,7 +3,22 @@ guid: c86ebc97102d64b499de2d75e6b49fa5
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Button
+    second: {fileID: 2100000, guid: 474a1126c9182ff43ab2344ccd355d13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PrintButtonFrame
+    second: {fileID: 2100000, guid: 3b50dc54882d9514d8ce4e61f6ad8443, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PrintButtonMain
+    second: {fileID: 2100000, guid: a6b2761da97c7a94fbb4e582d7650d0d, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

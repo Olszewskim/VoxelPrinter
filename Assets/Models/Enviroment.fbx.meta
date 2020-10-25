@@ -3,7 +3,47 @@ guid: 6a0921901eb642e45841228a34f334fd
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Floar
+    second: {fileID: 2100000, guid: 5e013cce2682f514c84f6acb94a71aa0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloarCR
+    second: {fileID: 2100000, guid: a2de8f9badb893c4b99dbe4b623d6955, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frame
+    second: {fileID: 2100000, guid: ab42a0debdc216f4bb83f67ee15c561c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Poster1
+    second: {fileID: 2100000, guid: 15b17976b3e28154886a3839e051e69d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Poster2
+    second: {fileID: 2100000, guid: b2541ce5c65588d4786fd13c6a2c3a89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Poster3
+    second: {fileID: 2100000, guid: 4e8c772ba3efe5b46ab7b66f5ca9424d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Table
+    second: {fileID: 2100000, guid: 1c73389580f77934796bef9f71a75051, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall
+    second: {fileID: 2100000, guid: 82eb23a54f46b5740a1c6a59e45a0753, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
