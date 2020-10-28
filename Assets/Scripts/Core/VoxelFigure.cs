@@ -19,6 +19,8 @@ public class VoxelData {
 }
 
 public class VoxelFigure : MonoBehaviour {
+    public event Action<int> OnLayerChanged;
+
     [SerializeField] private List<VoxelData> _voxels;
 
     private int _currentLayer;
@@ -59,6 +61,7 @@ public class VoxelFigure : MonoBehaviour {
         if (element.voxelPosition.y != _currentLayer) {
             _currentLayer = (int) element.voxelPosition.y;
             ShowCurrentLayer();
+            OnLayerChanged?.Invoke(_currentLayer);
         }
 
         element.voxelElement.ShowCurrentElement();
@@ -96,5 +99,11 @@ public class VoxelFigure : MonoBehaviour {
         }
 
         return _voxels[_currentPrintedElementIndex];
+    }
+
+    public (int min, int max) GetLayersIDs() {
+        var minLayer = (int)_voxels.First().voxelPosition.y;
+        var maxLayer = (int)_voxels.Last().voxelPosition.y;
+        return (minLayer, maxLayer);
     }
 }

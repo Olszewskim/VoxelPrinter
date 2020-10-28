@@ -13,6 +13,7 @@ public class Printer : MonoBehaviour {
     [SerializeField] private Transform _fillament;
     [SerializeField] private PrinterButton _buttonsPrefab;
     [SerializeField] private ParticleSystem _laserBeam;
+    [SerializeField] private CameraController _cameraController;
 
     private Material _fillamentMaterial;
     private Vector3 _fillamentStartScale;
@@ -40,6 +41,11 @@ public class Printer : MonoBehaviour {
         _currentPrintedModel = voxelFigure;
         SetButtonsColors(voxelFigure.GetFigureColors());
         voxelFigure.TurnOffAllVoxels();
+
+        var layers = _currentPrintedModel.GetLayersIDs();
+        _cameraController.InitCamera(layers.min, layers.max);
+        _currentPrintedModel.OnLayerChanged += _cameraController.MoveCameraToLayer;
+
         _currentPrintedModel.ShowCurrentElementAndLayer();
     }
 
