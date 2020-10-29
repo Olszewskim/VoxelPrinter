@@ -217,7 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 303997490}
   m_Layer: 0
-  m_Name: _______________Menager_________________
+  m_Name: _______________Managers_________________
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1295,6 +1295,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8827795445891800551, guid: 4b46fd0159a2b441eb83012d9bd9cf7d,
+        type: 3}
+      propertyPath: _cameraController
+      value: 
+      objectReference: {fileID: 531574470}
     - target: {fileID: 8827795445891800568, guid: 4b46fd0159a2b441eb83012d9bd9cf7d,
         type: 3}
       propertyPath: m_Name
