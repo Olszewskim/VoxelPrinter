@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
 public class Printer : MonoBehaviour {
+    public event Action OnPrintingStarted;
+    public event Action<float> OnPrintingProgress;
+
     private const float PRINT_HEIGHT = 1.5f;
     private const float MOVE_TIME = 5f;
     private const float PRINT_TIME = 0.3f;
@@ -47,6 +51,7 @@ public class Printer : MonoBehaviour {
         _currentPrintedModel.OnLayerChanged += _cameraController.MoveCameraToLayer;
 
         _currentPrintedModel.ShowCurrentElementAndLayer();
+        OnPrintingStarted?.Invoke();
     }
 
     private void SetButtonsColors(List<Color> colors) {
@@ -113,6 +118,7 @@ public class Printer : MonoBehaviour {
         _currentPrintedModel.ShowCurrentElementAndLayer();
         _isPrinting = false;
         _isNoozleMoved = false;
+        OnPrintingProgress?.Invoke(_currentPrintedModel.GetPrintProgress());
         if (_continuePrinting) {
             IncreaseSpeedMultiplier();
             StartPrinting(_currentColor);

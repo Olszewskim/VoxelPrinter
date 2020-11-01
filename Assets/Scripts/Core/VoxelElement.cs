@@ -13,6 +13,7 @@ public class VoxelElement : MonoBehaviour {
 
     private MeshRenderer _meshRenderer;
     private Sequence _blinkSequence;
+    public bool IsPrinted { get; private set; }
 
     private void Awake() {
         _meshRenderer = GetComponent<MeshRenderer>();
@@ -35,6 +36,7 @@ public class VoxelElement : MonoBehaviour {
     private void OnElementPrinted() {
         _frame.gameObject.SetActive(false);
         _blinkSequence.Kill();
+        IsPrinted = true;
     }
 
     public void PrepareToPrint() {

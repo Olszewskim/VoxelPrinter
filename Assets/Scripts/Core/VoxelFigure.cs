@@ -11,6 +11,7 @@ public class VoxelData {
     public VoxelElement voxelElement;
     public Color voxelColor;
 
+    public bool IsPrinted => voxelElement.IsPrinted;
     public VoxelData(Vector3 voxelPosition, VoxelElement voxelElement, Color voxelColor) {
         this.voxelPosition = voxelPosition;
         this.voxelElement = voxelElement;
@@ -105,5 +106,10 @@ public class VoxelFigure : MonoBehaviour {
         var minLayer = (int)_voxels.First().voxelPosition.y;
         var maxLayer = (int)_voxels.Last().voxelPosition.y;
         return (minLayer, maxLayer);
+    }
+
+    public float GetPrintProgress() {
+        var printedElements = _voxels.Count(v => v.IsPrinted);
+        return printedElements / (float)_voxels.Count;
     }
 }
