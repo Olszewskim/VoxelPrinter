@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     [SerializeField] private VoxelFigure _voxelFigure;
@@ -7,5 +8,9 @@ public class GameManager : MonoBehaviour {
     public void Start() {
         Input.multiTouchEnabled = false;
         _printer.SetupPrintModel(_voxelFigure);
+    }
+
+    public void ResetGame() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
