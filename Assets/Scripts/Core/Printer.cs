@@ -25,7 +25,7 @@ public class Printer : MonoBehaviour {
 
     private List<PrinterButton> _buttons = new List<PrinterButton>();
     private VoxelFigure _currentPrintedModel;
-    private float _buttonAreaDistance = 8f;
+    private float _buttonAreaDistance = 12f;
 
     private bool _isPrinting;
     private bool _continuePrinting;
