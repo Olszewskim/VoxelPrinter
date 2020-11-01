@@ -1,7 +1,6 @@
 ﻿using System;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class VoxelElement : MonoBehaviour {
     private const float FRAME_BLINK_TIME = 0.5f;
@@ -10,15 +9,12 @@ public class VoxelElement : MonoBehaviour {
     private static readonly Vector3 _beforePrintScale = new Vector3(1, 0.01f, 1);
     private static readonly Vector3 _showScale = new Vector3(1, 1, 1);
 
-    [SerializeField] private Image _frame;
+    [SerializeField] private SpriteRenderer _frame;
 
-    private Canvas _canvas;
     private MeshRenderer _meshRenderer;
     private Sequence _blinkSequence;
 
     private void Awake() {
-        _canvas = GetComponentInChildren<Canvas>();
-        _canvas.worldCamera = Camera.main;
         _meshRenderer = GetComponent<MeshRenderer>();
     }
 
