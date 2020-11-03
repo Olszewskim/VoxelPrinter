@@ -6,7 +6,12 @@ ModelImporter:
   - first:
       74: -1840106705541294414
     second: FanMain|Cylinder.001Action
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TableColection
+    second: {fileID: 2100000, guid: 230e4759184ffd547bcd88d25ba1d5d3, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

@@ -3,7 +3,72 @@ guid: a12aaf1c54afff044a7e94c815d011e1
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CorkBoard
+    second: {fileID: 2100000, guid: 7c67d96ea6ea9d74ca17b0eff2eba6ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frame
+    second: {fileID: 2100000, guid: 0ee69c8704ad6d34dabed272ecb515ae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Paper
+    second: {fileID: 2100000, guid: eabfd2365d87427409a229d3febd8f38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PinMain1
+    second: {fileID: 2100000, guid: 394d99de842799047a1f737e4c707e40, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PinMain2
+    second: {fileID: 2100000, guid: 9c3a021747a8cc84f816dc393420eb4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PinMain3
+    second: {fileID: 2100000, guid: 9af6075bebc38884e8bab761e5c4f42d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PinMain4
+    second: {fileID: 2100000, guid: 5724ec90779b6b24581ef794c5c14df0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PinMain6
+    second: {fileID: 2100000, guid: 78f1d5d95757c0a488980f41fe4570c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PinMain7
+    second: {fileID: 2100000, guid: ed625dfcbfd6ab94fb73416b1341aa86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PinMain8
+    second: {fileID: 2100000, guid: a21f65064b31716419408cb8b0273284, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PinMain9
+    second: {fileID: 2100000, guid: 7c9d3f934d2f025449f28cdf13c7367f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PinMetal
+    second: {fileID: 2100000, guid: 0a3b494108d5ab348b8fcaa0f3671540, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: YellowPaper
+    second: {fileID: 2100000, guid: 92973aa2f9757e8458a068ff0f88c92e, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
