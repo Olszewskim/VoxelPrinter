@@ -22,6 +22,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Paper1
+    second: {fileID: 2100000, guid: eabfd2365d87427409a229d3febd8f38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Paper2
+    second: {fileID: 2100000, guid: 0e0d898d26d8d954c988a6f4a23e6529, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: PinMain1
     second: {fileID: 2100000, guid: 394d99de842799047a1f737e4c707e40, type: 2}
   - first:
