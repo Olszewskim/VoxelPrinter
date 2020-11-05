@@ -72,7 +72,7 @@ public class Printer : MonoBehaviour {
     }
 
     private void StartPrinting(Color printColor) {
-        var currentElement = _currentPrintedModel.GetCurrentElement();
+        var currentElement = _currentPrintedModel?.GetCurrentElement();
         if (currentElement == null) {
             return;
         }
@@ -119,10 +119,22 @@ public class Printer : MonoBehaviour {
         _isPrinting = false;
         _isNoozleMoved = false;
         OnPrintingProgress?.Invoke(_currentPrintedModel.GetPrintProgress());
+
+        if (_currentPrintedModel.IsCompleted) {
+            FinishPrintingCurrentModel();
+            return;
+        }
+
         if (_continuePrinting) {
             IncreaseSpeedMultiplier();
             StartPrinting(_currentColor);
         }
+    }
+
+    private void FinishPrintingCurrentModel() {
+        var stageFinishedAtPercentage = _currentPrintedModel.GetPercentageOfCorrectVoxels();
+        _currentPrintedModel = null;
+        LevelCompletedWindow.Instance.ShowWindow(stageFinishedAtPercentage);
     }
 
     private void TurnOffAllButtons() {

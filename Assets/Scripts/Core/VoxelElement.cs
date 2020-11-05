@@ -13,6 +13,7 @@ public class VoxelElement : MonoBehaviour {
 
     private MeshRenderer _meshRenderer;
     private Sequence _blinkSequence;
+    private Color _myPrintedColor;
     public bool IsPrinted { get; private set; }
 
     private void Awake() {
@@ -24,8 +25,9 @@ public class VoxelElement : MonoBehaviour {
         _frame.gameObject.SetActive(false);
     }
 
-    public void Print(float time, Material material, Action onFinish) {
+    public void Print(float time, Material material, Color printColor, Action onFinish) {
         _meshRenderer.sharedMaterial = material;
+        _myPrintedColor = printColor;
         transform.DOScale(_showScale, time).SetEase(Ease.Linear)
             .OnComplete(() => {
                 OnElementPrinted();
@@ -54,5 +56,9 @@ public class VoxelElement : MonoBehaviour {
         _blinkSequence.Append(_frame.DOColor(Color.clear, FRAME_BLINK_TIME))
             .Append(_frame.DOColor(Color.white, FRAME_BLINK_TIME))
             .SetLoops(-1).SetEase(Ease.Linear);
+    }
+
+    public bool IsPrintedCorrectly(Color voxelColor) {
+        return voxelColor == _myPrintedColor && IsPrinted;
     }
 }

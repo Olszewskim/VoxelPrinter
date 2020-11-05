@@ -12,10 +12,15 @@ public class VoxelData {
     public Color voxelColor;
 
     public bool IsPrinted => voxelElement.IsPrinted;
+
     public VoxelData(Vector3 voxelPosition, VoxelElement voxelElement, Color voxelColor) {
         this.voxelPosition = voxelPosition;
         this.voxelElement = voxelElement;
         this.voxelColor = voxelColor;
+    }
+
+    public bool IsPrintedCorrectly() {
+        return voxelElement.IsPrintedCorrectly(voxelColor);
     }
 }
 
@@ -23,6 +28,8 @@ public class VoxelFigure : MonoBehaviour {
     public event Action<int> OnLayerChanged;
 
     [SerializeField] private List<VoxelData> _voxels;
+
+    public bool IsCompleted => _currentPrintedElementIndex >= _voxels.Count;
 
     private int _currentLayer;
     private int _currentPrintedElementIndex;
@@ -49,7 +56,7 @@ public class VoxelFigure : MonoBehaviour {
     public void Print(float printTime, Color printColor, Action onFinish) {
         var element = _voxels[_currentPrintedElementIndex];
         var material = _materialsMap[printColor];
-        element.voxelElement.Print(printTime, material, onFinish);
+        element.voxelElement.Print(printTime, material, printColor, onFinish);
         _currentPrintedElementIndex++;
     }
 
@@ -103,13 +110,18 @@ public class VoxelFigure : MonoBehaviour {
     }
 
     public (int min, int max) GetLayersIDs() {
-        var minLayer = (int)_voxels.First().voxelPosition.y;
-        var maxLayer = (int)_voxels.Last().voxelPosition.y;
+        var minLayer = (int) _voxels.First().voxelPosition.y;
+        var maxLayer = (int) _voxels.Last().voxelPosition.y;
         return (minLayer, maxLayer);
     }
 
     public float GetPrintProgress() {
         var printedElements = _voxels.Count(v => v.IsPrinted);
-        return printedElements / (float)_voxels.Count;
+        return printedElements / (float) _voxels.Count;
+    }
+
+    public float GetPercentageOfCorrectVoxels() {
+        var elementsPrintedCorrectly = _voxels.Count(v => v.IsPrintedCorrectly());
+        return elementsPrintedCorrectly / (float) _voxels.Count;
     }
 }
