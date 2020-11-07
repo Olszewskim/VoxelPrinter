@@ -61,4 +61,8 @@ public class VoxelElement : MonoBehaviour {
     public bool IsPrintedCorrectly(Color voxelColor) {
         return voxelColor == _myPrintedColor && IsPrinted;
     }
+
+    private void OnDestroy() {
+        _blinkSequence.Kill();
+    }
 }

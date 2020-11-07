@@ -19,4 +19,8 @@ public class CameraController : MonoBehaviour {
         var destinationHeight = Mathf.Lerp(_minCameraPosY, _maxCameraPosY, percentage);
         transform.DOMoveY(destinationHeight, MOVE_ANIM_TIME).SetEase(Ease.OutQuint);
     }
+
+    private void OnDestroy() {
+        transform.DOKill();
+    }
 }
