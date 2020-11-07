@@ -32,6 +32,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: HeatBedUp
+    second: {fileID: 2100000, guid: 6fe490ba4868f874c99399485a1a2faa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Plate
     second: {fileID: 2100000, guid: 1700784e056e63f4b842a45f934a8877, type: 2}
   - first:
