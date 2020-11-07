@@ -112,6 +112,7 @@ public class Printer : MonoBehaviour {
         var printTime = GetPrintSpeed();
         _fillament.DOScale(_fillamentRunOutScale, printTime).OnComplete(() => _laserBeam.Stop());
         _currentPrintedModel.Print(printTime, printColor, FinishPrinting);
+        Vibration.VibratePop();
     }
 
     private void FinishPrinting() {

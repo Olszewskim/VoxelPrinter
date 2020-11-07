@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
 
     public void Start() {
         Input.multiTouchEnabled = false;
+        Vibration.Init();
         _printer.SetupPrintModel(_voxelFigure);
     }
 
