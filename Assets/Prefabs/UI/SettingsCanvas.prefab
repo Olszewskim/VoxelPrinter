@@ -80,6 +80,7 @@ MonoBehaviour:
   _musicSettings: {fileID: 5644163711757129130}
   _soundsSettings: {fileID: 8290784624560094779}
   _hapticSettings: {fileID: 2970057444427782385}
+  _versionText: {fileID: 3640439856558636060}
 --- !u!222 &4183128190468645410
 CanvasRenderer:
   m_ObjectHideFlags: 0
