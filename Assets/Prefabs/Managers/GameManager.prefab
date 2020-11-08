@@ -43,3 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2a457c72f65c457f99eece0d7a43d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _voxelFiguresData:
+  - {fileID: 11400000, guid: 1e62dc896a05e46309de60342a369c17, type: 2}
+  - {fileID: 11400000, guid: 4d56ffc6231e547d5a00d1e467c504aa, type: 2}
+  - {fileID: 11400000, guid: 54d3dfbe89d3c44debc5d2e60b51222d, type: 2}
+  - {fileID: 11400000, guid: 130b1a1f40ec041c4a22fa42982685c6, type: 2}
+  - {fileID: 11400000, guid: 981022a1e85cb4014beb9408c8d7a398, type: 2}
+  - {fileID: 11400000, guid: f80caa6b635fc4d3993592bdcbecfcba, type: 2}
+  - {fileID: 11400000, guid: 82e2bd621d90f4905bea26b541a385dc, type: 2}
+  - {fileID: 11400000, guid: 548602210cedf483ea2400273ae7c398, type: 2}
+  - {fileID: 11400000, guid: ab711bf8bc1fd42c793041501c7f35ff, type: 2}
+  _printer: {fileID: 0}
