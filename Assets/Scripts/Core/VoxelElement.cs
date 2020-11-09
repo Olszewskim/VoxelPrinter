@@ -65,4 +65,12 @@ public class VoxelElement : MonoBehaviour {
     private void OnDestroy() {
         _blinkSequence.Kill();
     }
+
+    public void HideFrame() {
+        _frame.gameObject.SetActive(false);
+    }
+
+    public void SetMaterial(Material material) {
+        _meshRenderer.sharedMaterial = material;
+    }
 }

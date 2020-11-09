@@ -124,4 +124,11 @@ public class VoxelFigure : MonoBehaviour {
         var elementsPrintedCorrectly = _voxels.Count(v => v.IsPrintedCorrectly());
         return elementsPrintedCorrectly / (float) _voxels.Count;
     }
+
+    public void DisableFigure() {
+        foreach (var voxel in _voxels) {
+            voxel.voxelElement.HideFrame();
+            voxel.voxelElement.SetMaterial(GameResourcesDatabase.Instance._lockedFigureMaterial);
+        }
+    }
 }
