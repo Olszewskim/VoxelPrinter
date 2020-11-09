@@ -7,6 +7,7 @@ public class FigureSlot : MonoBehaviour {
     public void Init(VoxelFigureData voxelFigureData) {
         _currentVoxelFigureData = voxelFigureData;
         _currentSpawnedVoxelFigure = Instantiate(_currentVoxelFigureData.voxelFigure, transform);
+        _currentSpawnedVoxelFigure.DisableFigure();
     }
 
     public void Clear() {
