@@ -6,6 +6,7 @@ using static Enums;
 public class GameManager : Singleton<GameManager> {
     [SerializeField] private List<VoxelFigureData> _voxelFiguresData;
     [SerializeField] private Printer _printer;
+    [SerializeField] private FiguresBookcase _figuresBookcase;
 
     private Dictionary<CollectionType, List<VoxelFigureData>> _voxelFiguresDataDictionary;
     private CollectionType _currentCollection = CollectionType.Animals;
@@ -16,6 +17,7 @@ public class GameManager : Singleton<GameManager> {
         Input.multiTouchEnabled = false;
         Vibration.Init();
         InitVoxelFiguresDictionary();
+        LoadCurrentCollection();
         InitNewFigure();
     }
 
@@ -28,6 +30,10 @@ public class GameManager : Singleton<GameManager> {
 
             _voxelFiguresDataDictionary[voxelData.collectionType].Add(voxelData);
         }
+    }
+
+    private void LoadCurrentCollection() {
+        _figuresBookcase.InitFigureSlots(_voxelFiguresDataDictionary[_currentCollection]);
     }
 
     private void InitNewFigure() {
