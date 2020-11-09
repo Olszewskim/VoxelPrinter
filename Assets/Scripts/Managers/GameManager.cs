@@ -4,36 +4,27 @@ using UnityEngine.SceneManagement;
 using static Enums;
 
 public class GameManager : Singleton<GameManager> {
-    [SerializeField] private List<VoxelFigureData> _voxelFiguresData;
     [SerializeField] private Printer _printer;
     [SerializeField] private FiguresBookcase _figuresBookcase;
 
-    private Dictionary<CollectionType, List<VoxelFigureData>> _voxelFiguresDataDictionary;
     private CollectionType _currentCollection = CollectionType.Animals;
+    private List<VoxelFigureData> _currentCollectionFigures;
     private int _currentFigureID;
     private VoxelFigure _currentVoxelFigure;
+
 
     public void Start() {
         Input.multiTouchEnabled = false;
         Vibration.Init();
-        InitVoxelFiguresDictionary();
         LoadCurrentCollection();
         InitNewFigure();
     }
 
-    private void InitVoxelFiguresDictionary() {
-        _voxelFiguresDataDictionary = new Dictionary<CollectionType, List<VoxelFigureData>>();
-        foreach (var voxelData in _voxelFiguresData) {
-            if (!_voxelFiguresDataDictionary.ContainsKey(voxelData.collectionType)) {
-                _voxelFiguresDataDictionary[voxelData.collectionType] = new List<VoxelFigureData>();
-            }
 
-            _voxelFiguresDataDictionary[voxelData.collectionType].Add(voxelData);
-        }
-    }
 
     private void LoadCurrentCollection() {
-        _figuresBookcase.InitFigureSlots(_voxelFiguresDataDictionary[_currentCollection]);
+        _currentCollectionFigures = GameResourcesDatabase.GetVoxelFiguresCollection(_currentCollection);
+        _figuresBookcase.InitFigureSlots(_currentCollectionFigures);
     }
 
     private void InitNewFigure() {
@@ -41,17 +32,17 @@ public class GameManager : Singleton<GameManager> {
             Destroy(_currentVoxelFigure.gameObject);
         }
 
-        _currentVoxelFigure = Instantiate(_voxelFiguresData[_currentFigureID].voxelFigure);
+        _currentVoxelFigure = Instantiate(_currentCollectionFigures[_currentFigureID].voxelFigure);
         _printer.SetupPrintModel(_currentVoxelFigure);
     }
 
     public void LoadNextFigure() {
-        _currentFigureID = Mathf.Min(_currentFigureID + 1, _voxelFiguresDataDictionary[_currentCollection].Count - 1);
+        _currentFigureID = Mathf.Min(_currentFigureID + 1, _currentCollectionFigures.Count - 1);
         InitNewFigure();
     }
 
     public string GetCurrentVoxelFigureName() {
-        return _voxelFiguresDataDictionary[_currentCollection][_currentFigureID].figureName;
+        return _currentCollectionFigures[_currentFigureID].figureName;
     }
 
     public void ResetGame() {

@@ -11,6 +11,7 @@ public class FigureSlot : MonoBehaviour {
 
     public void Clear() {
         if (_currentSpawnedVoxelFigure != null) {
+            //TODO: Optimize spawning figures
             Destroy(_currentSpawnedVoxelFigure.gameObject);
             _currentSpawnedVoxelFigure = null;
         }
