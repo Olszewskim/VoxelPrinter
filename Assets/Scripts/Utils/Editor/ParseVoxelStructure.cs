@@ -68,10 +68,12 @@ public class ParseVoxelStructure : MonoBehaviour {
         }
 
         for (int i = 0; i < rawVoxelData.Count; i++) {
-            var cube = (VoxelElement)PrefabUtility.InstantiatePrefab(_voxelPrefab);
+            var cube = (VoxelElement) PrefabUtility.InstantiatePrefab(_voxelPrefab);
             cube.gameObject.layer = Layers.Voxel;
             cube.transform.SetParent(root.transform);
             cube.transform.position = rawVoxelData[i].position;
+            cube.name =
+                $"[{rawVoxelData[i].position.x},{rawVoxelData[i].position.y},{rawVoxelData[i].position.z}] Voxel";
             var material = GetOrCreateVoxelMaterial(rawVoxelData[i].color);
             cube.GetComponent<Renderer>().sharedMaterial = material;
             voxelFigure.AddVoxel(rawVoxelData[i].position, cube, material.color);
