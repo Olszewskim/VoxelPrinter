@@ -143,43 +143,22 @@ public class VoxelFigure : MonoBehaviour {
     public void DisableFigure() {
         foreach (var voxel in _voxels) {
             voxel.voxelElement.HideFrame();
-            voxel.voxelElement.SetMaterial(GameResourcesDatabase.Instance._lockedFigureMaterial);
+            //  voxel.voxelElement.SetMaterial(GameResourcesDatabase.Instance._lockedFigureMaterial);
         }
 
         HideInvisibleVoxels();
     }
 
     private void HideInvisibleVoxels() {
-        var neighbourTypes = (NeighbourType[]) Enum.GetValues(typeof(NeighbourType));
         foreach (var voxel in _voxels) {
-            var neiboursCount = 0;
-            var requiredNeighboursCount = GetRequiredNeighboursCount(voxel.voxelPosition);
-            foreach (var neighbourType in neighbourTypes) {
-                var neighbour = GetNeighbour(neighbourType, voxel.voxelPosition);
-                if (neighbour == null) {
-                    break;
-                }
+            var topNeighbour = GetNeighbour(NeighbourType.Top, voxel.voxelPosition);
+            var leftNeighbour = GetNeighbour(NeighbourType.Left, voxel.voxelPosition);
+            var frontNeighbour = GetNeighbour(NeighbourType.Front, voxel.voxelPosition);
 
-                neiboursCount++;
-            }
-
-            if (neiboursCount == requiredNeighboursCount) {
+            if (topNeighbour != null && leftNeighbour != null && frontNeighbour != null) {
                 voxel.voxelElement.Disable();
             }
         }
-    }
-
-    private int GetRequiredNeighboursCount(Vector3 voxelPosition) {
-        //Bottom layer case
-        if (voxelPosition.y == _minPositions.y) {
-            return 5;
-        }
-        //Back layer case
-        if (voxelPosition.z == _maxPositions.z) {
-            return 5;
-        }
-
-        return 6;
     }
 
     private VoxelElement GetNeighbour(NeighbourType neighbourType, Vector3 voxelPosition) {
