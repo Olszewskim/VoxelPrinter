@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening;
 using UnityEngine;
+using static Enums;
 
 [Serializable]
 public class VoxelData {
@@ -34,6 +33,9 @@ public class VoxelFigure : MonoBehaviour {
     private int _currentLayer;
     private int _currentPrintedElementIndex;
     private Dictionary<Color, Material> _materialsMap = new Dictionary<Color, Material>();
+    private Dictionary<Vector3, VoxelElement> _voxelElementsPositionsDictionary =
+        new Dictionary<Vector3, VoxelElement>();
+    private Vector3 _minPositions, _maxPositions;
 
     public void AddVoxel(Vector3 position, VoxelElement voxelElement, Color voxelColor) {
         if (_voxels == null) {
@@ -51,6 +53,19 @@ public class VoxelFigure : MonoBehaviour {
         _voxels = _voxels.OrderBy(v => v.voxelPosition.y).ThenByDescending(v => v.voxelPosition.z)
             .ThenByDescending(v => v.voxelPosition.x)
             .ToList();
+
+        foreach (var voxel in _voxels) {
+            _voxelElementsPositionsDictionary.Add(voxel.voxelPosition, voxel.voxelElement);
+        }
+
+        var minX = _voxels.Min(v => v.voxelPosition.x);
+        var maxX = _voxels.Max(v => v.voxelPosition.x);
+        var minY = _voxels.Min(v => v.voxelPosition.y);
+        var maxY = _voxels.Max(v => v.voxelPosition.y);
+        var minZ = _voxels.Min(v => v.voxelPosition.z);
+        var maxZ = _voxels.Max(v => v.voxelPosition.z);
+        _minPositions = new Vector3(minX, minY, minZ);
+        _maxPositions = new Vector3(maxX, maxY, maxZ);
     }
 
     public void Print(float printTime, Color printColor, Action onFinish) {
@@ -130,5 +145,70 @@ public class VoxelFigure : MonoBehaviour {
             voxel.voxelElement.HideFrame();
             voxel.voxelElement.SetMaterial(GameResourcesDatabase.Instance._lockedFigureMaterial);
         }
+
+        HideInvisibleVoxels();
+    }
+
+    private void HideInvisibleVoxels() {
+        var neighbourTypes = (NeighbourType[]) Enum.GetValues(typeof(NeighbourType));
+        foreach (var voxel in _voxels) {
+            var neiboursCount = 0;
+            var requiredNeighboursCount = GetRequiredNeighboursCount(voxel.voxelPosition);
+            foreach (var neighbourType in neighbourTypes) {
+                var neighbour = GetNeighbour(neighbourType, voxel.voxelPosition);
+                if (neighbour == null) {
+                    break;
+                }
+
+                neiboursCount++;
+            }
+
+            if (neiboursCount == requiredNeighboursCount) {
+                voxel.voxelElement.Disable();
+            }
+        }
+    }
+
+    private int GetRequiredNeighboursCount(Vector3 voxelPosition) {
+        //Bottom layer case
+        if (voxelPosition.y == _minPositions.y) {
+            return 5;
+        }
+        //Back layer case
+        if (voxelPosition.z == _maxPositions.z) {
+            return 5;
+        }
+
+        return 6;
+    }
+
+    private VoxelElement GetNeighbour(NeighbourType neighbourType, Vector3 voxelPosition) {
+        var neighbourPosition = voxelPosition;
+        switch (neighbourType) {
+            case NeighbourType.Top:
+                neighbourPosition.y += 1;
+                break;
+            case NeighbourType.Left:
+                neighbourPosition.x -= 1;
+                break;
+            case NeighbourType.Front:
+                neighbourPosition.z -= 1;
+                break;
+            case NeighbourType.Right:
+                neighbourPosition.x += 1;
+                break;
+            case NeighbourType.Back:
+                neighbourPosition.z += 1;
+                break;
+            case NeighbourType.Bottom:
+                neighbourPosition.y -= 1;
+                break;
+        }
+
+        if (_voxelElementsPositionsDictionary.ContainsKey(neighbourPosition)) {
+            return _voxelElementsPositionsDictionary[neighbourPosition];
+        }
+
+        return null;
     }
 }

@@ -73,4 +73,8 @@ public class VoxelElement : MonoBehaviour {
     public void SetMaterial(Material material) {
         _meshRenderer.sharedMaterial = material;
     }
+
+    public void Disable() {
+        gameObject.SetActive(false);
+    }
 }
