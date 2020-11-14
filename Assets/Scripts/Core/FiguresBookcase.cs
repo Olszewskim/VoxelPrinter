@@ -9,6 +9,7 @@ public class FiguresBookcase : MonoBehaviour {
         for (int i = 0; i < voxelFiguresData.Count; i++) {
             _figureSlots[i].Init(voxelFiguresData[i]);
         }
+
     }
 
     private void ClearAllSlots() {

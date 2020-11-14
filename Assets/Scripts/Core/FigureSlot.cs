@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
 public class FigureSlot : MonoBehaviour {
+    [SerializeField] private StarsControllerUI _starsControllerUI;
+
     private VoxelFigureData _currentVoxelFigureData;
     private VoxelFigure _currentSpawnedVoxelFigure;
 

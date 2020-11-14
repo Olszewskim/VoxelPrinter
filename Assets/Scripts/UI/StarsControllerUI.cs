@@ -15,10 +15,10 @@ public class StarsControllerUI : MonoBehaviour {
         }
     }
 
-    public void ShowStars(float levelResult) {
+    public void ShowStars(float levelResult, bool withAnimation) {
         var starsToShow = GetCountOfStarsToShow(levelResult);
         for (int i = 0; i < starsToShow; i++) {
-            _stars[i].Show(SHOW_STAR_DELAY * i);
+            _stars[i].Show(SHOW_STAR_DELAY * i, withAnimation);
         }
     }
 

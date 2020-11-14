@@ -19,7 +19,7 @@ public class LevelCompletedWindow : WindowBehaviour<LevelCompletedWindow> {
     public void ShowWindow(float stageFinishedAtPercentage) {
         _starsControllerUI.HideStars();
         var finalPercent = stageFinishedAtPercentage * 100;
-        _starsControllerUI.ShowStars(finalPercent);
+        _starsControllerUI.ShowStars(finalPercent, true);
         _percentText.text = "0%";
         _completedText.text = $"{GameManager.Instance.GetCurrentVoxelFigureName()} Completed";
         DOVirtual.Float(0, finalPercent, PERCENTAGE_ANIM_TIME, AnimatePercentage).SetEase(Ease.OutCubic);
