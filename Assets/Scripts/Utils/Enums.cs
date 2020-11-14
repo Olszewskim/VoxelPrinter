@@ -1,6 +1,8 @@
 ﻿public static class Enums {
     public enum CollectionType {
-        Animals
+        Animals,
+        People,
+        Plants
     }
 
     public enum NeighbourType {

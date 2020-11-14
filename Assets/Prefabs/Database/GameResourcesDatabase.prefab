@@ -46,21 +46,212 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 1e62dc896a05e46309de60342a369c17, type: 2}
+    - {fileID: 11400000, guid: 4d56ffc6231e547d5a00d1e467c504aa, type: 2}
+    - {fileID: 11400000, guid: 54d3dfbe89d3c44debc5d2e60b51222d, type: 2}
+    - {fileID: 11400000, guid: 130b1a1f40ec041c4a22fa42982685c6, type: 2}
+    - {fileID: 11400000, guid: f80caa6b635fc4d3993592bdcbecfcba, type: 2}
+    - {fileID: 11400000, guid: 82e2bd621d90f4905bea26b541a385dc, type: 2}
+    - {fileID: 11400000, guid: 981022a1e85cb4014beb9408c8d7a398, type: 2}
+    - {fileID: 11400000, guid: 548602210cedf483ea2400273ae7c398, type: 2}
+    - {fileID: 11400000, guid: ab711bf8bc1fd42c793041501c7f35ff, type: 2}
+    - {fileID: 11400000, guid: 75fadc0cc43a44248a4eed745d2f2d4b, type: 2}
+    - {fileID: 11400000, guid: c64b8f36116c845d4805794444c2913a, type: 2}
+    - {fileID: 11400000, guid: 07a888b75cea24d0ebdb42649603f549, type: 2}
+    - {fileID: 11400000, guid: 77978db0aeb5c46a6bc27d22cf70b2ac, type: 2}
+    - {fileID: 11400000, guid: a5ebd504cdaa240c6ac7280a2ff4c619, type: 2}
+    - {fileID: 11400000, guid: cd6edd783ee384d829ee27f0a2c87050, type: 2}
+    - {fileID: 11400000, guid: 2a9ee81659e9e4e1fb473d4789a54d11, type: 2}
+    - {fileID: 11400000, guid: d3b0d069898d14ac8be66fb538521ddb, type: 2}
+    - {fileID: 11400000, guid: c85b8d057e7214493a84838a096daf6f, type: 2}
+    - {fileID: 11400000, guid: 2eeabe16561074beaac23c9b57c31d73, type: 2}
+    - {fileID: 11400000, guid: 3dbeaa9f52ba04e0bb77e018db87dc3a, type: 2}
+    - {fileID: 11400000, guid: e083c99d7f8224c78a7b0174a634e063, type: 2}
+    - {fileID: 11400000, guid: 80efa1cbf61054119b41efb2c63d916e, type: 2}
+    - {fileID: 11400000, guid: 368d5a830eb5a44eab8551b8152da232, type: 2}
+    - {fileID: 11400000, guid: 30b92d96aa695413a8ef73904764bd8f, type: 2}
+    - {fileID: 11400000, guid: 084a12c756f614dcf9ed1953e0f96482, type: 2}
+    - {fileID: 11400000, guid: 724892913602b41f48ab91d612f9e904, type: 2}
+    - {fileID: 11400000, guid: d52ed34291bb64de49a1c8ef312be0b4, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
-  _voxelFiguresData:
-  - {fileID: 11400000, guid: 1e62dc896a05e46309de60342a369c17, type: 2}
-  - {fileID: 11400000, guid: 4d56ffc6231e547d5a00d1e467c504aa, type: 2}
-  - {fileID: 11400000, guid: 54d3dfbe89d3c44debc5d2e60b51222d, type: 2}
-  - {fileID: 11400000, guid: 130b1a1f40ec041c4a22fa42982685c6, type: 2}
-  - {fileID: 11400000, guid: f80caa6b635fc4d3993592bdcbecfcba, type: 2}
-  - {fileID: 11400000, guid: 82e2bd621d90f4905bea26b541a385dc, type: 2}
-  - {fileID: 11400000, guid: 981022a1e85cb4014beb9408c8d7a398, type: 2}
-  - {fileID: 11400000, guid: 548602210cedf483ea2400273ae7c398, type: 2}
-  - {fileID: 11400000, guid: ab711bf8bc1fd42c793041501c7f35ff, type: 2}
+    SerializationNodes:
+    - Name: _voxelFiguresDataDictionary
+      Entry: 7
+      Data: 0|UnityEngine.Rendering.SerializedDictionary`2[[Enums+CollectionType,
+        Assembly-CSharp],[System.Collections.Generic.List`1[[VoxelFigureData, Assembly-CSharp]],
+        mscorlib]], Unity.RenderPipelines.Core.Runtime
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Enums+CollectionType,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[VoxelFigureData, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 9
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 10
+      Data: 8
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[VoxelFigureData, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 9
+    - Name: 
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 10
+      Data: 10
+    - Name: 
+      Entry: 10
+      Data: 11
+    - Name: 
+      Entry: 10
+      Data: 12
+    - Name: 
+      Entry: 10
+      Data: 13
+    - Name: 
+      Entry: 10
+      Data: 14
+    - Name: 
+      Entry: 10
+      Data: 15
+    - Name: 
+      Entry: 10
+      Data: 16
+    - Name: 
+      Entry: 10
+      Data: 17
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[VoxelFigureData, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 9
+    - Name: 
+      Entry: 10
+      Data: 18
+    - Name: 
+      Entry: 10
+      Data: 19
+    - Name: 
+      Entry: 10
+      Data: 20
+    - Name: 
+      Entry: 10
+      Data: 21
+    - Name: 
+      Entry: 10
+      Data: 22
+    - Name: 
+      Entry: 10
+      Data: 23
+    - Name: 
+      Entry: 10
+      Data: 24
+    - Name: 
+      Entry: 10
+      Data: 25
+    - Name: 
+      Entry: 10
+      Data: 26
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   _lockedFigureMaterial: {fileID: 2100000, guid: 3c1b242cd27f8483ba40c68b4af8c7e7,
     type: 2}
