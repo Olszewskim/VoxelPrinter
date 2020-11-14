@@ -22,6 +22,8 @@ public class ParseVoxelStructure : MonoBehaviour {
 
     private static VoxelElement _voxelPrefab;
 
+    private const string SAVE_PATH = "Assets/Prefabs/VoxelStructures/";
+
     [MenuItem("Tools/Parse Voxel Structure into Prefab")]
     public static void Do() {
         if (Selection.assetGUIDs.Length == 0 || Selection.assetGUIDs.Length > 1) {
@@ -38,8 +40,14 @@ public class ParseVoxelStructure : MonoBehaviour {
 
         var rootGameObject = CreateVoxelStructure(rawVoxelDatas);
         Selection.activeObject = rootGameObject;
-        PrefabUtility.SaveAsPrefabAsset(rootGameObject,
-            "Assets/Prefabs/VoxelStructures/" + Path.GetFileName(path) + ".prefab");
+        var fileNames = Path.GetFileName(path).Split('_');
+        var namePath = Path.Combine(fileNames);
+
+        if (!Directory.Exists(SAVE_PATH + fileNames[0])) {
+            Directory.CreateDirectory(SAVE_PATH + fileNames[0]);
+        }
+
+        PrefabUtility.SaveAsPrefabAsset(rootGameObject, SAVE_PATH + namePath + ".prefab");
         DestroyImmediate(rootGameObject);
     }
 
@@ -84,7 +92,7 @@ public class ParseVoxelStructure : MonoBehaviour {
 
     private static Material GetOrCreateVoxelMaterial(string colorCode) {
         Material material =
-            (Material) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/VoxelStructures/Materials/" + colorCode + ".mat",
+            (Material) AssetDatabase.LoadAssetAtPath(SAVE_PATH + "Materials/" + colorCode + ".mat",
                 typeof(Material));
         if (material == null) {
             material = CreateVoxelMaterial(colorCode);
@@ -103,7 +111,7 @@ public class ParseVoxelStructure : MonoBehaviour {
             material.color = color;
         }
 
-        AssetDatabase.CreateAsset(material, "Assets/Prefabs/VoxelStructures/Materials/" + colorCode + ".mat");
+        AssetDatabase.CreateAsset(material, SAVE_PATH + "Materials/" + colorCode + ".mat");
         return material;
     }
 }
