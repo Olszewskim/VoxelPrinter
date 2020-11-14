@@ -50,6 +50,7 @@ MonoBehaviour:
   _fillament: {fileID: 3622436249177471436}
   _buttonsPrefab: {fileID: 5638307865928554286}
   _laserBeam: {fileID: 8000615732406384480}
+  _cameraController: {fileID: 0}
 --- !u!1001 &5638307867583080462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -286,10 +287,80 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8536812581196974080, guid: 0c05233898e1ac94397ebd31f540b53a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -8256134651489076907, guid: 0c05233898e1ac94397ebd31f540b53a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -8137066347416423108, guid: 0c05233898e1ac94397ebd31f540b53a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -7893893823302815712, guid: 0c05233898e1ac94397ebd31f540b53a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -6932950105287432170, guid: 0c05233898e1ac94397ebd31f540b53a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -3001509385739390959, guid: 0c05233898e1ac94397ebd31f540b53a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -1942207160066479808, guid: 0c05233898e1ac94397ebd31f540b53a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 336271658553974036, guid: 0c05233898e1ac94397ebd31f540b53a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0c05233898e1ac94397ebd31f540b53a,
         type: 3}
       propertyPath: m_Name
       value: Printer
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0c05233898e1ac94397ebd31f540b53a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0c05233898e1ac94397ebd31f540b53a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281296610929268242, guid: 0c05233898e1ac94397ebd31f540b53a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748043191716542752, guid: 0c05233898e1ac94397ebd31f540b53a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4250813969699001658, guid: 0c05233898e1ac94397ebd31f540b53a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6479137908180158667, guid: 0c05233898e1ac94397ebd31f540b53a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c05233898e1ac94397ebd31f540b53a, type: 3}
