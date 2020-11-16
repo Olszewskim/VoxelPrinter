@@ -25,8 +25,8 @@ public class VoxelElement : MonoBehaviour {
         _frame.gameObject.SetActive(false);
     }
 
-    public void Print(float time, Material material, Color printColor, Action onFinish) {
-        _meshRenderer.sharedMaterial = material;
+    public void Print(float time, Color printColor, Action onFinish) {
+        SetMaterial(GameResourcesDatabase.GetMaterialOfColor(printColor));
         _myPrintedColor = printColor;
         transform.DOScale(_showScale, time).SetEase(Ease.Linear)
             .OnComplete(() => {

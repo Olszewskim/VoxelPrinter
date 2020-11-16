@@ -32,10 +32,8 @@ public class VoxelFigure : MonoBehaviour {
 
     private int _currentLayer;
     private int _currentPrintedElementIndex;
-    private Dictionary<Color, Material> _materialsMap = new Dictionary<Color, Material>();
     private Dictionary<Vector3, VoxelElement> _voxelElementsPositionsDictionary =
         new Dictionary<Vector3, VoxelElement>();
-    private Vector3 _minPositions, _maxPositions;
 
     public void AddVoxel(Vector3 position, VoxelElement voxelElement, Color voxelColor) {
         if (_voxels == null) {
@@ -57,21 +55,11 @@ public class VoxelFigure : MonoBehaviour {
         foreach (var voxel in _voxels) {
             _voxelElementsPositionsDictionary.Add(voxel.voxelPosition, voxel.voxelElement);
         }
-
-        var minX = _voxels.Min(v => v.voxelPosition.x);
-        var maxX = _voxels.Max(v => v.voxelPosition.x);
-        var minY = _voxels.Min(v => v.voxelPosition.y);
-        var maxY = _voxels.Max(v => v.voxelPosition.y);
-        var minZ = _voxels.Min(v => v.voxelPosition.z);
-        var maxZ = _voxels.Max(v => v.voxelPosition.z);
-        _minPositions = new Vector3(minX, minY, minZ);
-        _maxPositions = new Vector3(maxX, maxY, maxZ);
     }
 
     public void Print(float printTime, Color printColor, Action onFinish) {
         var element = _voxels[_currentPrintedElementIndex];
-        var material = _materialsMap[printColor];
-        element.voxelElement.Print(printTime, material, printColor, onFinish);
+        element.voxelElement.Print(printTime, printColor, onFinish);
         _currentPrintedElementIndex++;
     }
 
@@ -91,14 +79,7 @@ public class VoxelFigure : MonoBehaviour {
     }
 
     public List<Color> GetFigureColors() {
-        var colors = new HashSet<Color>();
-        foreach (var v in _voxels) {
-            if (colors.Add(v.voxelColor)) {
-                _materialsMap.Add(v.voxelColor, v.voxelElement.GetMaterial());
-            }
-        }
-
-        return colors.ToList();
+        return _voxels.Select(v => v.voxelColor).Distinct().ToList();
     }
 
     private void ShowCurrentLayer() {
@@ -140,13 +121,30 @@ public class VoxelFigure : MonoBehaviour {
         return elementsPrintedCorrectly / (float) _voxels.Count;
     }
 
-    public void DisableFigure() {
-        foreach (var voxel in _voxels) {
-            voxel.voxelElement.HideFrame();
-            //  voxel.voxelElement.SetMaterial(GameResourcesDatabase.Instance._lockedFigureMaterial);
+    public void SetFigureState(VoxelFigureInfoData voxelFigureInfoData) {
+        if (!voxelFigureInfoData.isCompleted) {
+            DisableFigure();
+        } else {
+            InitFigureColors(voxelFigureInfoData);
         }
 
         HideInvisibleVoxels();
+    }
+
+    private void DisableFigure() {
+        foreach (var voxel in _voxels) {
+            voxel.voxelElement.HideFrame();
+            voxel.voxelElement.SetMaterial(GameResourcesDatabase.Instance._lockedFigureMaterial);
+        }
+    }
+
+    private void InitFigureColors(VoxelFigureInfoData voxelFigureInfoData) {
+        foreach (var voxel in _voxelElementsPositionsDictionary) {
+            if (voxelFigureInfoData.voxelColors.ContainsKey(voxel.Key)) {
+                var material = GameResourcesDatabase.GetMaterialOfColor(voxelFigureInfoData.voxelColors[voxel.Key]);
+                voxel.Value.SetMaterial(material);
+            }
+        }
     }
 
     private void HideInvisibleVoxels() {
