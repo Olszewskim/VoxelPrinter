@@ -8,6 +8,16 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
     public Material _lockedFigureMaterial;
 
     private Dictionary<Color, Material> _voxelColorsMap = new Dictionary<Color, Material>();
+    private Dictionary<string, VoxelFigureData> _voxelFiguresDataByNameDictionary = new Dictionary<string, VoxelFigureData>();
+
+    protected override void Awake() {
+        base.Awake();
+        foreach (var data in _voxelFiguresDataDictionary) {
+            foreach (var voxelFigure in data.Value) {
+                _voxelFiguresDataByNameDictionary.Add(voxelFigure.figureID, voxelFigure);
+            }
+        }
+    }
 
     public static List<VoxelFigureData> GetVoxelFiguresCollection(CollectionType collectionType) {
         if (Instance._voxelFiguresDataDictionary.ContainsKey(collectionType)) {
@@ -25,5 +35,13 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
         }
 
         return Instance._voxelColorsMap[voxelColor];
+    }
+
+    public static string GetVoxelFigureName(string figureID) {
+        if (Instance._voxelFiguresDataByNameDictionary.ContainsKey(figureID)) {
+            return Instance._voxelFiguresDataByNameDictionary[figureID].figureName;
+        }
+
+        return "";
     }
 }

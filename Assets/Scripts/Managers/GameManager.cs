@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,16 +13,15 @@ public class GameManager : Singleton<GameManager> {
         new Dictionary<CollectionType, Dictionary<string, VoxelFigureInfoData>>();
 
     private CollectionType _currentCollection = CollectionType.People;
-    private List<VoxelFigureData> _currentCollectionFigures;
-    private int _currentFigureID;
     private VoxelFigure _currentVoxelFigure;
+    private VoxelFigureInfoData _currentVoxelFigureInfoData;
 
     public void Start() {
         Input.multiTouchEnabled = false;
         Vibration.Init();
         LoadVoxelFiguresInfoData();
         LoadCurrentCollection();
-        InitNewFigure();
+        CameraController.Instance.MoveCameraToGamePrinterView();
     }
 
     private void LoadVoxelFiguresInfoData() {
@@ -55,12 +53,13 @@ public class GameManager : Singleton<GameManager> {
     }
 
     private void LoadCurrentCollection() {
-        _currentCollectionFigures = GameResourcesDatabase.GetVoxelFiguresCollection(_currentCollection);
-        var currentCollectionData = GetCurrentCollectionVoxelFigureInfoData();
-        _figuresBookcase.InitFigureSlots(_currentCollectionFigures, currentCollectionData);
+        var currentCollectionFigures = GameResourcesDatabase.GetVoxelFiguresCollection(_currentCollection);
+        var currentCollectionData = GetCurrentCollectionVoxelFigureInfoData(currentCollectionFigures);
+        _figuresBookcase.InitFigureSlots(currentCollectionFigures, currentCollectionData);
     }
 
-    private List<VoxelFigureInfoData> GetCurrentCollectionVoxelFigureInfoData() {
+    private List<VoxelFigureInfoData> GetCurrentCollectionVoxelFigureInfoData(
+        List<VoxelFigureData> currentCollectionFigures) {
         var currentCollectionData = new List<VoxelFigureInfoData>();
         var shouldSaveData = false;
         if (!_voxelFiguresInfoData.ContainsKey(_currentCollection)) {
@@ -68,9 +67,10 @@ public class GameManager : Singleton<GameManager> {
             shouldSaveData = true;
         }
 
-        foreach (var currentCollectionFigure in _currentCollectionFigures) {
+        foreach (var currentCollectionFigure in currentCollectionFigures) {
             if (!_voxelFiguresInfoData[_currentCollection].ContainsKey(currentCollectionFigure.figureID)) {
-                _voxelFiguresInfoData[_currentCollection].Add(currentCollectionFigure.figureID, new VoxelFigureInfoData(currentCollectionFigure.figureID));
+                _voxelFiguresInfoData[_currentCollection].Add(currentCollectionFigure.figureID,
+                    new VoxelFigureInfoData(currentCollectionFigure.figureID));
                 shouldSaveData = true;
             }
 
@@ -84,25 +84,26 @@ public class GameManager : Singleton<GameManager> {
         return currentCollectionData;
     }
 
-    private void InitNewFigure() {
+    public void PrintNewFigure(VoxelFigureData voxelFigureData) {
         if (_currentVoxelFigure != null) {
             Destroy(_currentVoxelFigure.gameObject);
         }
 
-        _currentVoxelFigure = Instantiate(_currentCollectionFigures[_currentFigureID].voxelFigure);
+        _currentVoxelFigure = Instantiate(voxelFigureData.voxelFigure);
+        _currentVoxelFigureInfoData = _voxelFiguresInfoData[_currentCollection][voxelFigureData.figureID];
         _printer.SetupPrintModel(_currentVoxelFigure);
+        CameraController.Instance.MoveCameraToGamePrinterView();
     }
 
     public void LoadNextFigure() {
-        _currentFigureID = Mathf.Min(_currentFigureID + 1, _currentCollectionFigures.Count - 1);
-        InitNewFigure();
+        // InitNewFigure();
     }
 
     public string GetCurrentVoxelFigureName() {
-        return _currentCollectionFigures[_currentFigureID].figureName;
+        return GameResourcesDatabase.GetVoxelFigureName(_currentVoxelFigureInfoData.figureID);
     }
 
-    public void SaveVoxelsData() {
+    private void SaveVoxelsData() {
         var playerData = new PlayerSaveJSON(_voxelFiguresInfoData);
         string json = JsonConvert.SerializeObject(playerData,
             new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});

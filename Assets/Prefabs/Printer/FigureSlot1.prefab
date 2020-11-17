@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _starsControllerUI: {fileID: 3530861674967526787}
-  _playButton: {fileID: 5466885828857848083}
+  _printButton: {fileID: 5466885828857848083}
   _lockPadImage: {fileID: 7884769129623188631}
   _voxelFigureNameText: {fileID: 3085888846270149955}
 --- !u!1001 &1104187265032193700
@@ -435,7 +435,7 @@ PrefabInstance:
     - target: {fileID: 2099380421431721512, guid: 3c9e1173584b74497bea6257660d8280,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2099380421431721512, guid: 3c9e1173584b74497bea6257660d8280,
         type: 3}
@@ -455,7 +455,7 @@ PrefabInstance:
     - target: {fileID: 2099380421431721512, guid: 3c9e1173584b74497bea6257660d8280,
         type: 3}
       propertyPath: m_text
-      value: Play
+      value: Print
       objectReference: {fileID: 0}
     - target: {fileID: 2099380421431721512, guid: 3c9e1173584b74497bea6257660d8280,
         type: 3}
@@ -490,7 +490,7 @@ PrefabInstance:
     - target: {fileID: 5259635649927087458, guid: 3c9e1173584b74497bea6257660d8280,
         type: 3}
       propertyPath: m_Name
-      value: Button
+      value: PrintButton
       objectReference: {fileID: 0}
     - target: {fileID: 8589787842743265302, guid: 3c9e1173584b74497bea6257660d8280,
         type: 3}

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class FigureSlot : MonoBehaviour {
     [SerializeField] private StarsControllerUI _starsControllerUI;
-    [SerializeField] private Button _playButton;
+    [SerializeField] private Button _printButton;
     [SerializeField] private Image _lockPadImage;
     [SerializeField] private TextMeshProUGUI _voxelFigureNameText;
 
@@ -12,12 +12,19 @@ public class FigureSlot : MonoBehaviour {
     private VoxelFigureInfoData _currentVoxelFigureInfoData;
     private VoxelFigure _currentSpawnedVoxelFigure;
 
+    private void Awake() {
+        _printButton.onClick.AddListener(PrintFigure);
+            //TODO: Shake lockpad on click
+    }
+
+
+
     public void Init(VoxelFigureData voxelFigureData, VoxelFigureInfoData voxelFigureInfoData) {
         _currentVoxelFigureData = voxelFigureData;
         _currentSpawnedVoxelFigure = Instantiate(_currentVoxelFigureData.voxelFigure, transform);
         _currentVoxelFigureInfoData = voxelFigureInfoData;
         _currentSpawnedVoxelFigure.SetFigureState(voxelFigureInfoData);
-        _playButton.gameObject.SetActive(_currentVoxelFigureInfoData.isUnlocked);
+        _printButton.gameObject.SetActive(_currentVoxelFigureInfoData.isUnlocked);
         _lockPadImage.gameObject.SetActive(!voxelFigureInfoData.isUnlocked);
         InitStars();
         SetFigureName();
@@ -48,5 +55,9 @@ public class FigureSlot : MonoBehaviour {
             _currentSpawnedVoxelFigure = null;
             _currentVoxelFigureInfoData = null;
         }
+    }
+
+    private void PrintFigure() {
+        GameManager.Instance.PrintNewFigure(_currentVoxelFigureData);
     }
 }
