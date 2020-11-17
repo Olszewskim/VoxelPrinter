@@ -22,6 +22,7 @@ public class GameManager : Singleton<GameManager> {
         LoadVoxelFiguresInfoData();
         LoadCurrentCollection();
         CameraController.Instance.MoveCameraToGamePrinterView();
+        MainMenuWindow.Instance.ShowWindow();
     }
 
     private void LoadVoxelFiguresInfoData() {
@@ -82,6 +83,10 @@ public class GameManager : Singleton<GameManager> {
         }
 
         return currentCollectionData;
+    }
+
+    public void ShowCollectionsView() {
+        CameraController.Instance.MoveCameraToCollectionsBookcaseView();
     }
 
     public void PrintNewFigure(VoxelFigureData voxelFigureData) {

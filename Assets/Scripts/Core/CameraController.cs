@@ -24,10 +24,12 @@ public class CameraController : Singleton<CameraController> {
 
     public void MoveCameraToGamePrinterView() {
         transform.DOMove(_gamePrinterView.position, MOVE_ANIM_TIME).SetEase(Ease.InOutCubic);
+        transform.DORotateQuaternion(_gamePrinterView.rotation, MOVE_ANIM_TIME).SetEase(Ease.InOutCubic);
     }
 
     public void MoveCameraToCollectionsBookcaseView() {
         transform.DOMove(_collectionsBookcaseView.position, MOVE_ANIM_TIME).SetEase(Ease.InOutCubic);
+        transform.DORotateQuaternion(_collectionsBookcaseView.rotation, MOVE_ANIM_TIME).SetEase(Ease.InOutCubic);
     }
 
     private void OnDestroy() {
