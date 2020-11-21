@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using static Enums;
 
 [RequireComponent(typeof(Slider))]
 public class LevelProgressMeterUI : MonoBehaviour {
@@ -12,6 +13,11 @@ public class LevelProgressMeterUI : MonoBehaviour {
         _printer = FindObjectOfType<Printer>();
         _printer.OnPrintingStarted += ResetProgress;
         _printer.OnPrintingProgress += RefreshPrintingProgress;
+        GameManager.OnGameViewChanged += OnGameViewChanged;
+    }
+
+    private void OnGameViewChanged(GameViewType gameViewType) {
+        gameObject.SetActive(gameViewType == GameViewType.GameView);
     }
 
     private void ResetProgress() {
@@ -21,5 +27,9 @@ public class LevelProgressMeterUI : MonoBehaviour {
 
     private void RefreshPrintingProgress(float progress) {
         _slider.value = progress;
+    }
+
+    private void OnDestroy() {
+        GameManager.OnGameViewChanged -= OnGameViewChanged;
     }
 }

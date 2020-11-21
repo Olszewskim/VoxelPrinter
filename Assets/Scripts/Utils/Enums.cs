@@ -13,4 +13,11 @@
         Back,
         Bottom
     }
+
+    public enum GameViewType {
+        None,
+        MainMenu,
+        CollectionView,
+        GameView
+    }
 }

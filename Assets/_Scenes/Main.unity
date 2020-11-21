@@ -1425,13 +1425,17 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 8741921382303975417, guid: e50db5aaa529f4e10baaceb44c794d10,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 8741921382303975417, guid: e50db5aaa529f4e10baaceb44c794d10,
         type: 3}
       propertyPath: _figuresBookcase
       value: 
       objectReference: {fileID: 1210616972}
+    - target: {fileID: 8741921382303975417, guid: e50db5aaa529f4e10baaceb44c794d10,
+        type: 3}
+      propertyPath: _cameraController
+      value: 
+      objectReference: {fileID: 531574470}
     - target: {fileID: 9136973583901995691, guid: e50db5aaa529f4e10baaceb44c794d10,
         type: 3}
       propertyPath: m_LocalPosition.x

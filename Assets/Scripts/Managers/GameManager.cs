@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine.SceneManagement;
 using static Enums;
 
 public class GameManager : Singleton<GameManager> {
+    public static event Action<GameViewType> OnGameViewChanged;
+
     [SerializeField] private Printer _printer;
     [SerializeField] private FiguresBookcase _figuresBookcase;
     [SerializeField] private CameraController _cameraController;
@@ -16,14 +19,15 @@ public class GameManager : Singleton<GameManager> {
     private CollectionType _currentCollection = CollectionType.People;
     private VoxelFigure _currentVoxelFigure;
     private VoxelFigureInfoData _currentVoxelFigureInfoData;
+    private GameViewType _currentGameViewType = GameViewType.None;
 
-    public void Start() {
+    public IEnumerator Start() {
         Input.multiTouchEnabled = false;
         Vibration.Init();
         LoadVoxelFiguresInfoData();
         LoadCurrentCollection();
-        _cameraController.MoveCameraToGamePrinterView();
-        MainMenuWindow.Instance.ShowWindow();
+        yield return null;
+        ChangeGameView(GameViewType.MainMenu);
     }
 
     private void LoadVoxelFiguresInfoData() {
@@ -87,7 +91,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void ShowCollectionsView() {
-        _cameraController.MoveCameraToCollectionsBookcaseView();
+        ChangeGameView(GameViewType.CollectionView);
     }
 
     public void PrintNewFigure(VoxelFigureData voxelFigureData) {
@@ -98,7 +102,7 @@ public class GameManager : Singleton<GameManager> {
         _currentVoxelFigure = Instantiate(voxelFigureData.voxelFigure);
         _currentVoxelFigureInfoData = _voxelFiguresInfoData[_currentCollection][voxelFigureData.figureID];
         _printer.SetupPrintModel(_currentVoxelFigure);
-        _cameraController.MoveCameraToGamePrinterView();
+        ChangeGameView(GameViewType.GameView);
     }
 
     public void LoadNextFigure() {
@@ -114,6 +118,13 @@ public class GameManager : Singleton<GameManager> {
         string json = JsonConvert.SerializeObject(playerData,
             new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
         PlayerPrefs.SetString(SaveKey.PLAYER_SAVE, json);
+    }
+
+    private void ChangeGameView(GameViewType gameViewType) {
+        if (gameViewType != _currentGameViewType) {
+            _currentGameViewType = gameViewType;
+            OnGameViewChanged?.Invoke(_currentGameViewType);
+        }
     }
 
     public void ResetGame() {
