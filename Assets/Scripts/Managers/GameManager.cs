@@ -24,7 +24,6 @@ public class GameManager : Singleton<GameManager> {
         Input.multiTouchEnabled = false;
         Vibration.Init();
         LoadVoxelFiguresInfoData();
-        LoadCurrentCollection();
         yield return null;
         ChangeGameView(GameViewType.MainMenu);
     }
@@ -33,7 +32,10 @@ public class GameManager : Singleton<GameManager> {
         if (PlayerPrefs.HasKey(SaveKey.PLAYER_SAVE)) {
             string json = PlayerPrefs.GetString(SaveKey.PLAYER_SAVE);
             var playerSaveData = JsonConvert.DeserializeObject<PlayerSaveJSON>(json,
-                new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
+                new JsonSerializerSettings {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
             try {
                 foreach (var saveData in playerSaveData.voxelsData) {
@@ -90,6 +92,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void ShowCollectionsView() {
+        LoadCurrentCollection();
         ChangeGameView(GameViewType.CollectionView);
     }
 
@@ -104,18 +107,24 @@ public class GameManager : Singleton<GameManager> {
         ChangeGameView(GameViewType.GameView);
     }
 
-    public void LoadNextFigure() {
-        // InitNewFigure();
-    }
-
     public string GetCurrentVoxelFigureName() {
         return GameResourcesDatabase.GetVoxelFigureName(_currentVoxelFigureInfoData.figureID);
+    }
+
+    public void SaveFigureData(VoxelFigure finishedModel, out float completionPercent) {
+        completionPercent = finishedModel.GetPercentageOfCorrectVoxels();
+        var hasToSave = _currentVoxelFigureInfoData.FinishModel(finishedModel, completionPercent);
+
+        if (hasToSave) {
+            SaveVoxelsData();
+        }
     }
 
     private void SaveVoxelsData() {
         var playerData = new PlayerSaveJSON(_voxelFiguresInfoData);
         string json = JsonConvert.SerializeObject(playerData,
-            new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
+            new JsonSerializerSettings
+                {NullValueHandling = NullValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
         PlayerPrefs.SetString(SaveKey.PLAYER_SAVE, json);
     }
 

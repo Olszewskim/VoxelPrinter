@@ -140,8 +140,10 @@ public class VoxelFigure : MonoBehaviour {
 
     private void InitFigureColors(VoxelFigureInfoData voxelFigureInfoData) {
         foreach (var voxel in _voxelElementsPositionsDictionary) {
-            if (voxelFigureInfoData.voxelColors.ContainsKey(voxel.Key)) {
-                var material = GameResourcesDatabase.GetMaterialOfColor(voxelFigureInfoData.voxelColors[voxel.Key]);
+            voxel.Value.HideFrame();
+            var voxelsColorDataDictionary = voxelFigureInfoData.GetVoxelsColorDataDictionary();
+            if (voxelsColorDataDictionary.ContainsKey(voxel.Key)) {
+                var material = GameResourcesDatabase.GetMaterialOfColor(voxelsColorDataDictionary[voxel.Key]);
                 voxel.Value.SetMaterial(material);
             }
         }
@@ -187,5 +189,14 @@ public class VoxelFigure : MonoBehaviour {
         }
 
         return null;
+    }
+
+    public List<ColorData> GetFigureColorsMap() {
+        var colorMap = new List<ColorData>();
+        foreach (var voxel in _voxelElementsPositionsDictionary) {
+            colorMap.Add(new ColorData(voxel.Key, voxel.Value.MyPrintedColor));
+        }
+
+        return colorMap;
     }
 }

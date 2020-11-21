@@ -11,6 +11,8 @@ public class VoxelElement : MonoBehaviour {
 
     [SerializeField] private SpriteRenderer _frame;
 
+    public Color MyPrintedColor => _myPrintedColor;
+
     private MeshRenderer _meshRenderer;
     private Sequence _blinkSequence;
     private Color _myPrintedColor;

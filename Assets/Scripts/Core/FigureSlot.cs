@@ -36,6 +36,7 @@ public class FigureSlot : MonoBehaviour {
         var shouldShowStars = _currentVoxelFigureInfoData.isCompleted;
         _starsControllerUI.gameObject.SetActive(shouldShowStars);
         if (shouldShowStars) {
+            _starsControllerUI.HideStars();
             _starsControllerUI.ShowStars(_currentVoxelFigureInfoData.completionPercent, false);
         }
     }

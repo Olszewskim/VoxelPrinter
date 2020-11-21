@@ -4,9 +4,9 @@ using UnityEngine;
 public class StarsControllerUI : MonoBehaviour {
     [SerializeField] private List<StarUI> _stars;
 
-    private const float MIN_RESULT_FOR_1_STAR = 40f;
-    private const float MIN_RESULT_FOR_2_STARS = 60f;
-    private const float MIN_RESULT_FOR_3_STARS = 90f;
+    private const float MIN_RESULT_FOR_1_STAR = 0.4f;
+    private const float MIN_RESULT_FOR_2_STARS = 0.6f;
+    private const float MIN_RESULT_FOR_3_STARS = 0.9f;
     private const float SHOW_STAR_DELAY = 1f;
 
     public void HideStars() {

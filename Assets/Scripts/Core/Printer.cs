@@ -133,7 +133,7 @@ public class Printer : MonoBehaviour {
     }
 
     private void FinishPrintingCurrentModel() {
-        var stageFinishedAtPercentage = _currentPrintedModel.GetPercentageOfCorrectVoxels();
+        GameManager.Instance.SaveFigureData(_currentPrintedModel,out float stageFinishedAtPercentage);
         _currentPrintedModel = null;
         LevelCompletedWindow.Instance.ShowWindow(stageFinishedAtPercentage);
     }

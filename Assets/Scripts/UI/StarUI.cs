@@ -21,6 +21,7 @@ public class StarUI : MonoBehaviour {
                 .SetEase(Ease.OutCubic);
         } else {
             _starFullImage.DOFade(1, 0);
+            _starFullImage.transform.DOScale(1, 0);
         }
     }
 
