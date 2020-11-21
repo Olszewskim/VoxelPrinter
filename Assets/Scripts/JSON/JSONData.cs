@@ -4,16 +4,19 @@ using UnityEngine;
 using static Enums;
 
 public class PlayerSaveJSON {
-    public Dictionary<CollectionType, List<VoxelFigureInfoData>> voxelsData =
-        new Dictionary<CollectionType, List<VoxelFigureInfoData>>();
+    public Dictionary<CollectionType, Dictionary<string, VoxelFigureInfoData>> voxelsData =
+        new Dictionary<CollectionType, Dictionary<string, VoxelFigureInfoData>>();
 
     public PlayerSaveJSON() {
     }
 
     public PlayerSaveJSON(Dictionary<CollectionType, Dictionary<string, VoxelFigureInfoData>> voxelsData) {
         foreach (var voxelData in voxelsData) {
-            this.voxelsData.Add(voxelData.Key, new List<VoxelFigureInfoData>());
-            this.voxelsData[voxelData.Key].AddRange(voxelData.Value.Values.ToList());
+            this.voxelsData.Add(voxelData.Key, new Dictionary<string, VoxelFigureInfoData>());
+            var vData = voxelData.Value.Values.ToList();
+            foreach (var data in vData) {
+                this.voxelsData[voxelData.Key].Add(data.figureID, data);
+            }
         }
     }
 }

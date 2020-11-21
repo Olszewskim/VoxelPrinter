@@ -11,7 +11,6 @@ public class GameManager : Singleton<GameManager> {
 
     [SerializeField] private Printer _printer;
     [SerializeField] private FiguresBookcase _figuresBookcase;
-    [SerializeField] private CameraController _cameraController;
 
     private Dictionary<CollectionType, Dictionary<string, VoxelFigureInfoData>> _voxelFiguresInfoData =
         new Dictionary<CollectionType, Dictionary<string, VoxelFigureInfoData>>();
@@ -40,7 +39,7 @@ public class GameManager : Singleton<GameManager> {
                 foreach (var saveData in playerSaveData.voxelsData) {
                     _voxelFiguresInfoData.Add(saveData.Key, new Dictionary<string, VoxelFigureInfoData>());
                     foreach (var data in saveData.Value) {
-                        _voxelFiguresInfoData[saveData.Key].Add(data.figureID, data);
+                        _voxelFiguresInfoData[saveData.Key].Add(data.Key, data.Value);
                     }
                 }
             } catch (Exception ex) {
