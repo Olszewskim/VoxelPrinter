@@ -303,8 +303,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Settings
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9f5267e4e68f6ef4b961b2d55d37b044, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 5ce6b4acee3073b4b9d15fbe4e897ffe, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -329,8 +329,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -459,8 +459,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: VERSION 0.1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9f5267e4e68f6ef4b961b2d55d37b044, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 5ce6b4acee3073b4b9d15fbe4e897ffe, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -485,8 +485,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -502,7 +502,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1072,6 +1072,27 @@ PrefabInstance:
       propertyPath: m_text
       value: SOUNDS
       objectReference: {fileID: 0}
+    - target: {fileID: 7855398735544257509, guid: ab3c76da2f6ca4a0daa62c229f519284,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f5267e4e68f6ef4b961b2d55d37b044,
+        type: 2}
+    - target: {fileID: 7855398735544257509, guid: ab3c76da2f6ca4a0daa62c229f519284,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ce6b4acee3073b4b9d15fbe4e897ffe, type: 2}
+    - target: {fileID: 7855398735544257509, guid: ab3c76da2f6ca4a0daa62c229f519284,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7855398735544257509, guid: ab3c76da2f6ca4a0daa62c229f519284,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab3c76da2f6ca4a0daa62c229f519284, type: 3}
 --- !u!224 &6849191673216037571 stripped
@@ -1208,6 +1229,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MusicSettingUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7855398735544257509, guid: ab3c76da2f6ca4a0daa62c229f519284,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f5267e4e68f6ef4b961b2d55d37b044,
+        type: 2}
+    - target: {fileID: 7855398735544257509, guid: ab3c76da2f6ca4a0daa62c229f519284,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ce6b4acee3073b4b9d15fbe4e897ffe, type: 2}
+    - target: {fileID: 7855398735544257509, guid: ab3c76da2f6ca4a0daa62c229f519284,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7855398735544257509, guid: ab3c76da2f6ca4a0daa62c229f519284,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab3c76da2f6ca4a0daa62c229f519284, type: 3}
@@ -1370,6 +1412,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: HAPTIC
+      objectReference: {fileID: 0}
+    - target: {fileID: 7855398735544257509, guid: ab3c76da2f6ca4a0daa62c229f519284,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f5267e4e68f6ef4b961b2d55d37b044,
+        type: 2}
+    - target: {fileID: 7855398735544257509, guid: ab3c76da2f6ca4a0daa62c229f519284,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ce6b4acee3073b4b9d15fbe4e897ffe, type: 2}
+    - target: {fileID: 7855398735544257509, guid: ab3c76da2f6ca4a0daa62c229f519284,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7855398735544257509, guid: ab3c76da2f6ca4a0daa62c229f519284,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab3c76da2f6ca4a0daa62c229f519284, type: 3}
