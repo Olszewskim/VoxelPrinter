@@ -113,11 +113,30 @@ public class GameManager : Singleton<GameManager> {
 
     public void SaveFigureData(VoxelFigure finishedModel, out float completionPercent) {
         completionPercent = finishedModel.GetPercentageOfCorrectVoxels();
-        var hasToSave = _currentVoxelFigureInfoData.FinishModel(finishedModel, completionPercent);
+        var modelChanged = _currentVoxelFigureInfoData.FinishModel(finishedModel, completionPercent);
+        var newFigureUnlocked = TryUnlockNextFigure();
 
-        if (hasToSave) {
+        if (modelChanged || newFigureUnlocked) {
             SaveVoxelsData();
         }
+    }
+
+    private bool TryUnlockNextFigure() {
+        var nextFigureID = "";
+        var currentCollectionFigures = GameResourcesDatabase.GetVoxelFiguresCollection(_currentCollection);
+        var indexOfCurrent =
+            currentCollectionFigures.FindIndex(v => v.figureID == _currentVoxelFigureInfoData.figureID);
+
+        if (indexOfCurrent > -1 && indexOfCurrent < currentCollectionFigures.Count - 1) {
+            nextFigureID = currentCollectionFigures[indexOfCurrent + 1].figureID;
+        }
+
+        if (_voxelFiguresInfoData[_currentCollection].ContainsKey(nextFigureID)) {
+            _voxelFiguresInfoData[_currentCollection][nextFigureID].isUnlocked = true;
+            return true;
+        }
+
+        return false;
     }
 
     private void SaveVoxelsData() {

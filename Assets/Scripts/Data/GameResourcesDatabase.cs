@@ -8,7 +8,8 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
     public Material _lockedFigureMaterial;
 
     private Dictionary<Color, Material> _voxelColorsMap = new Dictionary<Color, Material>();
-    private Dictionary<string, VoxelFigureData> _voxelFiguresDataByNameDictionary = new Dictionary<string, VoxelFigureData>();
+    private Dictionary<string, VoxelFigureData> _voxelFiguresDataByNameDictionary =
+        new Dictionary<string, VoxelFigureData>();
 
     protected override void Awake() {
         base.Awake();
