@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager> {
     private Dictionary<CollectionType, Dictionary<string, VoxelFigureInfoData>> _voxelFiguresInfoData =
         new Dictionary<CollectionType, Dictionary<string, VoxelFigureInfoData>>();
 
-    private CollectionType _currentCollection = CollectionType.People;
+    private CollectionType _currentCollection;
     private VoxelFigure _currentVoxelFigure;
     private VoxelFigureInfoData _currentVoxelFigureInfoData;
     private GameViewType _currentGameViewType = GameViewType.None;
@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager> {
     public IEnumerator Start() {
         Input.multiTouchEnabled = false;
         Vibration.Init();
+        _currentCollection = (CollectionType) PlayerPrefs.GetInt(SaveKey.CURRENT_COLLECTION, 0);
         LoadVoxelFiguresInfoData();
         yield return null;
         ChangeGameView(GameViewType.MainMenu);
@@ -78,6 +79,11 @@ public class GameManager : Singleton<GameManager> {
             if (!_voxelFiguresInfoData[_currentCollection].ContainsKey(currentCollectionFigure.figureID)) {
                 _voxelFiguresInfoData[_currentCollection].Add(currentCollectionFigure.figureID,
                     new VoxelFigureInfoData(currentCollectionFigure.figureID));
+
+                //TODO: REmove it - temp unlock 1st figure
+                if (currentCollectionFigure == currentCollectionFigures[0]) {
+                    _voxelFiguresInfoData[_currentCollection][currentCollectionFigure.figureID].isUnlocked = true;
+                }
                 shouldSaveData = true;
             }
 
@@ -154,6 +160,26 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
+    #region Test Buttons
+
+    public void SwitchToAnimalsCollection() {
+        _currentCollection = CollectionType.Animals;
+        PlayerPrefs.SetInt(SaveKey.CURRENT_COLLECTION, (int) _currentCollection);
+        ResetGame();
+    }
+
+    public void SwitchToPeopleCollection() {
+        _currentCollection = CollectionType.People;
+        PlayerPrefs.SetInt(SaveKey.CURRENT_COLLECTION, (int) _currentCollection);
+        ResetGame();
+    }
+
+    public void SwitchToPlantsCollection() {
+        _currentCollection = CollectionType.Plants;
+        PlayerPrefs.SetInt(SaveKey.CURRENT_COLLECTION, (int) _currentCollection);
+        ResetGame();
+    }
+
     public void ResetGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -162,4 +188,6 @@ public class GameManager : Singleton<GameManager> {
         PlayerPrefs.DeleteAll();
         ResetGame();
     }
+
+    #endregion
 }
