@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class CameraController : Singleton<CameraController> {
+public class CameraController : MonoBehaviour {
     private const float MOVE_ANIM_TIME = 2f;
 
     [SerializeField] private float _minCameraPosY;

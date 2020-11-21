@@ -8,6 +8,7 @@ using static Enums;
 public class GameManager : Singleton<GameManager> {
     [SerializeField] private Printer _printer;
     [SerializeField] private FiguresBookcase _figuresBookcase;
+    [SerializeField] private CameraController _cameraController;
 
     private Dictionary<CollectionType, Dictionary<string, VoxelFigureInfoData>> _voxelFiguresInfoData =
         new Dictionary<CollectionType, Dictionary<string, VoxelFigureInfoData>>();
@@ -21,7 +22,7 @@ public class GameManager : Singleton<GameManager> {
         Vibration.Init();
         LoadVoxelFiguresInfoData();
         LoadCurrentCollection();
-        CameraController.Instance.MoveCameraToGamePrinterView();
+        _cameraController.MoveCameraToGamePrinterView();
         MainMenuWindow.Instance.ShowWindow();
     }
 
@@ -86,7 +87,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void ShowCollectionsView() {
-        CameraController.Instance.MoveCameraToCollectionsBookcaseView();
+        _cameraController.MoveCameraToCollectionsBookcaseView();
     }
 
     public void PrintNewFigure(VoxelFigureData voxelFigureData) {
@@ -97,7 +98,7 @@ public class GameManager : Singleton<GameManager> {
         _currentVoxelFigure = Instantiate(voxelFigureData.voxelFigure);
         _currentVoxelFigureInfoData = _voxelFiguresInfoData[_currentCollection][voxelFigureData.figureID];
         _printer.SetupPrintModel(_currentVoxelFigure);
-        CameraController.Instance.MoveCameraToGamePrinterView();
+        _cameraController.MoveCameraToGamePrinterView();
     }
 
     public void LoadNextFigure() {
@@ -117,5 +118,10 @@ public class GameManager : Singleton<GameManager> {
 
     public void ResetGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void DeleteSave() {
+        PlayerPrefs.DeleteAll();
+        ResetGame();
     }
 }
