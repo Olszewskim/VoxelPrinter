@@ -10,8 +10,8 @@ public class Printer : MonoBehaviour {
     private const float PRINT_HEIGHT = 1.5f;
     private const float MOVE_TIME = 7f;
     private const float PRINT_TIME = 0.3f;
-    private const float MAX_SPEED_MULTIPLIER = 3f;
-    private const float SPEED_MULTIPLIER_INCREASE_RATE = 1.2f;
+    private const float MAX_SPEED_MULTIPLIER = 6f;
+    private const float SPEED_MULTIPLIER_INCREASE_RATE = 1.1f;
 
     [SerializeField] private Transform _nozzle;
     [SerializeField] private Transform _fillament;
@@ -25,7 +25,7 @@ public class Printer : MonoBehaviour {
 
     private List<PrinterButton> _buttons = new List<PrinterButton>();
     private VoxelFigure _currentPrintedModel;
-    private float _buttonAreaDistance = 12f;
+    private float _buttonAreaDistance = 16f;
 
     private bool _isPrinting;
     private bool _continuePrinting;
