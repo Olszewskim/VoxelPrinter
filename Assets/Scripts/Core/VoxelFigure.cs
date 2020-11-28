@@ -4,6 +4,14 @@ using System.Linq;
 using UnityEngine;
 using static Enums;
 
+public enum Direction {
+    Left,
+    Down,
+    Right,
+    Up,
+    Other
+}
+
 [Serializable]
 public class VoxelData {
     public Vector3 voxelPosition;
@@ -37,6 +45,7 @@ public class VoxelFigure : MonoBehaviour {
 
     private List<VoxelData> _currentLayerElements = new List<VoxelData>();
 
+    private Direction _currentDirection = Direction.Left;
     private float _extraScoreAmount = 0.1f;
 
     public void AddVoxel(Vector3 position, VoxelElement voxelElement, Color voxelColor) {
@@ -83,11 +92,25 @@ public class VoxelFigure : MonoBehaviour {
             return GetFirstElementFromLayer();
         }
 
+        if (!GetNeighbour(_currentDirection, CurrentElement.voxelPosition)) {
+            ChangeDirection();
+        }
+
+        Debug.Log("========================");
+        Debug.Log("Obecny element " + CurrentElement.voxelElement.name);
+        Debug.Log("Idę w " + _currentDirection);
         var shorterDistance = float.MaxValue;
         var closestElement = CurrentElement;
         foreach (var layerElement in _currentLayerElements) {
-            var extraScore = layerElement.voxelPosition.x < CurrentElement.voxelPosition.x ? _extraScoreAmount : 0;
-            var distance = (CurrentElement.voxelPosition - layerElement.voxelPosition).sqrMagnitude - extraScore;
+            var direction = layerElement.voxelPosition - CurrentElement.voxelPosition;
+            var directionOfCheckedElement = GetDirectionType(direction);
+            var extraScore = directionOfCheckedElement == _currentDirection ? _extraScoreAmount : 0;
+
+            if (extraScore > 0) {
+                Debug.Log(layerElement.voxelElement.name + " spelnia wymagania");
+            }
+
+            var distance = direction.sqrMagnitude - extraScore;
             if (distance < shorterDistance) {
                 shorterDistance = distance;
                 closestElement = layerElement;
@@ -98,8 +121,44 @@ public class VoxelFigure : MonoBehaviour {
         return closestElement;
     }
 
-    private VoxelData GetFirstElementFromLayer()
-    {
+    private Direction GetDirectionType(Vector3 direction) {
+        if (direction.x == 0) {
+            if (direction.z > 0) {
+                return Direction.Up;
+            }
+
+            return Direction.Down;
+        }
+
+        if (direction.z == 0) {
+            if (direction.x > 0) {
+                return Direction.Right;
+            }
+
+            return Direction.Left;
+        }
+
+        return Direction.Other;
+    }
+
+    private void ChangeDirection() {
+        switch (_currentDirection) {
+            case Direction.Left:
+                _currentDirection = Direction.Down;
+                break;
+            case Direction.Down:
+                _currentDirection = Direction.Right;
+                break;
+            case Direction.Right:
+                _currentDirection = Direction.Up;
+                break;
+            case Direction.Up:
+                _currentDirection = Direction.Left;
+                break;
+        }
+    }
+
+    private VoxelData GetFirstElementFromLayer() {
         var element = _currentLayerElements.OrderByDescending(v => v.voxelPosition.z)
             .ThenByDescending(v => v.voxelPosition.x).First();
         _currentLayerElements.Remove(element);
@@ -187,6 +246,21 @@ public class VoxelFigure : MonoBehaviour {
                 voxel.voxelElement.Disable();
             }
         }
+    }
+
+    private VoxelElement GetNeighbour(Direction dir, Vector3 voxelPosition) {
+        switch (dir) {
+            case Direction.Left:
+                return GetNeighbour(NeighbourType.Left, voxelPosition);
+            case Direction.Down:
+                return GetNeighbour(NeighbourType.Front, voxelPosition);
+            case Direction.Right:
+                return GetNeighbour(NeighbourType.Right, voxelPosition);
+            case Direction.Up:
+                return GetNeighbour(NeighbourType.Back, voxelPosition);
+        }
+
+        return null;
     }
 
     private VoxelElement GetNeighbour(NeighbourType neighbourType, Vector3 voxelPosition) {
