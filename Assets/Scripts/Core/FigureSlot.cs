@@ -14,12 +14,11 @@ public class FigureSlot : MonoBehaviour {
 
     private void Awake() {
         _printButton.onClick.AddListener(PrintFigure);
-            //TODO: Shake lockpad on click
+        //TODO: Shake lockpad on click
     }
 
-
-
     public void Init(VoxelFigureData voxelFigureData, VoxelFigureInfoData voxelFigureInfoData) {
+        gameObject.SetActive(true);
         _currentVoxelFigureData = voxelFigureData;
         _currentSpawnedVoxelFigure = Instantiate(_currentVoxelFigureData.voxelFigure, transform);
         _currentVoxelFigureInfoData = voxelFigureInfoData;
@@ -30,8 +29,6 @@ public class FigureSlot : MonoBehaviour {
         SetFigureName();
     }
 
-
-
     private void InitStars() {
         var shouldShowStars = _currentVoxelFigureInfoData.isCompleted;
         _starsControllerUI.gameObject.SetActive(shouldShowStars);
@@ -41,7 +38,6 @@ public class FigureSlot : MonoBehaviour {
         }
     }
 
-
     private void SetFigureName() {
         var shouldShowVoxelFigureName = _currentSpawnedVoxelFigure.IsCompleted;
         _voxelFigureNameText.gameObject.SetActive(shouldShowVoxelFigureName);
@@ -49,6 +45,7 @@ public class FigureSlot : MonoBehaviour {
             _voxelFigureNameText.text = _currentVoxelFigureData.figureName;
         }
     }
+
     public void Clear() {
         if (_currentSpawnedVoxelFigure != null) {
             //TODO: Optimize spawning figures
@@ -56,6 +53,8 @@ public class FigureSlot : MonoBehaviour {
             _currentSpawnedVoxelFigure = null;
             _currentVoxelFigureInfoData = null;
         }
+
+        gameObject.SetActive(false);
     }
 
     private void PrintFigure() {
