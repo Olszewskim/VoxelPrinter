@@ -1950,6 +1950,31 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SwitchToPeopleCollection
       objectReference: {fileID: 0}
+    - target: {fileID: 744018918087347463, guid: 40002261d1194415b88bbd5f8efc0ab3,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 744018918087347463, guid: 40002261d1194415b88bbd5f8efc0ab3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 744018918087347463, guid: 40002261d1194415b88bbd5f8efc0ab3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 744018918087347463, guid: 40002261d1194415b88bbd5f8efc0ab3,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 744018918087347463, guid: 40002261d1194415b88bbd5f8efc0ab3,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1479797900235067761, guid: 40002261d1194415b88bbd5f8efc0ab3,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -1980,6 +2005,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SwitchToPlantsCollection
+      objectReference: {fileID: 0}
+    - target: {fileID: 3107279764018979726, guid: 40002261d1194415b88bbd5f8efc0ab3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 383558421}
+    - target: {fileID: 3107279764018979726, guid: 40002261d1194415b88bbd5f8efc0ab3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SwitchToEmptyCollection
       objectReference: {fileID: 0}
     - target: {fileID: 3676572157715393877, guid: 40002261d1194415b88bbd5f8efc0ab3,
         type: 3}
@@ -2236,6 +2271,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: DeleteSave
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780153205249883251, guid: 40002261d1194415b88bbd5f8efc0ab3,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780153205249883251, guid: 40002261d1194415b88bbd5f8efc0ab3,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780153205249883251, guid: 40002261d1194415b88bbd5f8efc0ab3,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780153205249883251, guid: 40002261d1194415b88bbd5f8efc0ab3,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7876605922504903139, guid: 40002261d1194415b88bbd5f8efc0ab3,
         type: 3}

@@ -84,6 +84,7 @@ public class GameManager : Singleton<GameManager> {
                 if (currentCollectionFigure == currentCollectionFigures[0]) {
                     _voxelFiguresInfoData[_currentCollection][currentCollectionFigure.figureID].isUnlocked = true;
                 }
+
                 shouldSaveData = true;
             }
 
@@ -176,6 +177,12 @@ public class GameManager : Singleton<GameManager> {
 
     public void SwitchToPlantsCollection() {
         _currentCollection = CollectionType.Plants;
+        PlayerPrefs.SetInt(SaveKey.CURRENT_COLLECTION, (int) _currentCollection);
+        ResetGame();
+    }
+
+    public void SwitchToEmptyCollection() {
+        _currentCollection = CollectionType.Empty;
         PlayerPrefs.SetInt(SaveKey.CURRENT_COLLECTION, (int) _currentCollection);
         ResetGame();
     }

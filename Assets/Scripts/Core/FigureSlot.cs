@@ -20,6 +20,7 @@ public class FigureSlot : MonoBehaviour {
 
 
     public void Init(VoxelFigureData voxelFigureData, VoxelFigureInfoData voxelFigureInfoData) {
+        gameObject.SetActive(true);
         _currentVoxelFigureData = voxelFigureData;
         _currentSpawnedVoxelFigure = Instantiate(_currentVoxelFigureData.voxelFigure, transform);
         _currentVoxelFigureInfoData = voxelFigureInfoData;
@@ -56,6 +57,7 @@ public class FigureSlot : MonoBehaviour {
             _currentSpawnedVoxelFigure = null;
             _currentVoxelFigureInfoData = null;
         }
+        gameObject.SetActive(false);
     }
 
     private void PrintFigure() {

@@ -2,7 +2,8 @@
     public enum CollectionType {
         Animals,
         People,
-        Plants
+        Plants,
+        Empty
     }
 
     public enum NeighbourType {
