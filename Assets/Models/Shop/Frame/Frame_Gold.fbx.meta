@@ -3,7 +3,17 @@ guid: f5171aac97883a64fad13b4a85289b8d
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameGoldBot
+    second: {fileID: 2100000, guid: 18681f1bbdd850f4db3ddf5eb9e16d4c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameGoldTop
+    second: {fileID: 2100000, guid: 8ccb03ffd87d5ae4d916b1d0c6dba9f1, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

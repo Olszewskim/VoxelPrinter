@@ -3,7 +3,17 @@ guid: 3086f7d159daadc41be7a6d7922966cb
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameBronzeDown.001
+    second: {fileID: 2100000, guid: c0569fcb36cdc924098da80be1b7a2c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameBronzeTop
+    second: {fileID: 2100000, guid: 4fbdcc92ea7edc241ac5c89b11434200, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

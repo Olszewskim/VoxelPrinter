@@ -3,7 +3,82 @@ guid: b2ddb7f478011d043bd8121e777d5e30
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameColorfullBot
+    second: {fileID: 2100000, guid: 4c46c2e881c6add41944833a02c1b308, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameUP_Blue
+    second: {fileID: 2100000, guid: 903753d0bb5ebe9439d12b635e3b424c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameUP_Green
+    second: {fileID: 2100000, guid: 6f1b73e8ff4a3ba4291c8b3f2dedacef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameUP_LightBlue
+    second: {fileID: 2100000, guid: 7176dd240f4081148bb606b5d6e3a8de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameUP_Orange
+    second: {fileID: 2100000, guid: b06d894419424974bbbbbd91ec67ecd2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameUP_Red
+    second: {fileID: 2100000, guid: d8297fcb5253ed44a841df7fa684dd04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameUP_Violet
+    second: {fileID: 2100000, guid: 0b49e763056447942b8c104855bee88d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameUP_Yellow
+    second: {fileID: 2100000, guid: 57c0ca8f6c3ac2f48a8f960b4a573b88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NozzleBlue
+    second: {fileID: 2100000, guid: 8621e899a4130a3499c6b51a4c0361b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NozzleGreen
+    second: {fileID: 2100000, guid: ac5ff907195079d499fc77f452566be4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NozzleLightBlue
+    second: {fileID: 2100000, guid: 7a3784bd20a0b194d8433db7c0483847, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NozzleOrange
+    second: {fileID: 2100000, guid: 39de6b46605359b4fb51817225af1d7a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NozzleRed
+    second: {fileID: 2100000, guid: 3c0e6e773b5287841938eae77e2ba0ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NozzleVioler
+    second: {fileID: 2100000, guid: 68f5e3b6f50129a4a89ada2b7dd50c4a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NozzleYellow
+    second: {fileID: 2100000, guid: afd500fd496f7084f8a233a14843f1e3, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

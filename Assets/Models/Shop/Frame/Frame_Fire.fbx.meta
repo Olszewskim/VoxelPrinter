@@ -3,7 +3,22 @@ guid: 1cfdf81e6e46c0342affbaa7bcd48d22
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameFire
+    second: {fileID: 2100000, guid: 2504395d9e7d92f4a8d20064f791e0f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameFireTop
+    second: {fileID: 2100000, guid: 3b59b8413ff4238438e61f0b021464ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameFireTop.001
+    second: {fileID: 2100000, guid: dbe554c5b3b5de244b228fc2e1ac7f53, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

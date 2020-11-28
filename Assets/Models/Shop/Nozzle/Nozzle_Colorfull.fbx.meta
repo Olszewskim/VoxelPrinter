@@ -3,7 +3,47 @@ guid: b8ff154aac8c85d4cb8575cc5c4e3534
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FilamentMaterial
+    second: {fileID: 2100000, guid: f6651199166fa2b46bc9ab92366a7375, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NozzleBlue
+    second: {fileID: 2100000, guid: 3403b0d4920d4e54984148b9a1fda698, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NozzleGreen
+    second: {fileID: 2100000, guid: 4276fbca87182cc44bc9f418c952bf91, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NozzleLightBlue
+    second: {fileID: 2100000, guid: 933634c3209c7794fb2188f2109cfb27, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NozzleOrange
+    second: {fileID: 2100000, guid: 36600944783be0d4bb80cee95310f92e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NozzleRed
+    second: {fileID: 2100000, guid: 2c31168a61d1c9e44ace2ea8623ed6f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NozzleVioler
+    second: {fileID: 2100000, guid: 42590bb1f6a62af43ad024626ffb9363, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NozzleYellow
+    second: {fileID: 2100000, guid: 80b060bbe4b48e84bb37447483722725, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

@@ -3,7 +3,32 @@ guid: 8a1bcbc4eb5cbac448fc751a3a6b0d3c
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameSyringeBot
+    second: {fileID: 2100000, guid: 6c6b5447de82e834287a06adffe34beb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Nozzle_SyringeFilament
+    second: {fileID: 2100000, guid: d13390c1fe474af4fb9f58c5f1c927b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Nozzle_SyringeGlass
+    second: {fileID: 2100000, guid: a5f74dd0f380ac449a0642bf1dc1fa71, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Nozzle_SyringePlastic
+    second: {fileID: 2100000, guid: 30a78d2be62065a49bd9e11537b09b06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Nozzle_SyringeSteel
+    second: {fileID: 2100000, guid: 601fc134bc46f0b4ba25eb545795902e, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

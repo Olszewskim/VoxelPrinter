@@ -3,7 +3,17 @@ guid: 8b7e849019507db4ba938c60efa99887
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FilamentMaterial
+    second: {fileID: 2100000, guid: 0e7a8311b1e68c949aa3e27b9914c9bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameDragonTop
+    second: {fileID: 2100000, guid: 71708b7810786ba41bf5d5da077db96d, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

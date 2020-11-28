@@ -3,7 +3,17 @@ guid: 047da690642b63c45bfc97c879d5c91e
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DiamondFilament
+    second: {fileID: 2100000, guid: 9330fa2a9792ced4aa93d8416e91c234, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameDiamonds
+    second: {fileID: 2100000, guid: 142ffb0d157ef2c46874495fe28171bb, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

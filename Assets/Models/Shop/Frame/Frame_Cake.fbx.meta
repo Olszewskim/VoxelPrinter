@@ -3,7 +3,42 @@ guid: e5ddf57f9eecd874891c6a4c9421063c
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cookie
+    second: {fileID: 2100000, guid: d997fd566c00c504dbc3ebb36505192f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CookieBoy_Black
+    second: {fileID: 2100000, guid: 28534c9e4b057c344a2ace0eebd3a845, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CookieBoy_Main.001
+    second: {fileID: 2100000, guid: 048a46410537e41489acd88030f73a08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CookieBoy_MainWhite
+    second: {fileID: 2100000, guid: e8284346667567d42b28c03125fdb93b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CookieBoy_Red
+    second: {fileID: 2100000, guid: acbe4a46c877c52429d65f4f358ab3d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CookieChocolate
+    second: {fileID: 2100000, guid: 955b2a63e89f96a45b114d75a867fbce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrameCookieBot
+    second: {fileID: 2100000, guid: bfdc6161e52fc4646ad40339312dafad, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
