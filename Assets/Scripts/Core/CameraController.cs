@@ -1,22 +1,23 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 using static Enums;
 
 public class CameraController : MonoBehaviour {
     private const float MOVE_ANIM_TIME = 2f;
 
-    [SerializeField] private float _minCameraPosY;
     [SerializeField] private float _maxCameraPosY;
-    [SerializeField] private float _minCameraRotY;
-    [SerializeField] private float _maxCameraRotY;
+    [SerializeField] private float _maxCameraRotX;
     [SerializeField] private Transform _gamePrinterView;
     [SerializeField] private Transform _collectionsBookcaseView;
 
+    private float _minCameraPosY;
+    private float _minCameraRotX;
     private int _minLayerID, _maxLayerID;
 
     private void Awake() {
         GameManager.OnGameViewChanged += OnGameViewChanged;
+        _minCameraPosY = transform.position.y;
+        _minCameraRotX = transform.eulerAngles.x;
     }
 
     private void OnGameViewChanged(GameViewType gameViewType) {
@@ -41,7 +42,7 @@ public class CameraController : MonoBehaviour {
     public void MoveCameraToLayer(int layer) {
         var percentage = Mathf.InverseLerp(_minLayerID, _maxLayerID, layer);
         var destinationHeight = Mathf.Lerp(_minCameraPosY, _maxCameraPosY, percentage);
-        var destinationXAngle = Mathf.Lerp(_minCameraRotY, _maxCameraRotY, percentage);
+        var destinationXAngle = Mathf.Lerp(_minCameraRotX, _maxCameraRotX, percentage);
         transform.DOMoveY(destinationHeight, MOVE_ANIM_TIME).SetEase(Ease.OutQuint);
         var rot = transform.rotation.eulerAngles;
         rot.x = destinationXAngle;
