@@ -8,10 +8,10 @@ public class Printer : MonoBehaviour {
     public event Action<float> OnPrintingProgress;
 
     private const float PRINT_HEIGHT = 1.5f;
-    private const float MOVE_TIME = 7f;
+    private const float MOVE_TIME = 14f;
     private const float PRINT_TIME = 0.3f;
     private const float MAX_SPEED_MULTIPLIER = 6f;
-    private const float SPEED_MULTIPLIER_INCREASE_RATE = 1.1f;
+    private const float SPEED_MULTIPLIER_INCREASE_RATE = 1.15f;
 
     [SerializeField] private Transform _nozzle;
     [SerializeField] private Transform _fillament;
