@@ -39,7 +39,7 @@ public class FigureSlot : MonoBehaviour {
     }
 
     private void SetFigureName() {
-        var shouldShowVoxelFigureName = _currentSpawnedVoxelFigure.IsCompleted;
+        var shouldShowVoxelFigureName = _currentVoxelFigureInfoData.isCompleted;
         _voxelFigureNameText.gameObject.SetActive(shouldShowVoxelFigureName);
         if (shouldShowVoxelFigureName) {
             _voxelFigureNameText.text = _currentVoxelFigureData.figureName;
