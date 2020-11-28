@@ -28,12 +28,16 @@ public class VoxelFigure : MonoBehaviour {
 
     [SerializeField] private List<VoxelData> _voxels;
 
-    public bool IsCompleted => _currentPrintedElementIndex >= _voxels.Count;
+    public bool IsCompleted { get; private set; } //tODO: check if completed
+    public VoxelData CurrentElement { get; private set; }
 
     private int _currentLayer;
-    private int _currentPrintedElementIndex;
     private Dictionary<Vector3, VoxelElement> _voxelElementsPositionsDictionary =
         new Dictionary<Vector3, VoxelElement>();
+
+    private List<VoxelData> _currentLayerElements = new List<VoxelData>();
+
+    private float _extraScoreAmount = 0.1f;
 
     public void AddVoxel(Vector3 position, VoxelElement voxelElement, Color voxelColor) {
         if (_voxels == null) {
@@ -58,51 +62,75 @@ public class VoxelFigure : MonoBehaviour {
     }
 
     public void Print(float printTime, Color printColor, Action onFinish) {
-        var element = _voxels[_currentPrintedElementIndex];
-        element.voxelElement.Print(printTime, printColor, onFinish);
-        _currentPrintedElementIndex++;
+        CurrentElement?.voxelElement.Print(printTime, printColor, onFinish);
     }
 
     public void ShowCurrentElementAndLayer() {
-        if (_currentPrintedElementIndex >= _voxels.Count) {
+        if (IsCompleted) {
             return;
         }
 
-        var element = _voxels[_currentPrintedElementIndex];
-        if (element.voxelPosition.y != _currentLayer) {
-            _currentLayer = (int) element.voxelPosition.y;
-            ShowCurrentLayer();
-            OnLayerChanged?.Invoke(_currentLayer);
+        CurrentElement = GetNextElement();
+        CurrentElement?.voxelElement.ShowCurrentElement();
+    }
+
+    private VoxelData GetNextElement() {
+        while (_currentLayerElements.Count == 0 && !IsCompleted) {
+            InitAndShowNextLayer();
         }
 
-        element.voxelElement.ShowCurrentElement();
+        if (CurrentElement == null) {
+            return GetFirstElementFromLayer();
+        }
+
+        var shorterDistance = float.MaxValue;
+        var closestElement = CurrentElement;
+        foreach (var layerElement in _currentLayerElements) {
+            var extraScore = layerElement.voxelPosition.x < CurrentElement.voxelPosition.x ? _extraScoreAmount : 0;
+            var distance = (CurrentElement.voxelPosition - layerElement.voxelPosition).sqrMagnitude - extraScore;
+            if (distance < shorterDistance) {
+                shorterDistance = distance;
+                closestElement = layerElement;
+            }
+        }
+
+        _currentLayerElements.Remove(closestElement);
+        return closestElement;
+    }
+
+    private VoxelData GetFirstElementFromLayer()
+    {
+        var element = _currentLayerElements.OrderByDescending(v => v.voxelPosition.z)
+            .ThenByDescending(v => v.voxelPosition.x).First();
+        _currentLayerElements.Remove(element);
+        return element;
     }
 
     public List<Color> GetFigureColors() {
         return _voxels.Select(v => v.voxelColor).Distinct().ToList();
     }
 
-    private void ShowCurrentLayer() {
-        var thisLayerVoxels = _voxels.Where(v => v.voxelPosition.y == _currentLayer).ToList();
-        foreach (var voxel in thisLayerVoxels) {
+    private void InitAndShowNextLayer() {
+        if (GetPrintProgress() >= 1f) {
+            IsCompleted = true;
+            return;
+        }
+
+        _currentLayer++;
+        _currentLayerElements = _voxels.Where(v => v.voxelPosition.y == _currentLayer).ToList();
+        foreach (var voxel in _currentLayerElements) {
             voxel.voxelElement.PrepareToPrint();
         }
+
+        CurrentElement = null;
+        OnLayerChanged?.Invoke(_currentLayer);
     }
 
     public void TurnOffAllVoxels() {
         _currentLayer = -1;
-        _currentPrintedElementIndex = 0;
         foreach (var v in _voxels) {
             v.voxelElement.Hide();
         }
-    }
-
-    public VoxelData GetCurrentElement() {
-        if (_currentPrintedElementIndex >= _voxels.Count) {
-            return null;
-        }
-
-        return _voxels[_currentPrintedElementIndex];
     }
 
     public (int min, int max) GetLayersIDs() {

@@ -72,7 +72,7 @@ public class Printer : MonoBehaviour {
     }
 
     private void StartPrinting(Color printColor) {
-        var currentElement = _currentPrintedModel?.GetCurrentElement();
+        var currentElement = _currentPrintedModel?.CurrentElement;
         if (currentElement == null) {
             return;
         }
