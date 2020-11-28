@@ -64,7 +64,7 @@ public class VoxelFigure : MonoBehaviour {
     }
 
     public void ShowCurrentElementAndLayer() {
-        if (_currentPrintedElementIndex >= _voxels.Count) {
+        if (IsCompleted) {
             return;
         }
 
@@ -98,7 +98,7 @@ public class VoxelFigure : MonoBehaviour {
     }
 
     public VoxelData GetCurrentElement() {
-        if (_currentPrintedElementIndex >= _voxels.Count) {
+        if (IsCompleted) {
             return null;
         }
 
