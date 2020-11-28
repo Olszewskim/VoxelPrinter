@@ -84,6 +84,7 @@ public class GameManager : Singleton<GameManager> {
                 if (currentCollectionFigure == currentCollectionFigures[0]) {
                     _voxelFiguresInfoData[_currentCollection][currentCollectionFigure.figureID].isUnlocked = true;
                 }
+
                 shouldSaveData = true;
             }
 
@@ -103,6 +104,10 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void PrintNewFigure(VoxelFigureData voxelFigureData) {
+        if (!IsInCollectionsView()) {
+            return;
+        }
+
         if (_currentVoxelFigure != null) {
             Destroy(_currentVoxelFigure.gameObject);
         }
@@ -158,6 +163,10 @@ public class GameManager : Singleton<GameManager> {
             _currentGameViewType = gameViewType;
             OnGameViewChanged?.Invoke(_currentGameViewType);
         }
+    }
+
+    private bool IsInCollectionsView() {
+        return _currentGameViewType == GameViewType.CollectionView;
     }
 
     #region Test Buttons
