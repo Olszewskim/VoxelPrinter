@@ -7,21 +7,14 @@ public class Printer : MonoBehaviour {
     public event Action OnPrintingStarted;
     public event Action<float> OnPrintingProgress;
 
-    private const float PRINT_HEIGHT = 1.5f;
     private const float MOVE_TIME = 14f;
     private const float PRINT_TIME = 0.3f;
     private const float MAX_SPEED_MULTIPLIER = 6f;
     private const float SPEED_MULTIPLIER_INCREASE_RATE = 1.15f;
 
-    [SerializeField] private Transform _nozzle;
-    [SerializeField] private Transform _fillament;
+    [SerializeField] private Nozzle _nozzle;
     [SerializeField] private PrinterButton _buttonsPrefab;
-    [SerializeField] private ParticleSystem _laserBeam;
     [SerializeField] private CameraController _cameraController;
-
-    private Material _fillamentMaterial;
-    private Vector3 _fillamentStartScale;
-    private Vector3 _fillamentRunOutScale = new Vector3(0.8f, 0, 0.8f);
 
     private List<PrinterButton> _buttons = new List<PrinterButton>();
     private VoxelFigure _currentPrintedModel;
@@ -34,10 +27,6 @@ public class Printer : MonoBehaviour {
     private float _currentSpeedMultiplier = 1f;
 
     private void Awake() {
-        _laserBeam.Stop();
-        _fillamentStartScale = _fillament.localScale;
-        _fillamentRunOutScale = Vector3.Scale(_fillamentRunOutScale, _fillamentStartScale);
-        _fillamentMaterial = _fillament.GetComponent<MeshRenderer>().sharedMaterial;
         _buttonsPrefab.gameObject.SetActive(false);
     }
 
@@ -78,7 +67,7 @@ public class Printer : MonoBehaviour {
         }
 
         _isPrinting = true;
-        SetFillamentColor();
+        _nozzle.SetFillamentColor(_currentColor);
 
         if (_isNoozleMoved) {
             ContinuePrinting(printColor);
@@ -86,21 +75,13 @@ public class Printer : MonoBehaviour {
         }
 
         _isNoozleMoved = false;
-        MoveNoozle(currentElement.voxelPosition);
-    }
-
-    private void MoveNoozle(Vector3 voxelPosition) {
-        _fillament.localScale = _fillamentStartScale;
-        var position = voxelPosition;
-        position.y += PRINT_HEIGHT;
-        _nozzle.DOMove(position, GetNoozleMovementSpeed()).SetEase(Ease.Linear).SetSpeedBased()
-            .OnComplete(FinishNoozleMove);
+        _nozzle.MoveNoozle(currentElement.voxelPosition, GetNozzleMovementSpeed(), FinishNoozleMove);
     }
 
     private void FinishNoozleMove() {
         _isNoozleMoved = true;
         if (_continuePrinting) {
-            SetFillamentColor();
+            _nozzle.SetFillamentColor(_currentColor);
             ContinuePrinting(_currentColor);
         } else {
             _isPrinting = false;
@@ -108,9 +89,8 @@ public class Printer : MonoBehaviour {
     }
 
     private void ContinuePrinting(Color printColor) {
-        _laserBeam.Play();
         var printTime = GetPrintSpeed();
-        _fillament.DOScale(_fillamentRunOutScale, printTime).OnComplete(() => _laserBeam.Stop());
+        _nozzle.Print(printTime);
         _currentPrintedModel.Print(printTime, printColor, FinishPrinting);
         Vibration.VibratePop();
     }
@@ -133,7 +113,7 @@ public class Printer : MonoBehaviour {
     }
 
     private void FinishPrintingCurrentModel() {
-        GameManager.Instance.SaveFigureData(_currentPrintedModel,out float stageFinishedAtPercentage);
+        GameManager.Instance.SaveFigureData(_currentPrintedModel, out float stageFinishedAtPercentage);
         _currentPrintedModel = null;
         LevelCompletedWindow.Instance.ShowWindow(stageFinishedAtPercentage);
     }
@@ -161,12 +141,6 @@ public class Printer : MonoBehaviour {
         }
     }
 
-    private void SetFillamentColor() {
-        _fillamentMaterial.color = _currentColor;
-        var main = _laserBeam.main;
-        main.startColor = _currentColor;
-    }
-
     private void OnPrintButtonReleased() {
         _continuePrinting = false;
         _currentSpeedMultiplier = 1f;
@@ -181,7 +155,7 @@ public class Printer : MonoBehaviour {
         return PRINT_TIME / _currentSpeedMultiplier;
     }
 
-    private float GetNoozleMovementSpeed() {
+    private float GetNozzleMovementSpeed() {
         return MOVE_TIME * _currentSpeedMultiplier;
     }
 }
