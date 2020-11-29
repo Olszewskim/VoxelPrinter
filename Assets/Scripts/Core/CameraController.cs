@@ -2,8 +2,10 @@
 using UnityEngine;
 using static Enums;
 
+[RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour {
     private const float MOVE_ANIM_TIME = 2f;
+    private const float DEFAULT_FOV = 60f;
 
     [SerializeField] private float _maxCameraPosY;
     [SerializeField] private float _maxCameraRotX;
@@ -13,9 +15,14 @@ public class CameraController : MonoBehaviour {
     private float _minCameraPosY;
     private float _minCameraRotX;
     private int _minLayerID, _maxLayerID;
+    private Camera _cam;
 
     private void Awake() {
         GameManager.OnGameViewChanged += OnGameViewChanged;
+        _cam = GetComponent<Camera>();
+        _cam.fieldOfView = DEFAULT_FOV * (Constants.GAME_NATIVE_RESOLUTION.x / Constants.GAME_NATIVE_RESOLUTION.y) /
+                           ((float) _cam.pixelWidth / _cam.pixelHeight);
+
         _minCameraPosY = transform.position.y;
         _minCameraRotX = transform.eulerAngles.x;
     }
