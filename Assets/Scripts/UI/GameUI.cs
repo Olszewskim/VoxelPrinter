@@ -25,9 +25,12 @@ public class GameUI : MonoBehaviour {
     private void OnBack() {
         if (GameManager.Instance.IsInCollectionsView()) {
             GameManager.Instance.GoBackToMainMenu();
-        } else if(GameManager.Instance.IsInGameView()) {
+        } else if (GameManager.Instance.IsInGameView()) {
             GameManager.Instance.GoBackToCollectionView();
         }
     }
 
+    private void OnDestroy() {
+        GameManager.OnGameViewChanged -= RefreshButtonsVisibility;
+    }
 }

@@ -80,7 +80,7 @@ public class GameManager : Singleton<GameManager> {
                 _voxelFiguresInfoData[_currentCollection].Add(currentCollectionFigure.figureID,
                     new VoxelFigureInfoData(currentCollectionFigure.figureID));
 
-                //TODO: REmove it - temp unlock 1st figure
+                //TODO: Remove it - temp unlock 1st figure
                 if (currentCollectionFigure == currentCollectionFigures[0]) {
                     _voxelFiguresInfoData[_currentCollection][currentCollectionFigure.figureID].isUnlocked = true;
                 }
@@ -204,6 +204,26 @@ public class GameManager : Singleton<GameManager> {
         _currentCollection = CollectionType.Plants;
         PlayerPrefs.SetInt(SaveKey.CURRENT_COLLECTION, (int) _currentCollection);
         ResetGame();
+    }
+
+    public void UnlockAllFigures() {
+        var collections = (CollectionType[]) Enum.GetValues(typeof(CollectionType));
+        foreach (var collection in collections) {
+            if (!_voxelFiguresInfoData.ContainsKey(collection)) {
+                _voxelFiguresInfoData.Add(collection, new Dictionary<string, VoxelFigureInfoData>());
+            }
+
+            var figuresInCollection = GameResourcesDatabase.GetVoxelFiguresCollection(collection);
+            foreach (var figure in figuresInCollection) {
+                if (!_voxelFiguresInfoData[collection].ContainsKey(figure.figureID)) {
+                    _voxelFiguresInfoData[collection].Add(figure.figureID, new VoxelFigureInfoData(figure.figureID));
+                }
+
+                _voxelFiguresInfoData[collection][figure.figureID].isUnlocked = true;
+            }
+        }
+
+        SaveVoxelsData();
     }
 
     public void ResetGame() {
