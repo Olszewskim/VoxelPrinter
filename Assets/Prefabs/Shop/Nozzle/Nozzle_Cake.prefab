@@ -4839,6 +4839,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nozzle_Cake
       objectReference: {fileID: 0}
+    - target: {fileID: 6043472081000317648, guid: baf79aa711da7084c824f60628fe4604,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baf79aa711da7084c824f60628fe4604, type: 3}
 --- !u!4 &8064403738769428443 stripped
