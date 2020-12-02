@@ -43,6 +43,10 @@ public class Printer : MonoBehaviour {
         OnPrintingStarted?.Invoke();
     }
 
+    public void RemoveModel() {
+        _currentPrintedModel = null;
+    }
+
     private void SetButtonsColors(List<Color> colors) {
         TurnOffAllButtons();
         for (int i = 0; i < colors.Count; i++) {

@@ -108,14 +108,18 @@ public class GameManager : Singleton<GameManager> {
             return;
         }
 
-        if (_currentVoxelFigure != null) {
-            Destroy(_currentVoxelFigure.gameObject);
-        }
-
+        RemoveCurrentPrintedFigure();
         _currentVoxelFigure = Instantiate(voxelFigureData.voxelFigure);
         _currentVoxelFigureInfoData = _voxelFiguresInfoData[_currentCollection][voxelFigureData.figureID];
         _printer.SetupPrintModel(_currentVoxelFigure);
         ChangeGameView(GameViewType.GameView);
+    }
+
+    private void RemoveCurrentPrintedFigure() {
+        if (_currentVoxelFigure != null) {
+            Destroy(_currentVoxelFigure.gameObject);
+            _printer.RemoveModel();
+        }
     }
 
     public string GetCurrentVoxelFigureName() {
@@ -165,8 +169,21 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
-    private bool IsInCollectionsView() {
+    public bool IsInCollectionsView() {
         return _currentGameViewType == GameViewType.CollectionView;
+    }
+
+    public bool IsInGameView() {
+        return _currentGameViewType == GameViewType.GameView;
+    }
+
+    public void GoBackToCollectionView() {
+        ChangeGameView(GameViewType.CollectionView);
+    }
+
+    public void GoBackToMainMenu() {
+        RemoveCurrentPrintedFigure();
+        ChangeGameView(GameViewType.MainMenu);
     }
 
     #region Test Buttons
