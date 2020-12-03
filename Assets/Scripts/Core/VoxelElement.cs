@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class VoxelElement : MonoBehaviour {
     private const float FRAME_BLINK_TIME = 0.5f;
+    private const float RETURN_TO_NORMAL_SCALE_TIME = 0.2f;
 
     private static readonly Vector3 _hideScale = new Vector3(0, 0, 0);
     private static readonly Vector3 _beforePrintScale = new Vector3(1, 0.01f, 1);
-    private static readonly Vector3 _showScale = new Vector3(1, 1, 1);
+    private static readonly Vector3 _showScale = new Vector3(1, 1.8f, 1);
+    private static readonly Vector3 _normalScale = new Vector3(1, 1, 1);
 
     [SerializeField] private SpriteRenderer _frame;
 
@@ -41,15 +43,16 @@ public class VoxelElement : MonoBehaviour {
         _frame.gameObject.SetActive(false);
         _blinkSequence.Kill();
         IsPrinted = true;
+        ReturnToNormalScale();
+    }
+
+    private void ReturnToNormalScale() {
+        transform.DOScale(_normalScale, RETURN_TO_NORMAL_SCALE_TIME).SetEase(Ease.OutSine);
     }
 
     public void PrepareToPrint() {
         transform.localScale = _beforePrintScale;
         _frame.gameObject.SetActive(true);
-    }
-
-    public Material GetMaterial() {
-        return _meshRenderer.sharedMaterial;
     }
 
     public void ShowCurrentElement() {

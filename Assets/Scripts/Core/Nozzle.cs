@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 
 public class Nozzle : MonoBehaviour {
-    private const float PRINT_HEIGHT = 1.5f;
+    private const float PRINT_HEIGHT = 2f;
 
     [SerializeField] private Transform _fillament;
     [SerializeField] private ParticleSystem _laserBeam;
