@@ -80,7 +80,6 @@ public class GameManager : Singleton<GameManager> {
                 _voxelFiguresInfoData[_currentCollection].Add(currentCollectionFigure.figureID,
                     new VoxelFigureInfoData(currentCollectionFigure.figureID));
 
-                //TODO: Remove it - temp unlock 1st figure
                 if (currentCollectionFigure == currentCollectionFigures[0]) {
                     _voxelFiguresInfoData[_currentCollection][currentCollectionFigure.figureID].isUnlocked = true;
                 }
@@ -206,24 +205,6 @@ public class GameManager : Singleton<GameManager> {
     }
 
     #region Test Buttons
-
-    public void SwitchToAnimalsCollection() {
-        _currentCollection = CollectionType.Animals;
-        PlayerPrefs.SetInt(SaveKey.CURRENT_COLLECTION, (int) _currentCollection);
-        ResetGame();
-    }
-
-    public void SwitchToPeopleCollection() {
-        _currentCollection = CollectionType.People;
-        PlayerPrefs.SetInt(SaveKey.CURRENT_COLLECTION, (int) _currentCollection);
-        ResetGame();
-    }
-
-    public void SwitchToPlantsCollection() {
-        _currentCollection = CollectionType.Plants;
-        PlayerPrefs.SetInt(SaveKey.CURRENT_COLLECTION, (int) _currentCollection);
-        ResetGame();
-    }
 
     public void UnlockAllFigures() {
         var collections = (CollectionType[]) Enum.GetValues(typeof(CollectionType));
