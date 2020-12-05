@@ -1,11 +1,15 @@
-﻿using TMPro;
+﻿using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class FigureSlot : MonoBehaviour {
+    private const float POP_ANIM_TIME = 0.5f;
+    private const float POP_STRENGTH = 0.3f;
+
     [SerializeField] private StarsControllerUI _starsControllerUI;
     [SerializeField] private Button _printButton;
-    [SerializeField] private Image _lockPadImage;
+    [SerializeField] private Button _lockPadImage;
     [SerializeField] private TextMeshProUGUI _voxelFigureNameText;
 
     private VoxelFigureData _currentVoxelFigureData;
@@ -14,7 +18,7 @@ public class FigureSlot : MonoBehaviour {
 
     private void Awake() {
         _printButton.onClick.AddListener(PrintFigure);
-        //TODO: Shake lockpad on click
+        _lockPadImage.onClick.AddListener(ShakeLockPad);
     }
 
     public void Init(VoxelFigureData voxelFigureData, VoxelFigureInfoData voxelFigureInfoData) {
@@ -59,5 +63,9 @@ public class FigureSlot : MonoBehaviour {
 
     private void PrintFigure() {
         GameManager.Instance.PrintNewFigure(_currentVoxelFigureData);
+    }
+
+    private void ShakeLockPad() {
+        _lockPadImage.transform.DOShakeScale(POP_ANIM_TIME, POP_STRENGTH);
     }
 }
