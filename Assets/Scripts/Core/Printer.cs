@@ -9,7 +9,7 @@ public class Printer : MonoBehaviour {
 
     private const float MOVE_TIME = 14f;
     private const float PRINT_TIME = 0.3f;
-    private const float MAX_SPEED_MULTIPLIER = 6f;
+    private const float MAX_SPEED_MULTIPLIER = 4f;
     private const float SPEED_MULTIPLIER_INCREASE_RATE = 1.15f;
 
     [SerializeField] private Nozzle _nozzle;
