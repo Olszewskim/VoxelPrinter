@@ -9,7 +9,7 @@ public class FiguresBookcase : MonoBehaviour {
     public void InitFigureSlots(List<VoxelFigureData> voxelFiguresData,
         List<VoxelFigureInfoData> currentCollectionData) {
         ClearAllSlots();
-        _collectionNameText.text = voxelFiguresData[0].collectionType.ToString();
+        _collectionNameText.text = GameResourcesDatabase.GetCollectionName(voxelFiguresData[0].collectionType);
         for (int i = 0; i < voxelFiguresData.Count; i++) {
             _figureSlots[i].Init(voxelFiguresData[i], currentCollectionData[i]);
         }

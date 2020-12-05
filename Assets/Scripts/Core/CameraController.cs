@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour {
             case GameViewType.MainMenu:
                 MoveCameraToGamePrinterView();
                 break;
-            case GameViewType.CollectionView:
+            case GameViewType.SelectFigureView:
                 MoveCameraToCollectionsBookcaseView();
                 break;
             case GameViewType.GameView:

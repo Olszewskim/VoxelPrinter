@@ -99,12 +99,21 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void ShowCollectionsView() {
+        ChangeGameView(GameViewType.CollectionsView);
+    }
+
+    public void ShowSelectFigureView(CollectionType collectionType) {
+        _currentCollection = collectionType;
+        ShowSelectFigureView();
+    }
+
+    public void ShowSelectFigureView() {
         LoadCurrentCollection();
-        ChangeGameView(GameViewType.CollectionView);
+        ChangeGameView(GameViewType.SelectFigureView);
     }
 
     public void PrintNewFigure(VoxelFigureData voxelFigureData) {
-        if (!IsInCollectionsView()) {
+        if (_currentGameViewType != GameViewType.SelectFigureView) {
             return;
         }
 
@@ -169,19 +178,29 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
-    public bool IsInCollectionsView() {
-        return _currentGameViewType == GameViewType.CollectionView;
+    public void OnBack() {
+        switch (_currentGameViewType) {
+            case GameViewType.CollectionsView:
+                GoBackToMainMenu();
+                break;
+            case GameViewType.SelectFigureView:
+                GoBackToCollectionsView();
+                break;
+            case GameViewType.GameView:
+                GoBackToSelectFigureView();
+                break;
+        }
     }
 
-    public bool IsInGameView() {
-        return _currentGameViewType == GameViewType.GameView;
+    private void GoBackToSelectFigureView() {
+        ChangeGameView(GameViewType.SelectFigureView);
     }
 
-    public void GoBackToCollectionView() {
-        ChangeGameView(GameViewType.CollectionView);
+    private void GoBackToCollectionsView() {
+        ChangeGameView(GameViewType.CollectionsView);
     }
 
-    public void GoBackToMainMenu() {
+    private void GoBackToMainMenu() {
         RemoveCurrentPrintedFigure();
         ChangeGameView(GameViewType.MainMenu);
     }

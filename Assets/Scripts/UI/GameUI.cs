@@ -14,7 +14,7 @@ public class GameUI : MonoBehaviour {
 
     private void RefreshButtonsVisibility(GameViewType gameViewType) {
         var shouldOnBackButtonBeVisible =
-            gameViewType == GameViewType.CollectionView || gameViewType == GameViewType.GameView;
+            gameViewType == GameViewType.SelectFigureView || gameViewType == GameViewType.GameView;
         _onBackButton.gameObject.SetActive(shouldOnBackButtonBeVisible);
     }
 
@@ -23,11 +23,7 @@ public class GameUI : MonoBehaviour {
     }
 
     private void OnBack() {
-        if (GameManager.Instance.IsInCollectionsView()) {
-            GameManager.Instance.GoBackToMainMenu();
-        } else if (GameManager.Instance.IsInGameView()) {
-            GameManager.Instance.GoBackToCollectionView();
-        }
+        GameManager.Instance.OnBack();
     }
 
     private void OnDestroy() {

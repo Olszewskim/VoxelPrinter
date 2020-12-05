@@ -253,5 +253,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  _collectionsData:
+  - {fileID: 11400000, guid: 365dc29c94fc3495096257849b4332b4, type: 2}
+  - {fileID: 11400000, guid: 2d6abe28f8f5a4233b14c3c7fcbd02a0, type: 2}
+  - {fileID: 11400000, guid: 5b53cd0eec0d14701a7d6e9c037a8596, type: 2}
   _lockedFigureMaterial: {fileID: 2100000, guid: 3c1b242cd27f8483ba40c68b4af8c7e7,
     type: 2}

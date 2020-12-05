@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static Enums;
 
 public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
     [SerializeField] private Dictionary<CollectionType, List<VoxelFigureData>> _voxelFiguresDataDictionary;
+    [SerializeField] private List<CollectionData> _collectionsData = new List<CollectionData>();
 
     public Material _lockedFigureMaterial;
 
@@ -41,6 +43,19 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
     public static string GetVoxelFigureName(string figureID) {
         if (Instance._voxelFiguresDataByNameDictionary.ContainsKey(figureID)) {
             return Instance._voxelFiguresDataByNameDictionary[figureID].figureName;
+        }
+
+        return "";
+    }
+
+    public static List<CollectionData> GetCollectionsData() {
+        return Instance._collectionsData;
+    }
+
+    public static string GetCollectionName(CollectionType collectionType) {
+        var collection = Instance._collectionsData.FirstOrDefault(c => c.collectionType == collectionType);
+        if(collection != null) {
+            return collection.collectionName;
         }
 
         return "";

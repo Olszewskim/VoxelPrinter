@@ -32,6 +32,6 @@ public class LevelCompletedWindow : WindowBehaviour<LevelCompletedWindow> {
 
     private void PrintNextFigure() {
         CloseWindow();
-        GameManager.Instance.ShowCollectionsView();
+        GameManager.Instance.ShowSelectFigureView();
     }
 }

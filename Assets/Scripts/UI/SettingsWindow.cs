@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingsWindow : PoppingOutWindowBehaviour<SettingsWindow> {
-    [SerializeField] private Button _closeButton;
     [SerializeField] private SwitchUI _musicSettings;
     [SerializeField] private SwitchUI _soundsSettings;
     [SerializeField] private SwitchUI _hapticSettings;
@@ -15,7 +14,6 @@ public class SettingsWindow : PoppingOutWindowBehaviour<SettingsWindow> {
 
     protected override void Awake() {
         base.Awake();
-        _closeButton.onClick.AddListener(CloseWindow);
         InitSettings();
         SetVersionText();
     }

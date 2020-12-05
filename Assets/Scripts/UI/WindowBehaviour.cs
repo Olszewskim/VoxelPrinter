@@ -9,8 +9,10 @@ public abstract class WindowBehaviour<T> : Screen<T> where T : Screen<T> {
 
     public event Action OnWindowClosed;
 
+    [SerializeField] protected Button _closeButton;
+    [SerializeField] protected Button _closeWindowClickableArea;
+
     public bool IsOpen { get; protected set; }
-    [SerializeField] private Button _closeWindowClickableArea;
     protected float animTime = 0.5f;
     protected CanvasGroup canvasGroup;
 
@@ -20,6 +22,9 @@ public abstract class WindowBehaviour<T> : Screen<T> where T : Screen<T> {
         canvasGroup.alpha = 0;
         canvasGroup.LockGroup();
         _closeWindowClickableArea?.onClick.AddListener(ForceCloseWindow);
+        if (_closeButton != null) {
+            _closeButton.onClick.AddListener(CloseWindow);
+        }
     }
 
     protected virtual void Start() {

@@ -17,7 +17,8 @@
     public enum GameViewType {
         None,
         MainMenu,
-        CollectionView,
+        CollectionsView,
+        SelectFigureView,
         GameView
     }
 }
