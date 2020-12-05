@@ -7,7 +7,8 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
     [SerializeField] private Dictionary<CollectionType, List<VoxelFigureData>> _voxelFiguresDataDictionary;
     [SerializeField] private List<CollectionData> _collectionsData = new List<CollectionData>();
 
-    public Material _lockedFigureMaterial;
+    [SerializeField] private Material _lockedFigureMaterial;
+    [SerializeField] private float _grayScale;
 
     private Dictionary<Color, Material> _voxelColorsMap = new Dictionary<Color, Material>();
     private Dictionary<string, VoxelFigureData> _voxelFiguresDataByNameDictionary =
@@ -40,6 +41,11 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
         return Instance._voxelColorsMap[voxelColor];
     }
 
+    public static Material GetGrayscaledMaterial(Color voxelColor) {
+        var grayScaleColor = new Color(Instance._grayScale * voxelColor.r, Instance._grayScale * voxelColor.b, Instance._grayScale * voxelColor.b);
+        return GetMaterialOfColor(grayScaleColor);
+    }
+
     public static string GetVoxelFigureName(string figureID) {
         if (Instance._voxelFiguresDataByNameDictionary.ContainsKey(figureID)) {
             return Instance._voxelFiguresDataByNameDictionary[figureID].figureName;
@@ -54,7 +60,7 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
 
     public static string GetCollectionName(CollectionType collectionType) {
         var collection = Instance._collectionsData.FirstOrDefault(c => c.collectionType == collectionType);
-        if(collection != null) {
+        if (collection != null) {
             return collection.collectionName;
         }
 

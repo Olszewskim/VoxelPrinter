@@ -134,7 +134,7 @@ public class VoxelFigure : MonoBehaviour {
     private void DisableFigure() {
         foreach (var voxel in _voxels) {
             voxel.voxelElement.HideFrame();
-            voxel.voxelElement.SetMaterial(GameResourcesDatabase.Instance._lockedFigureMaterial);
+            voxel.voxelElement.SetMaterial(GameResourcesDatabase.GetGrayscaledMaterial(voxel.voxelColor));
         }
     }
 
