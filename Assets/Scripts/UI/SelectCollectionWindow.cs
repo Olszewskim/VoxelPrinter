@@ -4,6 +4,7 @@ using static Enums;
 
 public class SelectCollectionWindow : PoppingOutWindowBehaviour<SelectCollectionWindow> {
     [SerializeField] private CollectionTileUI _collectionTileUIPrefab;
+    [SerializeField] private Transform _moreCollectionsSoonTile;
 
     private List<CollectionTileUI> _collectionTileUIList = new List<CollectionTileUI>();
 
@@ -31,6 +32,8 @@ public class SelectCollectionWindow : PoppingOutWindowBehaviour<SelectCollection
 
             _collectionTileUIList[i].Init(collectionsData[i]);
         }
+
+        _moreCollectionsSoonTile.SetAsLastSibling();
     }
 
     private void TurnOffAllTiles() {
