@@ -24,13 +24,20 @@ public class FigureSlot : MonoBehaviour {
     public void Init(VoxelFigureData voxelFigureData, VoxelFigureInfoData voxelFigureInfoData) {
         gameObject.SetActive(true);
         _currentVoxelFigureData = voxelFigureData;
-        _currentSpawnedVoxelFigure = Instantiate(_currentVoxelFigureData.voxelFigure, transform);
         _currentVoxelFigureInfoData = voxelFigureInfoData;
-        _currentSpawnedVoxelFigure.SetFigureState(voxelFigureInfoData);
         _printButton.gameObject.SetActive(_currentVoxelFigureInfoData.isUnlocked);
         _lockPadImage.gameObject.SetActive(!voxelFigureInfoData.isUnlocked);
+        LoadFigure();
         InitStars();
         SetFigureName();
+    }
+
+    private void LoadFigure() {
+        _currentSpawnedVoxelFigure = GameResourcesDatabase.GetBookcaseFigure(_currentVoxelFigureData);
+        _currentSpawnedVoxelFigure.gameObject.SetActive(true);
+        _currentSpawnedVoxelFigure.transform.position = transform.position;
+        _currentSpawnedVoxelFigure.transform.localScale = transform.lossyScale;
+        _currentSpawnedVoxelFigure.SetFigureState(_currentVoxelFigureInfoData);
     }
 
     private void InitStars() {
@@ -52,8 +59,7 @@ public class FigureSlot : MonoBehaviour {
 
     public void Clear() {
         if (_currentSpawnedVoxelFigure != null) {
-            //TODO: Optimize spawning figures
-            Destroy(_currentSpawnedVoxelFigure.gameObject);
+            _currentSpawnedVoxelFigure.gameObject.SetActive(false);
             _currentSpawnedVoxelFigure = null;
             _currentVoxelFigureInfoData = null;
         }

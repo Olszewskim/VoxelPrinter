@@ -577,6 +577,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingsWindow
       objectReference: {fileID: 0}
+    - target: {fileID: 409741206198020813, guid: 7d3326bda04d04824be8868c68aa21a0,
+        type: 3}
+      propertyPath: m_text
+      value: Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 409741206198020813, guid: 7d3326bda04d04824be8868c68aa21a0,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2906506292993867998, guid: 7d3326bda04d04824be8868c68aa21a0,
         type: 3}
       propertyPath: m_AnchorMax.x

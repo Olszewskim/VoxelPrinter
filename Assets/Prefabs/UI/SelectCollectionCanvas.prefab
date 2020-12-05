@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 693871754038019756}
   - component: {fileID: 1010207654307572517}
   m_Layer: 5
-  m_Name: SelectCollelctionCanvas
+  m_Name: SelectCollectionCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -819,12 +819,12 @@ PrefabInstance:
     - target: {fileID: 409741206198020813, guid: 7d3326bda04d04824be8868c68aa21a0,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 8
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 409741206198020813, guid: 7d3326bda04d04824be8868c68aa21a0,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 409741206198020813, guid: 7d3326bda04d04824be8868c68aa21a0,
         type: 3}
@@ -834,6 +834,16 @@ PrefabInstance:
     - target: {fileID: 409741206198020813, guid: 7d3326bda04d04824be8868c68aa21a0,
         type: 3}
       propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 409741206198020813, guid: 7d3326bda04d04824be8868c68aa21a0,
+        type: 3}
+      propertyPath: m_text
+      value: Choose collection
+      objectReference: {fileID: 0}
+    - target: {fileID: 409741206198020813, guid: 7d3326bda04d04824be8868c68aa21a0,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2906506292993867998, guid: 7d3326bda04d04824be8868c68aa21a0,

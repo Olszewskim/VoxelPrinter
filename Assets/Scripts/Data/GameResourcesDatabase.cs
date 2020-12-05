@@ -10,9 +10,13 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
     [SerializeField] private Material _lockedFigureMaterial;
     [SerializeField] private float _grayScale;
 
+    [SerializeField] private Transform _bookcaseFiguresRoot;
+
     private Dictionary<Color, Material> _voxelColorsMap = new Dictionary<Color, Material>();
     private Dictionary<string, VoxelFigureData> _voxelFiguresDataByNameDictionary =
         new Dictionary<string, VoxelFigureData>();
+
+    private Dictionary<string, VoxelFigure> _bookcaseFiguresPool = new Dictionary<string, VoxelFigure>();
 
     protected override void Awake() {
         base.Awake();
@@ -65,5 +69,13 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
         }
 
         return "";
+    }
+
+    public static VoxelFigure GetBookcaseFigure(VoxelFigureData voxelFigureData) {
+        if (!Instance._bookcaseFiguresPool.ContainsKey(voxelFigureData.figureID)) {
+             Instance._bookcaseFiguresPool.Add(voxelFigureData.figureID, Instantiate(voxelFigureData.voxelFigure, Instance._bookcaseFiguresRoot));
+        }
+
+        return Instance._bookcaseFiguresPool[voxelFigureData.figureID];
     }
 }
