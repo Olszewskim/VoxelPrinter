@@ -845,15 +845,82 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
         type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
+        type: 3}
+      propertyPath: _collectionsData.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
+        type: 3}
+      propertyPath: _bookcaseFiguresRoot
+      value: 
+      objectReference: {fileID: 1043944262}
+    - target: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
+        type: 3}
+      propertyPath: _collectionsData.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: b13d5ee8316ab46b38439dd2ac5bd3c4,
+        type: 2}
+    - target: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
+        type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
         type: 3}
     - target: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
         type: 3}
-      propertyPath: _bookcaseFiguresRoot
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[0]
       value: 
-      objectReference: {fileID: 1043944262}
+      objectReference: {fileID: 11400000, guid: ef17f640b38174bb1b7963f6d991fa3f,
+        type: 2}
+    - target: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: bbd553de8ca584ffea6b7b2863bea4c2,
+        type: 2}
+    - target: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 12ab6689390ed43b7a9259d9ad98efe2,
+        type: 2}
+    - target: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[0]
+      value: '"path":"_voxelFiguresDataDictionary","add_keys":{"$id":0,"$type":"System.Object[],
+        mscorlib","$rlength":2,"$rcontent":[{"$id":1,"$type":"Enums+CollectionType,
+        Assembly-CSharp",3},{"$id":2,"$type":"Enums+CollectionType, Assembly-CSharp",3}]},"remove_keys":null'
+      objectReference: {fileID: 0}
+    - target: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[1]
+      value: '"path":"_voxelFiguresDataDictionary.{3es}","value":{"$id":0,"$type":"System.Collections.Generic.List`1[[VoxelFigureData,
+        Assembly-CSharp]], mscorlib","$rlength":3,"$rcontent":[$eref:0,$eref:1,$eref:2]}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[2]
+      value: '"path":"_voxelFiguresDataDictionary.{3es}.[0]","value":$eref:0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[3]
+      value: '"path":"_voxelFiguresDataDictionary.{3es}.[1]","value":$eref:1'
+      objectReference: {fileID: 0}
+    - target: {fileID: 53708376003269777, guid: bf0968587668f4af186880cfc52a8d76,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[4]
+      value: '"path":"_voxelFiguresDataDictionary.{3es}.[2]","value":$eref:2'
+      objectReference: {fileID: 0}
     - target: {fileID: 2294165675026834481, guid: bf0968587668f4af186880cfc52a8d76,
         type: 3}
       propertyPath: m_LocalPosition.x
