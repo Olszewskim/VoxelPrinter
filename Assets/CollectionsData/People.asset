@@ -15,4 +15,4 @@ MonoBehaviour:
   collectionType: 1
   collectionName: People
   collectionImage: {fileID: 21300000, guid: 6ef166d756b9d45108db72460e1fed25, type: 3}
-  startToUnlock: 0
+  starsToUnlock: 0

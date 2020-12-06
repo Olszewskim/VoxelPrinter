@@ -22,7 +22,7 @@ public class StarsControllerUI : MonoBehaviour {
         }
     }
 
-    private int GetCountOfStarsToShow(float levelResult) {
+    public static int GetCountOfStarsToShow(float levelResult) {
         if (levelResult > MIN_RESULT_FOR_3_STARS) {
             return 3;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -162,6 +163,18 @@ public class GameManager : Singleton<GameManager> {
         return false;
     }
 
+    public int GetCurrentAmountOfStars() {
+        var stars = 0;
+        foreach (var collectionData in _voxelFiguresInfoData) {
+            foreach (var data in collectionData.Value) {
+                var completionPercent = data.Value.completionPercent;
+                stars += StarsControllerUI.GetCountOfStarsToShow(completionPercent);
+            }
+        }
+
+        return stars;
+    }
+
     private void SaveVoxelsData() {
         var playerData = new PlayerSaveJSON(_voxelFiguresInfoData);
         string json = JsonConvert.SerializeObject(playerData,
@@ -236,4 +249,6 @@ public class GameManager : Singleton<GameManager> {
     }
 
     #endregion
+
+
 }

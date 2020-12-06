@@ -23,6 +23,7 @@ public class SelectCollectionWindow : PoppingOutWindowBehaviour<SelectCollection
 
     private void RefreshCollectionTiles() {
         TurnOffAllTiles();
+        var currentAmountOfStars = GameManager.Instance.GetCurrentAmountOfStars();
         var collectionsData = GameResourcesDatabase.GetCollectionsData();
         for (int i = 0; i < collectionsData.Count; i++) {
             if (_collectionTileUIList.Count <= i) {
@@ -30,11 +31,12 @@ public class SelectCollectionWindow : PoppingOutWindowBehaviour<SelectCollection
                     Instantiate(_collectionTileUIPrefab, _collectionTileUIPrefab.transform.parent));
             }
 
-            _collectionTileUIList[i].Init(collectionsData[i]);
+            _collectionTileUIList[i].Init(collectionsData[i], currentAmountOfStars);
         }
 
         _moreCollectionsSoonTile.SetAsLastSibling();
     }
+
 
     private void TurnOffAllTiles() {
         foreach (var collectionTileUI in _collectionTileUIList) {

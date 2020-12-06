@@ -15,4 +15,4 @@ MonoBehaviour:
   collectionType: 0
   collectionName: Animals
   collectionImage: {fileID: 21300000, guid: 6e7c003affee54cd88cbbf036aaa52f4, type: 3}
-  startToUnlock: 0
+  starsToUnlock: 20
