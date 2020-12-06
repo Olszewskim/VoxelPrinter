@@ -233,6 +233,7 @@ public class GameManager : Singleton<GameManager> {
                 }
 
                 _voxelFiguresInfoData[collection][figure.figureID].isUnlocked = true;
+                _voxelFiguresInfoData[collection][figure.figureID].completionPercent = 1;
             }
         }
 
