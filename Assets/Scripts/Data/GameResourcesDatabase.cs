@@ -20,11 +20,17 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
 
     protected override void Awake() {
         base.Awake();
+        if (Instance != this) {
+            return;
+        }
+
         foreach (var data in _voxelFiguresDataDictionary) {
             foreach (var voxelFigure in data.Value) {
                 _voxelFiguresDataByNameDictionary.Add(voxelFigure.figureID, voxelFigure);
             }
         }
+
+        DontDestroyOnLoad(_bookcaseFiguresRoot);
     }
 
     public static List<VoxelFigureData> GetVoxelFiguresCollection(CollectionType collectionType) {
@@ -46,7 +52,8 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
     }
 
     public static Material GetGrayscaledMaterial(Color voxelColor) {
-        var grayScaleColor = new Color(Instance._grayScale * voxelColor.r, Instance._grayScale * voxelColor.b, Instance._grayScale * voxelColor.b);
+        var grayScaleColor = new Color(Instance._grayScale * voxelColor.r, Instance._grayScale * voxelColor.b,
+            Instance._grayScale * voxelColor.b);
         return GetMaterialOfColor(grayScaleColor);
     }
 
@@ -73,7 +80,8 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
 
     public static VoxelFigure GetBookcaseFigure(VoxelFigureData voxelFigureData) {
         if (!Instance._bookcaseFiguresPool.ContainsKey(voxelFigureData.figureID)) {
-             Instance._bookcaseFiguresPool.Add(voxelFigureData.figureID, Instantiate(voxelFigureData.voxelFigure, Instance._bookcaseFiguresRoot));
+            Instance._bookcaseFiguresPool.Add(voxelFigureData.figureID,
+                Instantiate(voxelFigureData.voxelFigure, Instance._bookcaseFiguresRoot));
         }
 
         return Instance._bookcaseFiguresPool[voxelFigureData.figureID];
