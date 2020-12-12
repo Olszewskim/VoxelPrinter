@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectionType: 2
   collectionName: Plants
-  collectionImage: {fileID: 21300000, guid: d718472d3357a46709fa041c6d8e1b81, type: 3}
+  collectionImage: {fileID: 21300000, guid: 765c29454064ff84686b3988902cd874, type: 3}
   starsToUnlock: 40

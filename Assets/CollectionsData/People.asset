@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectionType: 1
   collectionName: People
-  collectionImage: {fileID: 21300000, guid: 6ef166d756b9d45108db72460e1fed25, type: 3}
+  collectionImage: {fileID: 21300000, guid: 08b588bca1d2e9b4c85db6da2f5ee4c3, type: 3}
   starsToUnlock: 0
