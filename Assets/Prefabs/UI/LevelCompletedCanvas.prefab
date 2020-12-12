@@ -73,6 +73,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  _closeButton: {fileID: 0}
   _closeWindowClickableArea: {fileID: 0}
   _percentText: {fileID: 2600307065883003418}
   _completedText: {fileID: 7200947150337546800}
@@ -527,7 +528,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!114 &8074337392917495526
 MonoBehaviour:
