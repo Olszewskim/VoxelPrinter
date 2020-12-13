@@ -140,6 +140,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  _closeButton: {fileID: 0}
   _closeWindowClickableArea: {fileID: 0}
   _startGameButton: {fileID: 3945146276993397450}
 --- !u!1 &6457302644164964159
@@ -313,7 +314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
