@@ -22,4 +22,10 @@
         SelectFigureView,
         GameView
     }
+
+    public enum ShopItemType {
+        Nozzle,
+        HeatBed,
+        Frame
+    }
 }
