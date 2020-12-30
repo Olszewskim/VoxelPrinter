@@ -7,6 +7,8 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
     [SerializeField] private Dictionary<CollectionType, List<VoxelFigureData>> _voxelFiguresDataDictionary;
     [SerializeField] private List<CollectionData> _collectionsData = new List<CollectionData>();
 
+    [SerializeField] private List<ShopItemData> _shopItemsData = new List<ShopItemData>();
+
     [SerializeField] private Material _lockedFigureMaterial;
     [SerializeField] private float _grayScale;
 
@@ -17,6 +19,7 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
         new Dictionary<string, VoxelFigureData>();
 
     private Dictionary<string, VoxelFigure> _bookcaseFiguresPool = new Dictionary<string, VoxelFigure>();
+    private Dictionary<ShopItemType, List<ShopItemData>> _shopItemsDataDictionary = new Dictionary<ShopItemType, List<ShopItemData>>();
 
     protected override void Awake() {
         base.Awake();
@@ -28,6 +31,14 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
             foreach (var voxelFigure in data.Value) {
                 _voxelFiguresDataByNameDictionary.Add(voxelFigure.figureID, voxelFigure);
             }
+        }
+
+        foreach (var data in _shopItemsData) {
+            if (!_shopItemsDataDictionary.ContainsKey(data.shopItemType)) {
+                _shopItemsDataDictionary.Add(data.shopItemType, new List<ShopItemData>());
+            }
+
+            _shopItemsDataDictionary[data.shopItemType].Add(data);
         }
 
         DontDestroyOnLoad(_bookcaseFiguresRoot);
@@ -85,5 +96,13 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
         }
 
         return Instance._bookcaseFiguresPool[voxelFigureData.figureID];
+    }
+
+    public static List<ShopItemData> GetShopItemData(ShopItemType shopItemType) {
+        if (Instance._shopItemsDataDictionary.ContainsKey(shopItemType)) {
+            return Instance._shopItemsDataDictionary[shopItemType];
+        }
+
+        return null;
     }
 }
