@@ -9,6 +9,7 @@ public class ShopWindow : WindowBehaviour<ShopWindow> {
     private Dictionary<ShopItemType, Button> _switchShopTypeButtons = new Dictionary<ShopItemType, Button>();
     [SerializeField] private ShopItemUI _shopItemUIPrefab;
     [SerializeField] private TextMeshProUGUI _shopTypeTitle;
+    [SerializeField] private Button _unlockRandomItemButton;
 
     private readonly List<ShopItemUI> _shopItemUIs = new List<ShopItemUI>();
     private ShopItemType _currentShopItemType;
@@ -21,6 +22,7 @@ public class ShopWindow : WindowBehaviour<ShopWindow> {
         }
 
         _shopItemUIPrefab.gameObject.SetActive(false);
+        _unlockRandomItemButton.onClick.AddListener(UnlockRandomShopItem);
     }
 
     protected override void Start() {
@@ -40,11 +42,37 @@ public class ShopWindow : WindowBehaviour<ShopWindow> {
 
             _shopItemUIs[i].InitShopItem(shopItems[i]);
         }
+
+        RefreshUnlockRandomShopItemButton();
+    }
+
+    private void RefreshUnlockRandomShopItemButton() {
+        var itemsToUnlock = GetItemsToUnlock();
+        var shouldButttonBeEnabled = itemsToUnlock.Count > 0;
+        _unlockRandomItemButton.gameObject.SetActive(shouldButttonBeEnabled);
     }
 
     private void TurnOffShopItemUIs() {
         foreach (var shopItemUI in _shopItemUIs) {
             shopItemUI.gameObject.SetActive(false);
         }
+    }
+
+    private void UnlockRandomShopItem() {
+        var itemsToUnlock = GetItemsToUnlock();
+
+        var randomItem = itemsToUnlock.GetRandomElement();
+        GameManager.Instance.UnlockedShopItem(randomItem.itemID);
+        SwitchShopType(_currentShopItemType);
+    }
+
+    private List<ShopItemData> GetItemsToUnlock() {
+        var shopItems = new List<ShopItemData>(GameResourcesDatabase.GetShopItemData(_currentShopItemType));
+        var unlockedItems = GameManager.Instance.UnlockedShopItems;
+        foreach (var unlockedItem in unlockedItems) {
+            shopItems.RemoveAll(i => i.itemID == unlockedItem);
+        }
+
+        return shopItems;
     }
 }

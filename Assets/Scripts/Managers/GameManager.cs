@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager> {
     private Dictionary<CollectionType, Dictionary<string, VoxelFigureInfoData>> _voxelFiguresInfoData =
         new Dictionary<CollectionType, Dictionary<string, VoxelFigureInfoData>>();
 
-    private HashSet<string> _unlockedShopItems = new HashSet<string>();
+    public HashSet<string> UnlockedShopItems { get; private set; } = new HashSet<string>();
 
     private CollectionType _currentCollection;
     private VoxelFigure _currentVoxelFigure;
@@ -72,9 +72,9 @@ public class GameManager : Singleton<GameManager> {
                     NullValueHandling = NullValueHandling.Ignore,
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 });
-            _unlockedShopItems = unlockedShopItemsData.unlockedShopItems;
+            UnlockedShopItems = unlockedShopItemsData.unlockedShopItems;
         } else {
-            _unlockedShopItems = GameResourcesDatabase.GetStartUlockedShopItems();
+            UnlockedShopItems = GameResourcesDatabase.GetStartUlockedShopItems();
             SaveUnlockedItems();
         }
     }
@@ -230,7 +230,12 @@ public class GameManager : Singleton<GameManager> {
     #region ItemShop
 
     public bool IsShopItemUnlocked(string shopItemID) {
-        return _unlockedShopItems.Contains(shopItemID);
+        return UnlockedShopItems.Contains(shopItemID);
+    }
+
+    public void UnlockedShopItem(string shopItemID) {
+        UnlockedShopItems.Add(shopItemID);
+        SaveUnlockedItems();
     }
 
     #endregion
@@ -246,7 +251,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     private void SaveUnlockedItems() {
-        var unlockedItemsData = new UnlockedShopItemsJSON(_unlockedShopItems);
+        var unlockedItemsData = new UnlockedShopItemsJSON(UnlockedShopItems);
         string json = JsonConvert.SerializeObject(unlockedItemsData, new JsonSerializerSettings
             {NullValueHandling = NullValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
         PlayerPrefs.SetString(SaveKey.UNLOCKED_SHOP_ITEMS_SAVE, json);
