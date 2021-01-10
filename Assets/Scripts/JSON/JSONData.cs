@@ -77,3 +77,15 @@ public class VoxelFigureInfoData {
         return colorsData;
     }
 }
+
+[Serializable]
+public class UnlockedShopItemsJSON {
+    public HashSet<string> unlockedShopItems = new HashSet<string>();
+
+    public UnlockedShopItemsJSON() {
+    }
+
+    public UnlockedShopItemsJSON(HashSet<string> unlockedShopItems) {
+        this.unlockedShopItems = unlockedShopItems;
+    }
+}

@@ -9,6 +9,8 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
 
     [SerializeField] private List<ShopItemData> _shopItemsData = new List<ShopItemData>();
 
+    [SerializeField] private List<ShopItemData> _startShopItemsData = new List<ShopItemData>();
+
     [SerializeField] private Material _lockedFigureMaterial;
     [SerializeField] private float _grayScale;
 
@@ -104,5 +106,14 @@ public class GameResourcesDatabase : Singleton<GameResourcesDatabase> {
         }
 
         return null;
+    }
+
+    public static HashSet<string> GetStartUlockedShopItems() {
+        var data = new HashSet<string>();
+        foreach (var startShopItemData in Instance._startShopItemsData) {
+            data.Add(startShopItemData.itemID);
+        }
+
+        return data;
     }
 }

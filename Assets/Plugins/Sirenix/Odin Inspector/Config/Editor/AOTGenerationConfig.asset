@@ -16,7 +16,7 @@ MonoBehaviour:
   deleteDllAfterBuilds: 1
   AutomateForAllAOTPlatforms: 1
   automateForPlatforms: 0900000014000000
-  lastScan: 637422001879551130
+  lastScan: 637446718290569120
   supportSerializedTypes:
   - TypeName: System.Collections.Generic.Dictionary`2[[Enums+CollectionType, Assembly-CSharp],[System.Collections.Generic.List`1[[VoxelFigureData,
       Assembly-CSharp]], mscorlib]], mscorlib
@@ -35,6 +35,12 @@ MonoBehaviour:
     Emit: 1
   - TypeName: System.Collections.Generic.List`1[[VoxelFigureData, Assembly-CSharp]],
       mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.Object, mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.Object[], mscorlib
     IsCustom: 0
     Emit: 1
   - TypeName: UnityEngine.Rendering.SerializedDictionary`2[[Enums+CollectionType,

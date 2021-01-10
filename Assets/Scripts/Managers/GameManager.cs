@@ -16,6 +16,8 @@ public class GameManager : Singleton<GameManager> {
     private Dictionary<CollectionType, Dictionary<string, VoxelFigureInfoData>> _voxelFiguresInfoData =
         new Dictionary<CollectionType, Dictionary<string, VoxelFigureInfoData>>();
 
+    private HashSet<string> _unlockedShopItems = new HashSet<string>();
+
     private CollectionType _currentCollection;
     private VoxelFigure _currentVoxelFigure;
     private VoxelFigureInfoData _currentVoxelFigureInfoData;
@@ -26,6 +28,7 @@ public class GameManager : Singleton<GameManager> {
         Vibration.Init();
         _currentCollection = (CollectionType) PlayerPrefs.GetInt(SaveKey.CURRENT_COLLECTION, 0);
         LoadVoxelFiguresInfoData();
+        LoadUnlockedShopItemsData();
         yield return null;
         ChangeGameView(GameViewType.MainMenu);
     }
@@ -58,6 +61,21 @@ public class GameManager : Singleton<GameManager> {
             };
             _voxelFiguresInfoData[Constants.FIRST_COLLECTION].Add(firstFigure.figureID, voxelFigureInfoData);
             SaveVoxelsData();
+        }
+    }
+
+    private void LoadUnlockedShopItemsData() {
+        if (PlayerPrefs.HasKey(SaveKey.UNLOCKED_SHOP_ITEMS_SAVE)) {
+            var json = PlayerPrefs.GetString(SaveKey.UNLOCKED_SHOP_ITEMS_SAVE);
+            var unlockedShopItemsData = JsonConvert.DeserializeObject<UnlockedShopItemsJSON>(json,
+                new JsonSerializerSettings {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+            _unlockedShopItems = unlockedShopItemsData.unlockedShopItems;
+        } else {
+            _unlockedShopItems = GameResourcesDatabase.GetStartUlockedShopItems();
+            SaveUnlockedItems();
         }
     }
 
@@ -175,14 +193,6 @@ public class GameManager : Singleton<GameManager> {
         return stars;
     }
 
-    private void SaveVoxelsData() {
-        var playerData = new PlayerSaveJSON(_voxelFiguresInfoData);
-        string json = JsonConvert.SerializeObject(playerData,
-            new JsonSerializerSettings
-                {NullValueHandling = NullValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
-        PlayerPrefs.SetString(SaveKey.PLAYER_SAVE, json);
-    }
-
     private void ChangeGameView(GameViewType gameViewType) {
         if (gameViewType != _currentGameViewType) {
             _currentGameViewType = gameViewType;
@@ -217,6 +227,38 @@ public class GameManager : Singleton<GameManager> {
         ChangeGameView(GameViewType.MainMenu);
     }
 
+    #region ItemShop
+
+    public bool IsShopItemUnlocked(string shopItemID) {
+        return _unlockedShopItems.Contains(shopItemID);
+    }
+
+    #endregion
+
+    #region SavingData
+
+    private void SaveVoxelsData() {
+        var playerData = new PlayerSaveJSON(_voxelFiguresInfoData);
+        string json = JsonConvert.SerializeObject(playerData,
+            new JsonSerializerSettings
+                {NullValueHandling = NullValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
+        PlayerPrefs.SetString(SaveKey.PLAYER_SAVE, json);
+    }
+
+    private void SaveUnlockedItems() {
+        var unlockedItemsData = new UnlockedShopItemsJSON(_unlockedShopItems);
+        string json = JsonConvert.SerializeObject(unlockedItemsData, new JsonSerializerSettings
+            {NullValueHandling = NullValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
+        PlayerPrefs.SetString(SaveKey.UNLOCKED_SHOP_ITEMS_SAVE, json);
+    }
+
+    private void SaveAllData() {
+        SaveVoxelsData();
+        SaveUnlockedItems();
+    }
+
+    #endregion
+
     #region Test Buttons
 
     public void UnlockAllFigures() {
@@ -250,6 +292,4 @@ public class GameManager : Singleton<GameManager> {
     }
 
     #endregion
-
-
 }

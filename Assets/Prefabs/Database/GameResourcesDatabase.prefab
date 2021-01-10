@@ -285,6 +285,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9a8f4602114c345ada9e6cabe8e027dc, type: 2}
   - {fileID: 11400000, guid: d02f2a26b621c4834ba0d406bdd7d0bb, type: 2}
   - {fileID: 11400000, guid: d70665d11cb25435ebadbf52fb41b1d9, type: 2}
+  _startShopItemsData:
+  - {fileID: 11400000, guid: e93cc4941400947b4b59dc464f18e72f, type: 2}
+  - {fileID: 11400000, guid: 74500ba2b0cbf4a63b8789ec57ddfa2a, type: 2}
+  - {fileID: 11400000, guid: 49a48460a5bb8445c9801076b7788603, type: 2}
   _lockedFigureMaterial: {fileID: 2100000, guid: 3c1b242cd27f8483ba40c68b4af8c7e7,
     type: 2}
   _grayScale: 0.13

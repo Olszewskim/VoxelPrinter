@@ -3,5 +3,6 @@
     public const string SOUNDS_SETTINGS = "AudioSettings";
     public const string HAPTIC_SETTINGS = "MusicSettings";
     public const string PLAYER_SAVE = "PlayerSave";
+    public const string UNLOCKED_SHOP_ITEMS_SAVE = "UnlockedShopItemsSave";
     public const string CURRENT_COLLECTION = "CurrentCollection";
 }
