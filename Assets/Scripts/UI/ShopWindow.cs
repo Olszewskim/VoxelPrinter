@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +16,10 @@ public class ShopWindow : WindowBehaviour<ShopWindow> {
 
     private readonly List<ShopItemUI> _shopItemUIs = new List<ShopItemUI>();
     private ShopItemType _currentShopItemType;
+
+    private const int MIN_UNLOCK_STEPS = 5;
+    private const int MAX_UNLOCK_STEPS = 11;
+    private readonly WaitForSeconds _timeBetweenUnlockAnimations = new WaitForSeconds(0.15f);
 
     protected override void Awake() {
         base.Awake();
@@ -60,10 +67,35 @@ public class ShopWindow : WindowBehaviour<ShopWindow> {
 
     private void UnlockRandomShopItem() {
         var itemsToUnlock = GetItemsToUnlock();
+        StartCoroutine(UnlockAnimation(itemsToUnlock));
+    }
 
-        var randomItem = itemsToUnlock.GetRandomElement();
-        GameManager.Instance.UnlockedShopItem(randomItem.itemID);
+    private IEnumerator UnlockAnimation(List<ShopItemData> itemsToUnlock) {
+        ChangeButtonsInteractivity(false);
+        ShopItemData randomElement = null;
+        ShopItemData lastRandomElement = null;
+
+        var animationSteps =
+            itemsToUnlock.Count > 1 ? Randomizer.GetRandomNumber(MIN_UNLOCK_STEPS, MAX_UNLOCK_STEPS) : 1;
+
+        for (int i = 0; i < animationSteps; i++) {
+            do {
+                randomElement = itemsToUnlock.GetRandomElement();
+            } while (randomElement == lastRandomElement);
+
+            lastRandomElement = randomElement;
+            var shopItemUI = _shopItemUIs.FirstOrDefault(ui => ui.IsShopItemTile(randomElement.itemID));
+            shopItemUI?.Mark();
+            Vibration.VibratePop();
+            //SoundsManager.Instance.PlaySound(SoundType.ShopDraw);
+            yield return _timeBetweenUnlockAnimations;
+            shopItemUI?.Unmark();
+        }
+
+        // SoundsManager.Instance.PlaySound(SoundType.UnlockItem);
+        GameManager.Instance.UnlockedShopItem(randomElement.itemID);
         SwitchShopType(_currentShopItemType);
+        ChangeButtonsInteractivity(true);
     }
 
     private List<ShopItemData> GetItemsToUnlock() {
@@ -74,5 +106,14 @@ public class ShopWindow : WindowBehaviour<ShopWindow> {
         }
 
         return shopItems;
+    }
+
+    private void ChangeButtonsInteractivity(bool shouldBeActive) {
+        foreach (var switchShopButton in _switchShopTypeButtons) {
+            switchShopButton.Value.interactable = shouldBeActive;
+        }
+
+        _closeButton.interactable = shouldBeActive;
+        _closeWindowClickableArea.interactable = shouldBeActive;
     }
 }
