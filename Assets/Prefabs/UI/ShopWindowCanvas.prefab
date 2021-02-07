@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 3245362582676059849}
   - component: {fileID: 8933121847025822121}
   - component: {fileID: 4301994052757073980}
+  - component: {fileID: 8021987725330029084}
   m_Layer: 5
   m_Name: ShopTab (2)
   m_TagString: Untagged
@@ -189,6 +190,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8021987725330029084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2860199865525249255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7d01bc933f27143a65ab22c43e8d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioSource: {fileID: 0}
+  ClickSound: {fileID: 8300000, guid: 068e71ac0cee949f3a998edd4331f48c, type: 3}
 --- !u!1 &2923177992923255098
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,6 +855,7 @@ GameObject:
   - component: {fileID: 7917531668579151291}
   - component: {fileID: 1043804842422775810}
   - component: {fileID: 3862163285199091372}
+  - component: {fileID: 4085557608200654551}
   m_Layer: 5
   m_Name: ShopTab (1)
   m_TagString: Untagged
@@ -947,6 +963,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4085557608200654551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6177795982712655682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7d01bc933f27143a65ab22c43e8d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioSource: {fileID: 0}
+  ClickSound: {fileID: 8300000, guid: 068e71ac0cee949f3a998edd4331f48c, type: 3}
 --- !u!1 &7581056483219169822
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,6 +989,7 @@ GameObject:
   - component: {fileID: 1671214291230501857}
   - component: {fileID: 884946062300875814}
   - component: {fileID: 2886995210387001032}
+  - component: {fileID: 2170015241590339572}
   m_Layer: 5
   m_Name: ShopTab
   m_TagString: Untagged
@@ -1066,6 +1097,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2170015241590339572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7581056483219169822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7d01bc933f27143a65ab22c43e8d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioSource: {fileID: 0}
+  ClickSound: {fileID: 8300000, guid: 068e71ac0cee949f3a998edd4331f48c, type: 3}
 --- !u!1 &7992830400703921617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1796,12 +1841,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b39c1eae19f6406293c9231310ae7dc, type: 3}
---- !u!224 &3289294290506402731 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 9124467918149532398, guid: 7b39c1eae19f6406293c9231310ae7dc,
-    type: 3}
-  m_PrefabInstance: {fileID: 5982315776132706629}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6415755308709238425 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 723993182788528092, guid: 7b39c1eae19f6406293c9231310ae7dc,
@@ -1814,6 +1853,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85774a8a445cb4346a4bb568a66069d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &3289294290506402731 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9124467918149532398, guid: 7b39c1eae19f6406293c9231310ae7dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 5982315776132706629}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7113089104528982959
 PrefabInstance:
   m_ObjectHideFlags: 0

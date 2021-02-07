@@ -35,13 +35,13 @@ public class SettingsWindow : PoppingOutWindowBehaviour<SettingsWindow> {
     private void RefreshMusicSettings(bool state) {
         IsMusicOn = state;
         PlayerPrefs.SetInt(SaveKey.MUSIC_SETTINGS, state ? 1 : 0);
-        SoundManager.Instance.SetMusicSettings(IsMusicOn);
+        SoundsManager.Instance.SetMusicSettings(IsMusicOn);
     }
 
     private void RefreshSoundsSettings(bool state) {
         IsSoundOn = state;
         PlayerPrefs.SetInt(SaveKey.SOUNDS_SETTINGS, state ? 1 : 0);
-        SoundManager.Instance.SetSFXSettings(IsSoundOn);
+        SoundsManager.Instance.SetSFXSettings(IsSoundOn);
     }
 
     private void RefreshHapticSettings(bool state) {

@@ -17,9 +17,10 @@ public class ShopWindow : WindowBehaviour<ShopWindow> {
     private readonly List<ShopItemUI> _shopItemUIs = new List<ShopItemUI>();
     private ShopItemType _currentShopItemType;
 
-    private const int MIN_UNLOCK_STEPS = 5;
-    private const int MAX_UNLOCK_STEPS = 11;
-    private readonly WaitForSeconds _timeBetweenUnlockAnimations = new WaitForSeconds(0.15f);
+    private const int MIN_UNLOCK_STEPS = 8;
+    private const int MAX_UNLOCK_STEPS = 20;
+    private const float MIN_ANIM_TIME = 0.01f;
+    private const float MAX_ANIM_TIME = 0.33f;
 
     protected override void Awake() {
         base.Awake();
@@ -78,6 +79,8 @@ public class ShopWindow : WindowBehaviour<ShopWindow> {
         var animationSteps =
             itemsToUnlock.Count > 1 ? Randomizer.GetRandomNumber(MIN_UNLOCK_STEPS, MAX_UNLOCK_STEPS) : 1;
 
+
+
         for (int i = 0; i < animationSteps; i++) {
             do {
                 randomElement = itemsToUnlock.GetRandomElement();
@@ -87,12 +90,13 @@ public class ShopWindow : WindowBehaviour<ShopWindow> {
             var shopItemUI = _shopItemUIs.FirstOrDefault(ui => ui.IsShopItemTile(randomElement.itemID));
             shopItemUI?.Mark();
             Vibration.VibratePop();
-            //SoundsManager.Instance.PlaySound(SoundType.ShopDraw);
-            yield return _timeBetweenUnlockAnimations;
+            SoundsManager.PlaySound(SoundType.ShopDraw);
+            var animTime = Mathf.Lerp(MIN_ANIM_TIME, MAX_ANIM_TIME, i / (float) animationSteps);
+            yield return new WaitForSeconds(animTime);
             shopItemUI?.Unmark();
         }
 
-        // SoundsManager.Instance.PlaySound(SoundType.UnlockItem);
+        SoundsManager.PlaySound(SoundType.UnlockItem);
         GameManager.Instance.UnlockedShopItem(randomElement.itemID);
         SwitchShopType(_currentShopItemType);
         ChangeButtonsInteractivity(true);
