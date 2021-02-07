@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2574763111888084426}
   - component: {fileID: 8167126617002693479}
   - component: {fileID: 5357516269560530969}
+  - component: {fileID: 5356775455277704532}
   m_Layer: 5
   m_Name: CollectionTileUI
   m_TagString: Untagged
@@ -139,6 +140,20 @@ MonoBehaviour:
   _selectCollectionButton: {fileID: 8167126617002693479}
   _lockedCollectionArea: {fileID: 1948528485753416623}
   _lockedCollectionText: {fileID: 3448644408726090363}
+--- !u!114 &5356775455277704532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94628019104444636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7d01bc933f27143a65ab22c43e8d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioSource: {fileID: 0}
+  ClickSound: {fileID: 8300000, guid: 068e71ac0cee949f3a998edd4331f48c, type: 3}
 --- !u!1 &1418611468388297639
 GameObject:
   m_ObjectHideFlags: 0
